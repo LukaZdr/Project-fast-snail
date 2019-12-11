@@ -4,7 +4,7 @@ To get a good training dataset that applies in real situations we want to exchan
 In addition to that mirrored images and images from differen perspectives of cables should give a solid ground for the CV system to recognize the type of cable.
 
 ## Useage
-- Step1: Copy images (max 35 in one bach) into '/images_to_change'
+- Step1: Copy images (max 35 in one bach) into new dir '/images_to_change'
 - Step2: execute 'py prepare_images' on your terminal in the image_preperation folder
 - Step3: copy generated images from one of the '/converted_images_{X}' directories
 - Step4: delete the generated '/converted_images_{X}' folder
