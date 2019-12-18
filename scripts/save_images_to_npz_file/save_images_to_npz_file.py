@@ -27,4 +27,4 @@ for img in co3:
     arrayOfImages.append(img)
     labels.append(4)
    
-np.savez("image_library", data = arrayOfImages, labels = labels)
+np.savez("vga_val", data = arrayOfImages, labels = labels)
