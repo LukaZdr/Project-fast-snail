@@ -1,0 +1,145 @@
+<html lang="de">
+<head>
+	<meta charset="utf-8">
+	<title>CV - Manueller Ansatz</title>
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+		thead th {
+			text-align: left;
+			padding: 10 8 !important;
+		}
+		td {
+			border-left: 1px solid #ccc;
+		}
+		td:first-child {
+			border-left: none;
+		}
+		table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+			background-color: #fff !important;
+		}
+		table.dataTable.stripe tbody tr.even, table.dataTable.display tbody tr.even {
+			background-color: #ddd !important;
+		}
+		table.dataTable.display tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
+			background-color: #daffd9 !important;
+		}
+		table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
+			background-color: #a6eda4 !important;
+		}
+		table.dataTable.hover tbody tr:hover, 
+		table.dataTable.display tbody tr:hover, 
+		table.dataTable.display tbody tr:hover > .sorting_1, table.dataTable.order-column.hover tbody tr:hover > .sorting_1 {
+			background-color: #b8bfff !important;
+		}
+	</style>
+	<link rel="stylesheet" href="assets/jquery.dataTables.min.css">
+	<script src="assets/jquery-3.3.1.js"></script>
+	<script src="assets/jquery.dataTables.min.js"></script>
+</head>
+
+<body>
+
+
+<table id="t" class="display" style="width:100%">
+        
+		<!-- PUT TABLE HERE -->
+		
+		
+		
+		
+<thead><tr>
+<th title="Field #1">distance_measure</th>
+<th title="Field #2">neighbour_count</th>
+<th title="Field #3">descriptor_1</th>
+<th title="Field #4">descriptor_2</th>
+<th title="Field #5">weight</th>
+<th title="Field #6">bin_count</th>
+<th title="Field #7">guessing_accuracy (%)</th>
+<th title="Field #8">time_needed (min)</th>
+<th title="Field #9">image_set</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>euklid</td>
+<td>3</td>
+<td>sobel</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>22.76</td>
+<td>3.47</td>
+<td>2</td>
+</tr><tr>
+<td>euklid</td>
+<td>3</td>
+<td>sobel</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>22.76</td>
+<td>3.47</td>
+<td>2</td>
+</tr><tr>
+<td>euklid</td>
+<td>3</td>
+<td>sobel</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>22.76</td>
+<td>3.47</td>
+<td>2</td>
+</tr>
+</tbody>
+		
+		
+		
+		<!-- END OF PUT TABLE HERE -->
+			
+<tfoot><tr><th title="Field #1">distance_measure</th>
+<th title="Field #2">neighbour_count</th>
+<th title="Field #3">descriptor_1</th>
+<th title="Field #4">descriptor_2</th>
+<th title="Field #5">weight</th>
+<th title="Field #6">bin_count</th>
+<th title="Field #7">guessing_accuracy (%)</th>
+<th title="Field #8">time_needed (min)</th>
+<th title="Field #9">image_set</th></tr>
+</tfoot>
+</table>
+
+
+<script>
+	$(document).ready(function() {
+		$('#t').DataTable( {
+			"lengthMenu": [ "9999", "100", "50", "10" ],
+			initComplete: function () {
+				this.api().columns().every( function () {
+					var column = this;
+					var select = $('<select><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+							);
+	 
+							column
+								.search( val ? '^'+val+'$' : '', true, false )
+								.draw();
+						} );
+	 
+					column.data().unique().sort().each( function ( d, j ) {
+						select.append( '<option value="'+d+'">'+d+'</option>' )
+					} );
+				} );
+			}
+		} );
+	} );
+</script>
+</body>
+</html>
+
+
+
