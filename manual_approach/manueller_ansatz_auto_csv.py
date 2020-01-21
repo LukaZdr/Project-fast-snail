@@ -194,7 +194,7 @@ va_labels = va['labels']
 tr_shuffled_images, tr_shuffled_labels = shuffle(tr_images, tr_labels)
 va_shuffled_images, va_shuffled_labels = shuffle(va_images, va_labels)
 
-# Write header
+# Write header of CSV file (just necessary the first time)
 #with open("Results.csv", mode="a", newline="\n", encoding="utf-8") as file:
 #    file_writer = writer(file, delimiter=";", quotechar="'", quoting=QUOTE_MINIMAL)
 #    file_writer.writerow(["distance_measure", "neighbour_count", "descriptor_1", "descriptor_2", "weight", "bin_count", "guessing_accuracy", "time_needed", "image_set"])
