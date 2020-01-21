@@ -115,25 +115,48 @@
 	$(document).ready(function() {
 		$('#t').DataTable( {
 			"lengthMenu": [ "9999", "100", "50", "10" ],
+			<!-- initComplete: function () { -->
+				<!-- this.api().columns().every( function () { -->
+					<!-- var column = this; -->
+					<!-- var select = $('<select><option value=""></option></select>') -->
+						<!-- .appendTo( $(column.footer()).empty() ) -->
+						<!-- .on( 'change', function () { -->
+							<!-- var val = $.fn.dataTable.util.escapeRegex( -->
+								<!-- $(this).val() -->
+							<!-- ); -->
+	 
+							<!-- column -->
+								<!-- .search( val ? '^'+val+'$' : '', true, false ) -->
+								<!-- .draw(); -->
+						<!-- } ); -->
+	 
+					<!-- column.data().unique().sort().each( function ( d, j ) { -->
+						<!-- select.append( '<option value="'+d+'">'+d+'</option>' ) -->
+					<!-- } ); -->
+				<!-- } ); -->
+			<!-- } -->
 			initComplete: function () {
-				this.api().columns().every( function () {
+				var table = this;
+					
+				table.api().columns().every( function () {
 					var column = this;
-					var select = $('<select><option value=""></option></select>')
-						.appendTo( $(column.footer()).empty() )
+					
+					var select = $('<br><select><option value=""></option></select>')
+						.appendTo( $(column.header()) )
 						.on( 'change', function () {
-							var val = $.fn.dataTable.util.escapeRegex(
-								$(this).val()
-							);
+							var val = $(this).val();
+							column.search( val ? '^'+val+'$' : '', true, false ).draw();
+						});
 	 
-							column
-								.search( val ? '^'+val+'$' : '', true, false )
-								.draw();
-						} );
-	 
-					column.data().unique().sort().each( function ( d, j ) {
-						select.append( '<option value="'+d+'">'+d+'</option>' )
-					} );
-				} );
+					column.data().unique().sort().each( function ( value, index ) {
+						select.append( '<option value="' + value + '">' + value + '</option>' )
+					});
+					
+					$( select ).click( function(e) {
+						e.stopPropagation();
+					});
+				});
+
 			}
 		} );
 	} );

@@ -32,8 +32,8 @@ for i, line in enumerate(csv):
         html.write("<td>%s</td>" % image_set)
         html.write("</tr>")
 
-html.write("<tfoot><tr><th title='Field #1'>distance_measure</th><th title='Field #2'>neighbour_count</th><th title='Field #3'>descriptor_1</th><th title='Field #4'>descriptor_2</th><th title='Field #5'>weight</th><th title='Field #6'>bin_count</th><th title='Field #7'>guessing_accuracy (%)</th><th title='Field #8'>time_needed (min)</th><th title='Field #9'>image_set</th></tr></tfoot></table>")
-html.write("<script>$(document).ready(function(){$(\"#t\").DataTable({lengthMenu:[\"9999\",\"100\",\"50\",\"10\"],initComplete:function(){this.api().columns().every(function(){var e=this,n=$('<select><option value=\"\"></option></select>').appendTo($(e.footer()).empty()).on(\"change\",function(){var n=$.fn.dataTable.util.escapeRegex($(this).val());e.search(n?\"^\"+n+\"$\":\"\",!0,!1).draw()});e.data().unique().sort().each(function(e,t){n.append('<option value=\"'+e+'\">'+e+\"</option>\")})})}})})</script></body></html>")
+#html.write("<tfoot><tr><th title='Field #1'>distance_measure</th><th title='Field #2'>neighbour_count</th><th title='Field #3'>descriptor_1</th><th title='Field #4'>descriptor_2</th><th title='Field #5'>weight</th><th title='Field #6'>bin_count</th><th title='Field #7'>guessing_accuracy (%)</th><th title='Field #8'>time_needed (min)</th><th title='Field #9'>image_set</th></tr></tfoot></table>")
+html.write("<script>$(document).ready(function(){$('#t').DataTable({\"lengthMenu\":[\"9999\",\"100\",\"50\",\"10\"],initComplete:function(){var table=this;table.api().columns().every(function(){var column=this;var select=$('<br><select><option value=\"\"></option></select>').appendTo($(column.header())).on('change',function(){var val=$(this).val();column.search(val?'^'+val+'$':'',true,false).draw();});column.data().unique().sort().each(function(value,index){select.append('<option value=\"'+value+'\">'+value+'</option>')});$(select).click(function(e){e.stopPropagation();});});}});});</script> </body></html>")
 html.close()
 
 print("\nDone!")
