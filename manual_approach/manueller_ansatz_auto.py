@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 import numpy as np
-import timeit
 from skimage.feature import hog
 from skimage.filters import sobel_h, sobel_v
 from skimage.color import rgb2gray
 from sklearn.utils import shuffle
+from timeit import default_timer
+from csv import writer, QUOTE_MINIMAL
 
 # Calculate estimated labels and write to file
-def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descriptor_1, p_descriptor_2, p_weight, p_bin_count):
-    # Open file
-    results_file = open("Results.html", "a")
-    
+def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descriptor_1, p_descriptor_2, p_weight, p_bin_count):   
     # Define needed functions
     def rgb_img_to_1d_histo(img):
     	img = img.ravel() # ravel => returns flattend 1d-Array
@@ -18,7 +16,7 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
     
     def rgb_img_to_3d_histo(img):
     	img = img.reshape(img.shape[0] * img.shape[1], 3)
-    	return np.histogramdd(img, bins = [bin_count,bin_count,bin_count], range=((0, 256), (0, 256), (0, 256)))
+    	return np.histogramdd(img, bins = [bin_count, bin_count, bin_count], range=((0, 256), (0, 256), (0, 256)))
     
     def eukl_dist(x, y):
     	return np.sqrt(np.sum((x-y)**2))
@@ -70,9 +68,12 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
             deskr_1_img_2 = np.sqrt(sobelH_2**2 + sobelV_2**2)
             #plt.imshow(deskr_1_img_2)
             #plt.show()
-        elif descriptor_1 == 'hog':
-            deskr_1_img_1 = hog(img_1, orientations=4, pixels_per_cell=(8, 8))
-            deskr_1_img_2 = hog(img_2, orientations=4, pixels_per_cell=(8, 8))
+        elif descriptor_1[:3] == 'hog':
+            params = descriptor_1.split(",")
+            par1 = int(params[1])
+            par2 = int(params[2])
+            deskr_1_img_1 = hog(img_1, orientations=par1, pixels_per_cell=(par2, par2))
+            deskr_1_img_2 = hog(img_1, orientations=par1, pixels_per_cell=(par2, par2))
             # So gibt man noch ein Bild dazu aus:
             #deskr_1_img_1, theBild = hog(img_1, orientations=8, pixels_per_cell=(16, 16), cells_per_block=(1, 1), visualize=True, multichannel=True)
             #plt.imshow(theBild)
@@ -102,9 +103,12 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
             sobelH_2 = sobel_h(rgb2gray(img_2))
             sobelV_2 = sobel_v(rgb2gray(img_2))
             deskr_2_img_2 = np.sqrt(sobelH_2**2 + sobelV_2**2)
-        elif descriptor_2 == 'hog': #Histogramm über Gradientenorientierung 
-            deskr_2_img_1 = hog(img_1, orientations=4, pixels_per_cell=(8, 8))
-            deskr_2_img_2 = hog(img_2, orientations=4, pixels_per_cell=(8, 8))
+        elif descriptor_2[:3] == 'hog': #Histogramm über Gradientenorientierung
+            params = descriptor_1.split(",")
+            par1 = int(params[1])
+            par2 = int(params[2])
+            deskr_2_img_1 = hog(img_1, orientations=par1, pixels_per_cell=(par2, par2))
+            deskr_2_img_2 = hog(img_1, orientations=par1, pixels_per_cell=(par2, par2))
     
         if distance_measure == 'euklid':
             distance_1 = eukl_dist(deskr_1_img_1, deskr_1_img_2)
@@ -117,7 +121,6 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
     
     def rgb_img_n_nearest_neighbour(va_imgs, tr_imgs): # Calculates esimated labels through nearest neighbour method
         print("\nCalculates: " + distance_measure + " / " + str(neighbour_count) + " / " + descriptor_1 + " / " + descriptor_2 + " / " + str(weight) + " / " + str(bin_count))
-        wait_length = len(va_imgs)
         est_labels_list = []
         for i, va_img in enumerate(va_imgs):
             distances = []
@@ -128,7 +131,7 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
             n_closest_labels = elements_for_index_list(index_list, tr_shuffled_labels)
             est_label = most_common_occurrence(n_closest_labels)
             est_labels_list.append(est_label)
-            print(str(i + 1) + "/" + str(wait_length))
+            print(str(i + 1) + "/" + wait_length)
         return est_labels_list
     
     def guessing_accuracy(est_labels, val_labels): # in %
@@ -149,27 +152,23 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
     time_stop = 0
     
     # Start time measurement
-    time_start = timeit.default_timer()
+    time_start = default_timer()
     
     # Calculate esimated labels
     estimated_labels = rgb_img_n_nearest_neighbour(va_shuffled_images, tr_shuffled_images)
     
     # Stop time measurement
-    time_stop = timeit.default_timer()
+    time_stop = default_timer()
     needed_time = (time_stop - time_start) / 60 # Min.
     
     # Calculate guessing accuracy
     guessing_accuracy = guessing_accuracy(estimated_labels, va_shuffled_labels)
     
-    # Write settings to file
-    results_file.write("<table>\n<tr><td>distance_measure</td><td>" + distance_measure + "</td><td rowspan='7' class='res'>" + "{:.2f}".format(guessing_accuracy) + "</td></tr>\n")
-    results_file.write("<tr><td>neighbour_count</td><td>" + str(neighbour_count) + "</td></tr>\n")
-    results_file.write("<tr><td>descriptor_1</td><td>" + descriptor_1 + "</td></tr>\n")
-    results_file.write("<tr><td>descriptor_2</td><td>" + descriptor_2 + "</td></tr>\n")
-    results_file.write("<tr><td>weight</td><td>" + str(weight) + "</td></tr>\n")
-    results_file.write("<tr><td>bin_count</td><td>" + str(bin_count) + "</td></tr>\n")
-    results_file.write("<tr><td>needed_time (min)</td><td>" + "{:.2f}".format(needed_time) + "</td></tr>\n</table>\n\n")
-    results_file.close()
+    # Write settings and result to file
+    with open("Results.csv", mode="a", newline="\n", encoding="utf-8") as file:
+        file_writer = writer(file, delimiter=";", quotechar="'", quoting=QUOTE_MINIMAL)
+        file_writer.writerow([distance_measure, str(neighbour_count), descriptor_1, descriptor_2, str(weight), str(bin_count), "{:.2f}".format(guessing_accuracy), "{:.2f}".format(needed_time), str(image_set)])
+
     print("Step done.")
 
 ###############################################################################
@@ -200,10 +199,13 @@ va_labels = va['labels']
 tr_shuffled_images, tr_shuffled_labels = shuffle(tr_images, tr_labels)
 va_shuffled_images, va_shuffled_labels = shuffle(va_images, va_labels)
 
-# Write CSS and used image set to file
-results_file = open("Results.html", "a")
-results_file.write("<style>table{border:1px solid #000;margin-bottom:15px;}td{border:1px solid #bbb;padding:3px;}.res{background:#ddd;}.res::after{content:' %';}</style>\n\n<h1>Image Set " + str(image_set) + "</h1>\n\n")
-results_file.close()
+# For displaying status
+wait_length = str(len(va_shuffled_images))
+
+# Write header of CSV file (just necessary the first time)
+#with open("Results.csv", mode="a", newline="\n", encoding="utf-8") as file:
+#    file_writer = writer(file, delimiter=";", quotechar="'", quoting=QUOTE_MINIMAL)
+#    file_writer.writerow(["distance_measure", "neighbour_count", "descriptor_1", "descriptor_2", "weight", "bin_count", "guessing_accuracy (%)", "time_needed (min)", "image_set"])
 
 ###############################################################################
 # Run function with different settings 
@@ -215,25 +217,58 @@ results_file.close()
 # weight:            gets multiplied with descriptor_2
 # bin_count:         bins used in histogram
 
-calculate_estimated_labels('euklid', 8, '1d_histo', '0', 0, 8)
-calculate_estimated_labels('euklid', 8, '3d_histo', '0', 0, 8)
-calculate_estimated_labels('euklid', 8, 'std', '0', 0, 8)
-calculate_estimated_labels('euklid', 8, 'mean', '0', 0, 8)
-calculate_estimated_labels('euklid', 8, 'sobel', '0', 0, 8)
-calculate_estimated_labels('euklid', 8, 'hog', '0', 0, 8)
+#calculate_estimated_labels('euklid', 8, '1d_histo', '0', 0, 8)
+#calculate_estimated_labels('euklid', 8, '3d_histo', '0', 0, 8)
+#calculate_estimated_labels('euklid', 8, 'std', '0', 0, 0)
+#calculate_estimated_labels('euklid', 8, 'mean', '0', 0, 0)
+#calculate_estimated_labels('euklid', 8, 'sobel', '0', 0, 0)
+#calculate_estimated_labels('euklid', 8, 'hog,4,8', '0', 0, 0)
+#
+#calculate_estimated_labels('euklid', 4, '1d_histo', '0', 0, 8)
+#calculate_estimated_labels('euklid', 4, '3d_histo', '0', 0, 8)
+#calculate_estimated_labels('euklid', 4, 'std', '0', 0, 0)
+#calculate_estimated_labels('euklid', 4, 'mean', '0', 0, 0)
+#calculate_estimated_labels('euklid', 4, 'sobel', '0', 0, 0)
+#calculate_estimated_labels('euklid', 4, 'hog,4,8', '0', 0, 0)
+#
+#calculate_estimated_labels('euklid', 3, '1d_histo', '0', 0, 8)
+#calculate_estimated_labels('euklid', 3, '3d_histo', '0', 0, 8)
+#calculate_estimated_labels('euklid', 3, 'std', '0', 0, 0)
+#calculate_estimated_labels('euklid', 3, 'mean', '0', 0, 0)
+#calculate_estimated_labels('euklid', 3, 'sobel', '0', 0, 0)
+#calculate_estimated_labels('euklid', 3, 'hog,4,8', '0', 0, 0)
+#
+#calculate_estimated_labels('euklid', 2, '1d_histo', '0', 0, 8)
+#calculate_estimated_labels('euklid', 2, '3d_histo', '0', 0, 8)
+#calculate_estimated_labels('euklid', 2, 'std', '0', 0, 0)
+#calculate_estimated_labels('euklid', 2, 'mean', '0', 0, 0)
+#calculate_estimated_labels('euklid', 2, 'sobel', '0', 0, 0)
+#calculate_estimated_labels('euklid', 2, 'hog,4,8', '0', 0, 0)
+#
+#calculate_estimated_labels('euklid', 8, '1d_histo', '0', 0, 4)
+#calculate_estimated_labels('euklid', 8, '3d_histo', '0', 0, 4)
+#calculate_estimated_labels('euklid', 4, '1d_histo', '0', 0, 4)
+#calculate_estimated_labels('euklid', 4, '3d_histo', '0', 0, 4)
+#calculate_estimated_labels('euklid', 3, '1d_histo', '0', 0, 4)
+#calculate_estimated_labels('euklid', 3, '3d_histo', '0', 0, 4)
+#calculate_estimated_labels('euklid', 2, '1d_histo', '0', 0, 4)
+#calculate_estimated_labels('euklid', 2, '3d_histo', '0', 0, 4)
+#
+#calculate_estimated_labels('euklid', 8, '1d_histo', '0', 0, 3)
+#calculate_estimated_labels('euklid', 8, '3d_histo', '0', 0, 3)
+#calculate_estimated_labels('euklid', 4, '1d_histo', '0', 0, 3)
+#calculate_estimated_labels('euklid', 4, '3d_histo', '0', 0, 3)
+#calculate_estimated_labels('euklid', 3, '1d_histo', '0', 0, 3)
+#calculate_estimated_labels('euklid', 3, '3d_histo', '0', 0, 3)
+#calculate_estimated_labels('euklid', 2, '1d_histo', '0', 0, 3)
+#calculate_estimated_labels('euklid', 2, '3d_histo', '0', 0, 3)
+#
+#calculate_estimated_labels('euklid', 8, 'hog,4,6', '0', 0, 0)
+#calculate_estimated_labels('euklid', 4, 'hog,4,6', '0', 0, 0)
+#calculate_estimated_labels('euklid', 3, 'hog,4,6', '0', 0, 0)
+#calculate_estimated_labels('euklid', 2, 'hog,4,6', '0', 0, 0)
+#calculate_estimated_labels('euklid', 8, 'hog,4,4', '0', 0, 0)
+#calculate_estimated_labels('euklid', 4, 'hog,4,4', '0', 0, 0)
 
-calculate_estimated_labels('euklid', 4, '1d_histo', '0', 0, 8)
-calculate_estimated_labels('euklid', 4, '3d_histo', '0', 0, 8)
-calculate_estimated_labels('euklid', 4, 'std', '0', 0, 8)
-calculate_estimated_labels('euklid', 4, 'mean', '0', 0, 8)
-calculate_estimated_labels('euklid', 4, 'sobel', '0', 0, 8)
-calculate_estimated_labels('euklid', 4, 'hog', '0', 0, 8)
-
-calculate_estimated_labels('euklid', 2, '1d_histo', '0', 0, 8)
-calculate_estimated_labels('euklid', 2, '3d_histo', '0', 0, 8)
-calculate_estimated_labels('euklid', 2, 'std', '0', 0, 8)
-calculate_estimated_labels('euklid', 2, 'mean', '0', 0, 8)
-calculate_estimated_labels('euklid', 2, 'sobel', '0', 0, 8)
-calculate_estimated_labels('euklid', 2, 'hog', '0', 0, 8)
 
 print("\nDone!")
