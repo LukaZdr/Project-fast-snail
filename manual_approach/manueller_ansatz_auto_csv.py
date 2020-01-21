@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 import numpy as np
-import timeit
-from csv import writer, QUOTE_MINIMAL
 from skimage.feature import hog
 from skimage.filters import sobel_h, sobel_v
 from skimage.color import rgb2gray
 from sklearn.utils import shuffle
+from timeit import default_timer
+from csv import writer, QUOTE_MINIMAL
 
 # Calculate estimated labels and write to file
 def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descriptor_1, p_descriptor_2, p_weight, p_bin_count):   
@@ -147,13 +147,13 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
     time_stop = 0
     
     # Start time measurement
-    time_start = timeit.default_timer()
+    time_start = default_timer()
     
     # Calculate esimated labels
     estimated_labels = rgb_img_n_nearest_neighbour(va_shuffled_images, tr_shuffled_images)
     
     # Stop time measurement
-    time_stop = timeit.default_timer()
+    time_stop = default_timer()
     needed_time = (time_stop - time_start) / 60 # Min.
     
     # Calculate guessing accuracy
