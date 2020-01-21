@@ -1,1 +1,2 @@
 distance_measure;neighbour_count;descriptor_1;descriptor_2;weight;bin_count;guessing_accuracy;time_needed;image_set
+euklid;8;1d_histo;0;0;8;27.50;2.52;1
