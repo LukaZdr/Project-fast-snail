@@ -156,7 +156,7 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
     
     # Stop time measurement
     time_stop = default_timer()
-    needed_time = (time_stop - time_start) / 60 # in min.
+    time_needed = (time_stop - time_start) / 60 # in min.
     
     # Calculate guessing accuracy
     guessing_accuracy = guessing_accuracy(estimated_labels, va_shuffled_labels)
@@ -164,7 +164,7 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
     # Write settings and result to file
     with open("Results.csv", mode="a", newline="\n", encoding="utf-8") as file:
         file_writer = writer(file, delimiter=";", quotechar="'", quoting=QUOTE_MINIMAL)
-        file_writer.writerow([distance_measure, str(neighbour_count), descriptor_1, descriptor_2, str(weight), str(bin_count), "{:.2f}".format(guessing_accuracy), "{:.2f}".format(needed_time), str(image_set)])
+        file_writer.writerow([distance_measure, str(neighbour_count), descriptor_1, descriptor_2, str(weight), str(bin_count), "{:.2f}".format(guessing_accuracy), "{:.2f}".format(time_needed), str(image_set)])
 
     print("Step done.")
 
