@@ -178,7 +178,7 @@ def get_image_set(set):
 
 
 # Set imageset (1 or 2) #######################################################
-image_set = 2
+image_set = 1
 ###############################################################################
         
 
@@ -264,11 +264,50 @@ wait_length = str(len(va_shuffled_images))
 #calculate_estimated_labels("euklid", 4, "hog,4,6", "0", 0, 0)
 #calculate_estimated_labels("euklid", 3, "hog,4,6", "0", 0, 0)
 #calculate_estimated_labels("euklid", 2, "hog,4,6", "0", 0, 0)
-calculate_estimated_labels("euklid", 8, "hog,4,4", "0", 0, 0)
-calculate_estimated_labels("euklid", 4, "hog,4,4", "0", 0, 0)
+#calculate_estimated_labels("euklid", 8, "hog,4,4", "0", 0, 0)
+#calculate_estimated_labels("euklid", 4, "hog,4,4", "0", 0, 0)
+#
+#calculate_estimated_labels("euklid", 8, "1d_histo", "0", 0, 5)
+#calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 5)
+#calculate_estimated_labels("euklid", 4, "1d_histo", "0", 0, 5)
+#calculate_estimated_labels("euklid", 4, "3d_histo", "0", 0, 5)
+#calculate_estimated_labels("euklid", 3, "1d_histo", "0", 0, 5)
+#calculate_estimated_labels("euklid", 3, "3d_histo", "0", 0, 5)
+#calculate_estimated_labels("euklid", 2, "1d_histo", "0", 0, 5)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 5)
+#
+#calculate_estimated_labels("euklid", 8, "1d_histo", "0", 0, 6)
+#calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 6)
+#calculate_estimated_labels("euklid", 4, "1d_histo", "0", 0, 6)
+#calculate_estimated_labels("euklid", 4, "3d_histo", "0", 0, 6)
+#calculate_estimated_labels("euklid", 3, "1d_histo", "0", 0, 6)
+#calculate_estimated_labels("euklid", 3, "3d_histo", "0", 0, 6)
+#calculate_estimated_labels("euklid", 2, "1d_histo", "0", 0, 6)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 6)
+#
+#calculate_estimated_labels("euklid", 8, "1d_histo", "0", 0, 7)
+#calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 7)
+#calculate_estimated_labels("euklid", 4, "1d_histo", "0", 0, 7)
+#calculate_estimated_labels("euklid", 4, "3d_histo", "0", 0, 7)
+#calculate_estimated_labels("euklid", 3, "1d_histo", "0", 0, 7)
+#calculate_estimated_labels("euklid", 3, "3d_histo", "0", 0, 7)
+#calculate_estimated_labels("euklid", 2, "1d_histo", "0", 0, 7)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 7)
 
+#calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 2)
 
-# bin_count 6 wäre interessant
+calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.9, 3)
+calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.7, 3)
+calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.5, 3)
+calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.3, 3)
+calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.1, 3)
 
+calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.9, 3)
+calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.7, 3)
+calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.5, 3)
+calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.3, 3)
+calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.1, 3)
+
+# Bilder ohne BG mit den normalen Fotos vergleichen
 
 print("\nDone!")
