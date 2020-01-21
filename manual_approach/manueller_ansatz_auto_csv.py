@@ -16,7 +16,7 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
     
     def rgb_img_to_3d_histo(img):
     	img = img.reshape(img.shape[0] * img.shape[1], 3)
-    	return np.histogramdd(img, bins = [bin_count,bin_count,bin_count], range=((0, 256), (0, 256), (0, 256)))
+    	return np.histogramdd(img, bins = [bin_count, bin_count, bin_count], range=((0, 256), (0, 256), (0, 256)))
     
     def eukl_dist(x, y):
     	return np.sqrt(np.sum((x-y)**2))
@@ -222,16 +222,16 @@ wait_length = len(va_shuffled_images)
 #calculate_estimated_labels('euklid', 8, 'std', '0', 0, 0)
 #calculate_estimated_labels('euklid', 8, 'mean', '0', 0, 0)
 #calculate_estimated_labels('euklid', 8, 'sobel', '0', 0, 0)
-#calculate_estimated_labels('euklid', 8, 'hog', '0', 0, 0)
+#calculate_estimated_labels('euklid', 8, 'hog,4,8', '0', 0, 0)
 
 #calculate_estimated_labels('euklid', 4, '1d_histo', '0', 0, 8)
 #calculate_estimated_labels('euklid', 4, '3d_histo', '0', 0, 8)
 #calculate_estimated_labels('euklid', 4, 'std', '0', 0, 0)
 #calculate_estimated_labels('euklid', 4, 'mean', '0', 0, 0)
 #calculate_estimated_labels('euklid', 4, 'sobel', '0', 0, 0)
-#calculate_estimated_labels('euklid', 4, 'hog', '0', 0, 0)
+#calculate_estimated_labels('euklid', 4, 'hog,4,8', '0', 0, 0)
 
-calculate_estimated_labels('euklid', 3, '1d_histo', '0', 0, 8)
+#calculate_estimated_labels('euklid', 3, '1d_histo', '0', 0, 8)
 calculate_estimated_labels('euklid', 3, '3d_histo', '0', 0, 8)
 calculate_estimated_labels('euklid', 3, 'std', '0', 0, 0)
 calculate_estimated_labels('euklid', 3, 'mean', '0', 0, 0)
