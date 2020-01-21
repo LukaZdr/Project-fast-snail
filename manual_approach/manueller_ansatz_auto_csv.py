@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 import timeit
+from csv import writer, QUOTE_MINIMAL
 from skimage.feature import hog
 from skimage.filters import sobel_h, sobel_v
 from skimage.color import rgb2gray
 from sklearn.utils import shuffle
 
 # Calculate estimated labels and write to file
-def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descriptor_1, p_descriptor_2, p_weight, p_bin_count):
-    # Open file
-    results_file = open("Results.html", "a")
-    
+def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descriptor_1, p_descriptor_2, p_weight, p_bin_count):   
     # Define needed functions
     def rgb_img_to_1d_histo(img):
     	img = img.ravel() # ravel => returns flattend 1d-Array
@@ -162,14 +160,10 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
     guessing_accuracy = guessing_accuracy(estimated_labels, va_shuffled_labels)
     
     # Write settings to file
-    results_file.write("<table>\n<tr><td>distance_measure</td><td>" + distance_measure + "</td><td rowspan='7' class='res'>" + "{:.2f}".format(guessing_accuracy) + "</td></tr>\n")
-    results_file.write("<tr><td>neighbour_count</td><td>" + str(neighbour_count) + "</td></tr>\n")
-    results_file.write("<tr><td>descriptor_1</td><td>" + descriptor_1 + "</td></tr>\n")
-    results_file.write("<tr><td>descriptor_2</td><td>" + descriptor_2 + "</td></tr>\n")
-    results_file.write("<tr><td>weight</td><td>" + str(weight) + "</td></tr>\n")
-    results_file.write("<tr><td>bin_count</td><td>" + str(bin_count) + "</td></tr>\n")
-    results_file.write("<tr><td>needed_time (min)</td><td>" + "{:.2f}".format(needed_time) + "</td></tr>\n</table>\n\n")
-    results_file.close()
+    with open('Results.csv', mode='a') as file:
+        file_writer = writer(file, delimiter=';', quotechar='"', quoting=QUOTE_MINIMAL)
+        file_writer.writerow([distance_measure, str(neighbour_count), descriptor_1, descriptor_2, str(weight), str(bin_count), "{:.2f}".format(guessing_accuracy), "{:.2f}".format(needed_time), str(image_set)])
+
     print("Step done.")
 
 ###############################################################################
@@ -200,10 +194,10 @@ va_labels = va['labels']
 tr_shuffled_images, tr_shuffled_labels = shuffle(tr_images, tr_labels)
 va_shuffled_images, va_shuffled_labels = shuffle(va_images, va_labels)
 
-# Write CSS and used image set to file
-results_file = open("Results.html", "a")
-results_file.write("<style>table{border:1px solid #000;margin-bottom:15px;}td{border:1px solid #bbb;padding:3px;}.res{background:#ddd;}.res::after{content:' %';}</style>\n\n<h1>Image Set " + str(image_set) + "</h1>\n\n")
-results_file.close()
+# Write header
+with open('Results.csv', mode='w') as file:
+    file_writer = writer(file, delimiter=';', quotechar='"', quoting=QUOTE_MINIMAL)
+    file_writer.writerow(["distance_measure", "neighbour_count", "descriptor_1", "descriptor_2", "weight", "bin_count", "guessing_accuracy", "time_needed", "image_set"])
 
 ###############################################################################
 # Run function with different settings 
