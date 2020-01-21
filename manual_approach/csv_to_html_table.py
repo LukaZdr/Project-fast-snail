@@ -37,3 +37,4 @@ html.write("<script>$(document).ready(function(){$('#t').DataTable({\"lengthMenu
 html.close()
 
 print("\nDone!")
+print("!!!")
