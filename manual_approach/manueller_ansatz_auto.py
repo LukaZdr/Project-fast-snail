@@ -10,13 +10,13 @@ from csv import writer, QUOTE_MINIMAL
 # Calculate estimated labels and write to file
 def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descriptor_1, p_descriptor_2, p_weight, p_bin_count):   
     # Define needed functions
-    def rgb_img_to_1d_histo(img):
+    def rgb_img_to_1d_histo(img): # Each channel for one color (3 channels)
     	img = img.ravel() # ravel => returns flattend 1d-Array
-    	return np.histogram(img, bins = bin_count, range=(0, 256))
+    	return np.histogram(img, bins=bin_count, range=(0, 256))
     
-    def rgb_img_to_3d_histo(img):
+    def rgb_img_to_3d_histo(img): # All 3 colors in one channel
     	img = img.reshape(img.shape[0] * img.shape[1], 3)
-    	return np.histogramdd(img, bins = [bin_count, bin_count, bin_count], range=((0, 256), (0, 256), (0, 256)))
+    	return np.histogramdd(img, bins=[bin_count, bin_count, bin_count], range=((0, 256), (0, 256), (0, 256)))
     
     def eukl_dist(x, y):
     	return np.sqrt(np.sum((x-y)**2))
@@ -42,74 +42,71 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
     	return max(element_list,key=element_list.count)
     
     def calculate_combined_weighted_distance(img_1, img_2): # nimmt die euklidische distanz von dem mittelwert und histogrammen und summiert sie gewichtet auf
-    	# Beladen der ersten beiden Merkmale
+    	# Set Descriptor 1
         if descriptor_1 == '1d_histo':
             deskr_1_img_1 = rgb_img_to_1d_histo(img_1)[0]
             deskr_1_img_2 = rgb_img_to_1d_histo(img_2)[0]
         elif descriptor_1 == '3d_histo':
             deskr_1_img_1 = rgb_img_to_3d_histo(img_1)[0]
             deskr_1_img_2 = rgb_img_to_3d_histo(img_2)[0]
-        elif descriptor_1 == 'std':
+        elif descriptor_1 == 'std': # (Standardabweichung)
             deskr_1_img_1 = np.std(img_1)
             deskr_1_img_2 = np.std(img_2)
-        elif descriptor_1 == 'mean':
+        elif descriptor_1 == 'mean': # (Mittelwert)
             deskr_1_img_1 = rgb_img_mean(img_1)
             deskr_1_img_2 = rgb_img_mean(img_2)
         elif descriptor_1 == '0':
             deskr_1_img_1 = 0
             deskr_1_img_2 = 0
-        elif descriptor_1 == 'sobel':
-            ### MUSS GRAUSTUFEN BILD SEIN !!!!!!!!!!!!!
-            sobelH_1 = sobel_h(rgb2gray(img_1)) #horizontale Kanten/Helligkeitsunterschiede finden mit dem Sobelfilter
-            sobelV_1 = sobel_v(rgb2gray(img_1)) #vertikale Kanten/Helligkeitsunterschiede finden mit dem Sobelfilter
-            deskr_1_img_1 = np.sqrt(sobelH_1**2 + sobelV_1**2) #gradientStaerke: die Staerke des Gradienten berechnet sich durch die Laenge des Vektors, der aus den beiden Einzelteilen sobelH und sobelV entsteht
+        elif descriptor_1 == 'sobel': # Find edges
+            sobelH_1 = sobel_h(rgb2gray(img_1)) # Find horizontal edges/brightness differences
+            sobelV_1 = sobel_v(rgb2gray(img_1)) # Find vertical edges/brightness differences
+            deskr_1_img_1 = np.sqrt(sobelH_1**2 + sobelV_1**2) # Gradient strength
             sobelH_2 = sobel_h(rgb2gray(img_2))
             sobelV_2 = sobel_v(rgb2gray(img_2))
             deskr_1_img_2 = np.sqrt(sobelH_2**2 + sobelV_2**2)
-            #plt.imshow(deskr_1_img_2)
-            #plt.show()
-        elif descriptor_1[:3] == 'hog':
+        elif descriptor_1[:3] == 'hog': # Histogram over gradient orientation
             params = descriptor_1.split(",")
             par1 = int(params[1])
             par2 = int(params[2])
             deskr_1_img_1 = hog(img_1, orientations=par1, pixels_per_cell=(par2, par2))
             deskr_1_img_2 = hog(img_1, orientations=par1, pixels_per_cell=(par2, par2))
-            # So gibt man noch ein Bild dazu aus:
-            #deskr_1_img_1, theBild = hog(img_1, orientations=8, pixels_per_cell=(16, 16), cells_per_block=(1, 1), visualize=True, multichannel=True)
-            #plt.imshow(theBild)
+            # With image return:
+            #deskr_1_img_1, image = hog(img_1, orientations=8, pixels_per_cell=(16, 16), visualize=True)
+            #plt.imshow(image)
             #plt.show()
     
-    	# Beladen der zweiten beiden Merkmale
+    	# Set Descriptor 2
         if descriptor_2 == '1d_histo':
             deskr_2_img_1 = rgb_img_to_1d_histo(img_1)[0]
             deskr_2_img_2 = rgb_img_to_1d_histo(img_2)[0]
         elif descriptor_2 == '3d_histo':
             deskr_2_img_1 = rgb_img_to_3d_histo(img_1)[0]
             deskr_2_img_2 = rgb_img_to_3d_histo(img_2)[0]
-        elif descriptor_2 == 'std': #Standardabweichung entlang der angegebenen Achse
+        elif descriptor_2 == 'std':
             deskr_2_img_1 = np.std(img_1)
             deskr_2_img_2 = np.std(img_2)
-        elif descriptor_2 == 'mean': #Mittelwert entlang der angegebenen Achse
+        elif descriptor_2 == 'mean':
             deskr_2_img_1 = rgb_img_mean(img_1)
             deskr_2_img_2 = rgb_img_mean(img_2)
         elif descriptor_2 == '0':
             deskr_2_img_1 = 0
             deskr_2_img_2 = 0
-        elif descriptor_2 == 'sobel': #Kanten finden
-            ### MUSS GRAUSTUFEN BILD SEIN !!!!!!!!!!!!!
-            sobelH_1 = sobel_h(rgb2gray(img_1)) #horizontale Kanten/Helligkeitsunterschiede finden mit dem Sobelfilter
-            sobelV_1 = sobel_v(rgb2gray(img_1)) #vertikale Kanten/Helligkeitsunterschiede finden mit dem Sobelfilter
-            deskr_2_img_1 = np.sqrt(sobelH_1**2 + sobelV_1**2) #gradientStaerke: die Staerke des Gradienten berechnet sich durch die Laenge des Vektors, der aus den beiden Einzelteilen sobelH und sobelV entsteht
+        elif descriptor_2 == 'sobel':
+            sobelH_1 = sobel_h(rgb2gray(img_1))
+            sobelV_1 = sobel_v(rgb2gray(img_1))
+            deskr_2_img_1 = np.sqrt(sobelH_1**2 + sobelV_1**2)
             sobelH_2 = sobel_h(rgb2gray(img_2))
             sobelV_2 = sobel_v(rgb2gray(img_2))
             deskr_2_img_2 = np.sqrt(sobelH_2**2 + sobelV_2**2)
-        elif descriptor_2[:3] == 'hog': #Histogramm über Gradientenorientierung
+        elif descriptor_2[:3] == 'hog': 
             params = descriptor_1.split(",")
             par1 = int(params[1])
             par2 = int(params[2])
             deskr_2_img_1 = hog(img_1, orientations=par1, pixels_per_cell=(par2, par2))
             deskr_2_img_2 = hog(img_1, orientations=par1, pixels_per_cell=(par2, par2))
     
+        # Calculate distance
         if distance_measure == 'euklid':
             distance_1 = eukl_dist(deskr_1_img_1, deskr_1_img_2)
             distance_2 = eukl_dist(deskr_2_img_1, deskr_2_img_2)
@@ -141,12 +138,12 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
                 count += 1
         return count / len(va_images) * 100
     
-    # Parameters
-    bin_count = p_bin_count # for histogram
-    neighbour_count = p_neighbour_count # number of compared suggestions for labels 
-    weight = p_weight # for the descriptor_2
-    distance_measure = p_distance_measure # distanzmas ist entweder euklid oder intersect
-    descriptor_1 = p_descriptor_1 # diskriptoren sind: 1d_histo, 3d_histo, std, mean, 0, sobel, hog
+    # Set Parameters
+    bin_count = p_bin_count
+    neighbour_count = p_neighbour_count
+    weight = p_weight
+    distance_measure = p_distance_measure
+    descriptor_1 = p_descriptor_1
     descriptor_2 = p_descriptor_2
     time_start = 0
     time_stop = 0
@@ -159,7 +156,7 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
     
     # Stop time measurement
     time_stop = default_timer()
-    needed_time = (time_stop - time_start) / 60 # Min.
+    needed_time = (time_stop - time_start) / 60 # in min.
     
     # Calculate guessing accuracy
     guessing_accuracy = guessing_accuracy(estimated_labels, va_shuffled_labels)
@@ -172,7 +169,7 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
     print("Step done.")
 
 ###############################################################################
-# Define helper function for image set selection (1 or 2 choosable)
+# Define helper function for image set selection
 def get_image_set(set):
     if set == 1:
         return ""
@@ -181,7 +178,7 @@ def get_image_set(set):
 
 
 # Set the image set (1 or 2) ##################################################
-image_set = 1
+image_set = 2
 ###############################################################################
         
 
@@ -223,52 +220,61 @@ wait_length = str(len(va_shuffled_images))
 #calculate_estimated_labels('euklid', 8, 'mean', '0', 0, 0)
 #calculate_estimated_labels('euklid', 8, 'sobel', '0', 0, 0)
 #calculate_estimated_labels('euklid', 8, 'hog,4,8', '0', 0, 0)
-#
-#calculate_estimated_labels('euklid', 4, '1d_histo', '0', 0, 8)
-#calculate_estimated_labels('euklid', 4, '3d_histo', '0', 0, 8)
-#calculate_estimated_labels('euklid', 4, 'std', '0', 0, 0)
-#calculate_estimated_labels('euklid', 4, 'mean', '0', 0, 0)
-#calculate_estimated_labels('euklid', 4, 'sobel', '0', 0, 0)
-#calculate_estimated_labels('euklid', 4, 'hog,4,8', '0', 0, 0)
-#
-#calculate_estimated_labels('euklid', 3, '1d_histo', '0', 0, 8)
-#calculate_estimated_labels('euklid', 3, '3d_histo', '0', 0, 8)
-#calculate_estimated_labels('euklid', 3, 'std', '0', 0, 0)
-#calculate_estimated_labels('euklid', 3, 'mean', '0', 0, 0)
-#calculate_estimated_labels('euklid', 3, 'sobel', '0', 0, 0)
-#calculate_estimated_labels('euklid', 3, 'hog,4,8', '0', 0, 0)
-#
-#calculate_estimated_labels('euklid', 2, '1d_histo', '0', 0, 8)
-#calculate_estimated_labels('euklid', 2, '3d_histo', '0', 0, 8)
-#calculate_estimated_labels('euklid', 2, 'std', '0', 0, 0)
-#calculate_estimated_labels('euklid', 2, 'mean', '0', 0, 0)
-#calculate_estimated_labels('euklid', 2, 'sobel', '0', 0, 0)
-#calculate_estimated_labels('euklid', 2, 'hog,4,8', '0', 0, 0)
-#
-#calculate_estimated_labels('euklid', 8, '1d_histo', '0', 0, 4)
-#calculate_estimated_labels('euklid', 8, '3d_histo', '0', 0, 4)
-#calculate_estimated_labels('euklid', 4, '1d_histo', '0', 0, 4)
-#calculate_estimated_labels('euklid', 4, '3d_histo', '0', 0, 4)
-#calculate_estimated_labels('euklid', 3, '1d_histo', '0', 0, 4)
-#calculate_estimated_labels('euklid', 3, '3d_histo', '0', 0, 4)
-#calculate_estimated_labels('euklid', 2, '1d_histo', '0', 0, 4)
-#calculate_estimated_labels('euklid', 2, '3d_histo', '0', 0, 4)
-#
-#calculate_estimated_labels('euklid', 8, '1d_histo', '0', 0, 3)
-#calculate_estimated_labels('euklid', 8, '3d_histo', '0', 0, 3)
-#calculate_estimated_labels('euklid', 4, '1d_histo', '0', 0, 3)
-#calculate_estimated_labels('euklid', 4, '3d_histo', '0', 0, 3)
-#calculate_estimated_labels('euklid', 3, '1d_histo', '0', 0, 3)
-#calculate_estimated_labels('euklid', 3, '3d_histo', '0', 0, 3)
-#calculate_estimated_labels('euklid', 2, '1d_histo', '0', 0, 3)
-#calculate_estimated_labels('euklid', 2, '3d_histo', '0', 0, 3)
-#
-#calculate_estimated_labels('euklid', 8, 'hog,4,6', '0', 0, 0)
-#calculate_estimated_labels('euklid', 4, 'hog,4,6', '0', 0, 0)
-#calculate_estimated_labels('euklid', 3, 'hog,4,6', '0', 0, 0)
-#calculate_estimated_labels('euklid', 2, 'hog,4,6', '0', 0, 0)
-#calculate_estimated_labels('euklid', 8, 'hog,4,4', '0', 0, 0)
-#calculate_estimated_labels('euklid', 4, 'hog,4,4', '0', 0, 0)
+
+calculate_estimated_labels('euklid', 4, '1d_histo', '0', 0, 8)
+calculate_estimated_labels('euklid', 4, '3d_histo', '0', 0, 8)
+calculate_estimated_labels('euklid', 4, 'std', '0', 0, 0)
+calculate_estimated_labels('euklid', 4, 'mean', '0', 0, 0)
+calculate_estimated_labels('euklid', 4, 'sobel', '0', 0, 0)
+calculate_estimated_labels('euklid', 4, 'hog,4,8', '0', 0, 0)
+
+calculate_estimated_labels('euklid', 3, '1d_histo', '0', 0, 8)
+calculate_estimated_labels('euklid', 3, '3d_histo', '0', 0, 8)
+calculate_estimated_labels('euklid', 3, 'std', '0', 0, 0)
+calculate_estimated_labels('euklid', 3, 'mean', '0', 0, 0)
+calculate_estimated_labels('euklid', 3, 'sobel', '0', 0, 0)
+calculate_estimated_labels('euklid', 3, 'hog,4,8', '0', 0, 0)
+
+calculate_estimated_labels('euklid', 2, '1d_histo', '0', 0, 8)
+calculate_estimated_labels('euklid', 2, '3d_histo', '0', 0, 8)
+calculate_estimated_labels('euklid', 2, 'std', '0', 0, 0)
+calculate_estimated_labels('euklid', 2, 'mean', '0', 0, 0)
+calculate_estimated_labels('euklid', 2, 'sobel', '0', 0, 0)
+calculate_estimated_labels('euklid', 2, 'hog,4,8', '0', 0, 0)
+
+calculate_estimated_labels('euklid', 8, '1d_histo', '0', 0, 4)
+calculate_estimated_labels('euklid', 8, '3d_histo', '0', 0, 4)
+calculate_estimated_labels('euklid', 4, '1d_histo', '0', 0, 4)
+calculate_estimated_labels('euklid', 4, '3d_histo', '0', 0, 4)
+calculate_estimated_labels('euklid', 3, '1d_histo', '0', 0, 4)
+calculate_estimated_labels('euklid', 3, '3d_histo', '0', 0, 4)
+calculate_estimated_labels('euklid', 2, '1d_histo', '0', 0, 4)
+calculate_estimated_labels('euklid', 2, '3d_histo', '0', 0, 4)
+
+calculate_estimated_labels('euklid', 8, '1d_histo', '0', 0, 3)
+calculate_estimated_labels('euklid', 8, '3d_histo', '0', 0, 3)
+calculate_estimated_labels('euklid', 4, '1d_histo', '0', 0, 3)
+calculate_estimated_labels('euklid', 4, '3d_histo', '0', 0, 3)
+calculate_estimated_labels('euklid', 3, '1d_histo', '0', 0, 3)
+calculate_estimated_labels('euklid', 3, '3d_histo', '0', 0, 3)
+calculate_estimated_labels('euklid', 2, '1d_histo', '0', 0, 3)
+calculate_estimated_labels('euklid', 2, '3d_histo', '0', 0, 3)
+
+calculate_estimated_labels('euklid', 8, 'hog,4,6', '0', 0, 0)
+calculate_estimated_labels('euklid', 4, 'hog,4,6', '0', 0, 0)
+calculate_estimated_labels('euklid', 3, 'hog,4,6', '0', 0, 0)
+calculate_estimated_labels('euklid', 2, 'hog,4,6', '0', 0, 0)
+calculate_estimated_labels('euklid', 8, 'hog,4,4', '0', 0, 0)
+calculate_estimated_labels('euklid', 4, 'hog,4,4', '0', 0, 0)
+
+calculate_estimated_labels('euklid', 8, '1d_histo', '0', 0, 'auto')
+calculate_estimated_labels('euklid', 8, '3d_histo', '0', 0, 'auto')
+calculate_estimated_labels('euklid', 4, '1d_histo', '0', 0, 'auto')
+calculate_estimated_labels('euklid', 4, '3d_histo', '0', 0, 'auto')
+calculate_estimated_labels('euklid', 3, '1d_histo', '0', 0, 'auto')
+calculate_estimated_labels('euklid', 3, '3d_histo', '0', 0, 'auto')
+calculate_estimated_labels('euklid', 2, '1d_histo', '0', 0, 'auto')
+calculate_estimated_labels('euklid', 2, '3d_histo', '0', 0, 'auto')
 
 
 print("\nDone!")
