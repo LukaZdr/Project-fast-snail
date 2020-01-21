@@ -115,7 +115,6 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
     
     def rgb_img_n_nearest_neighbour(va_imgs, tr_imgs): # Calculates esimated labels through nearest neighbour method
         print("\nCalculates: " + distance_measure + " / " + str(neighbour_count) + " / " + descriptor_1 + " / " + descriptor_2 + " / " + str(weight) + " / " + str(bin_count))
-        wait_length = len(va_imgs)
         est_labels_list = []
         for i, va_img in enumerate(va_imgs):
             distances = []
@@ -194,6 +193,9 @@ va_labels = va['labels']
 tr_shuffled_images, tr_shuffled_labels = shuffle(tr_images, tr_labels)
 va_shuffled_images, va_shuffled_labels = shuffle(va_images, va_labels)
 
+# For displaying status
+wait_length = len(va_shuffled_images)
+
 # Write header of CSV file (just necessary the first time)
 #with open("Results.csv", mode="a", newline="\n", encoding="utf-8") as file:
 #    file_writer = writer(file, delimiter=";", quotechar="'", quoting=QUOTE_MINIMAL)
@@ -209,18 +211,18 @@ va_shuffled_images, va_shuffled_labels = shuffle(va_images, va_labels)
 # weight:            gets multiplied with descriptor_2
 # bin_count:         bins used in histogram
 
-calculate_estimated_labels('euklid', 8, '1d_histo', '0', 0, 8)
-calculate_estimated_labels('euklid', 8, '3d_histo', '0', 0, 8)
-calculate_estimated_labels('euklid', 8, 'std', '0', 0, 8)
-calculate_estimated_labels('euklid', 8, 'mean', '0', 0, 8)
-calculate_estimated_labels('euklid', 8, 'sobel', '0', 0, 8)
-calculate_estimated_labels('euklid', 8, 'hog', '0', 0, 8)
+#calculate_estimated_labels('euklid', 8, '1d_histo', '0', 0, 8)
+#calculate_estimated_labels('euklid', 8, '3d_histo', '0', 0, 8)
+#calculate_estimated_labels('euklid', 8, 'std', '0', 0, 8)
+#calculate_estimated_labels('euklid', 8, 'mean', '0', 0, 8)
+#calculate_estimated_labels('euklid', 8, 'sobel', '0', 0, 8)
+#calculate_estimated_labels('euklid', 8, 'hog', '0', 0, 8)
 
-calculate_estimated_labels('euklid', 4, '1d_histo', '0', 0, 8)
-calculate_estimated_labels('euklid', 4, '3d_histo', '0', 0, 8)
-calculate_estimated_labels('euklid', 4, 'std', '0', 0, 8)
-calculate_estimated_labels('euklid', 4, 'mean', '0', 0, 8)
-calculate_estimated_labels('euklid', 4, 'sobel', '0', 0, 8)
+#calculate_estimated_labels('euklid', 4, '1d_histo', '0', 0, 8)
+#calculate_estimated_labels('euklid', 4, '3d_histo', '0', 0, 8)
+#calculate_estimated_labels('euklid', 4, 'std', '0', 0, 8)
+#calculate_estimated_labels('euklid', 4, 'mean', '0', 0, 8)
+#calculate_estimated_labels('euklid', 4, 'sobel', '0', 0, 8)
 calculate_estimated_labels('euklid', 4, 'hog', '0', 0, 8)
 
 calculate_estimated_labels('euklid', 2, '1d_histo', '0', 0, 8)
