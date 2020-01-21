@@ -267,14 +267,5 @@ calculate_estimated_labels('euklid', 2, 'hog,4,6', '0', 0, 0)
 calculate_estimated_labels('euklid', 8, 'hog,4,4', '0', 0, 0)
 calculate_estimated_labels('euklid', 4, 'hog,4,4', '0', 0, 0)
 
-calculate_estimated_labels('euklid', 8, '1d_histo', '0', 0, 'auto')
-calculate_estimated_labels('euklid', 8, '3d_histo', '0', 0, 'auto')
-calculate_estimated_labels('euklid', 4, '1d_histo', '0', 0, 'auto')
-calculate_estimated_labels('euklid', 4, '3d_histo', '0', 0, 'auto')
-calculate_estimated_labels('euklid', 3, '1d_histo', '0', 0, 'auto')
-calculate_estimated_labels('euklid', 3, '3d_histo', '0', 0, 'auto')
-calculate_estimated_labels('euklid', 2, '1d_histo', '0', 0, 'auto')
-calculate_estimated_labels('euklid', 2, '3d_histo', '0', 0, 'auto')
-
 
 print("\nDone!")
