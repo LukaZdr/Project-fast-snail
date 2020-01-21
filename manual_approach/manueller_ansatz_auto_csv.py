@@ -131,7 +131,7 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
             n_closest_labels = elements_for_index_list(index_list, tr_shuffled_labels)
             est_label = most_common_occurrence(n_closest_labels)
             est_labels_list.append(est_label)
-            print(str(i + 1) + "/" + str(wait_length))
+            print(str(i + 1) + "/" + wait_length)
         return est_labels_list
     
     def guessing_accuracy(est_labels, val_labels): # in %
@@ -200,7 +200,7 @@ tr_shuffled_images, tr_shuffled_labels = shuffle(tr_images, tr_labels)
 va_shuffled_images, va_shuffled_labels = shuffle(va_images, va_labels)
 
 # For displaying status
-wait_length = len(va_shuffled_images)
+wait_length = str(len(va_shuffled_images))
 
 # Write header of CSV file (just necessary the first time)
 #with open("Results.csv", mode="a", newline="\n", encoding="utf-8") as file:
