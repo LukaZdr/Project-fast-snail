@@ -160,7 +160,7 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
     guessing_accuracy = guessing_accuracy(estimated_labels, va_shuffled_labels)
     
     # Write settings to file
-    with open('Results.csv', mode='a') as file:
+    with open("Results.csv", mode="a", newline="\n", encoding="utf-8") as file:
         file_writer = writer(file, delimiter=';', quotechar='"', quoting=QUOTE_MINIMAL)
         file_writer.writerow([distance_measure, str(neighbour_count), descriptor_1, descriptor_2, str(weight), str(bin_count), "{:.2f}".format(guessing_accuracy), "{:.2f}".format(needed_time), str(image_set)])
 
@@ -195,7 +195,7 @@ tr_shuffled_images, tr_shuffled_labels = shuffle(tr_images, tr_labels)
 va_shuffled_images, va_shuffled_labels = shuffle(va_images, va_labels)
 
 # Write header
-with open('Results.csv', mode='w') as file:
+with open("Results.csv", mode="a", newline="\n", encoding="utf-8") as file:
     file_writer = writer(file, delimiter=';', quotechar='"', quoting=QUOTE_MINIMAL)
     file_writer.writerow(["distance_measure", "neighbour_count", "descriptor_1", "descriptor_2", "weight", "bin_count", "guessing_accuracy", "time_needed", "image_set"])
 
