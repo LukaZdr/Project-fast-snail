@@ -55,9 +55,6 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
         elif descriptor_1 == 'mean': # (Mittelwert)
             deskr_1_img_1 = rgb_img_mean(img_1)
             deskr_1_img_2 = rgb_img_mean(img_2)
-        elif descriptor_1 == '0':
-            deskr_1_img_1 = 0
-            deskr_1_img_2 = 0
         elif descriptor_1 == 'sobel': # Find edges
             sobelH_1 = sobel_h(rgb2gray(img_1)) # Find horizontal edges/brightness differences
             sobelV_1 = sobel_v(rgb2gray(img_1)) # Find vertical edges/brightness differences
@@ -75,6 +72,9 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
             #deskr_1_img_1, image = hog(img_1, orientations=8, pixels_per_cell=(16, 16), visualize=True)
             #plt.imshow(image)
             #plt.show()
+        elif descriptor_1 == '0':
+            deskr_1_img_1 = 0
+            deskr_1_img_2 = 0
     
     	# Set Descriptor 2
         if descriptor_2 == '1d_histo':
@@ -89,9 +89,6 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
         elif descriptor_2 == 'mean':
             deskr_2_img_1 = rgb_img_mean(img_1)
             deskr_2_img_2 = rgb_img_mean(img_2)
-        elif descriptor_2 == '0':
-            deskr_2_img_1 = 0
-            deskr_2_img_2 = 0
         elif descriptor_2 == 'sobel':
             sobelH_1 = sobel_h(rgb2gray(img_1))
             sobelV_1 = sobel_v(rgb2gray(img_1))
@@ -105,6 +102,9 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
             par2 = int(params[2])
             deskr_2_img_1 = hog(img_1, orientations=par1, pixels_per_cell=(par2, par2))
             deskr_2_img_2 = hog(img_1, orientations=par1, pixels_per_cell=(par2, par2))
+        elif descriptor_2 == '0':
+            deskr_2_img_1 = 0
+            deskr_2_img_2 = 0
     
         # Calculate distance
         if distance_measure == 'euklid':
