@@ -1,6 +1,7 @@
 body {
     font-family: sans-serif;
     margin: 5px;
+	overflow-y: scroll;
 }
 
 thead th {
