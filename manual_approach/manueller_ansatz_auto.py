@@ -293,20 +293,96 @@ wait_length = str(len(va_shuffled_images))
 #calculate_estimated_labels("euklid", 3, "3d_histo", "0", 0, 7)
 #calculate_estimated_labels("euklid", 2, "1d_histo", "0", 0, 7)
 #calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 7)
-
+#
 #calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 2)
+#
+#calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.9, 3)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.7, 3)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.5, 3)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.3, 3)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.1, 3)
+#
+#calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.9, 3)
+#calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.7, 3)
+#calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.5, 3)
+#calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.3, 3)
+#calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.1, 3)
 
-calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.9, 3)
-calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.7, 3)
-calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.5, 3)
-calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.3, 3)
-calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.1, 3)
+###############################################################################
+# Only with image_set 1
+#calculate_estimated_labels("euklid", 4, "3d_histo", "mean", 0.9, 3)
+#calculate_estimated_labels("euklid", 4, "3d_histo", "mean", 0.7, 3)
+#calculate_estimated_labels("euklid", 4, "3d_histo", "mean", 0.5, 3)
+#calculate_estimated_labels("euklid", 4, "3d_histo", "mean", 0.3, 3)
+#calculate_estimated_labels("euklid", 4, "3d_histo", "mean", 0.1, 3)
+#
+#calculate_estimated_labels("euklid", 5, "3d_histo", "mean", 0.9, 3)
+#calculate_estimated_labels("euklid", 5, "3d_histo", "mean", 0.7, 3)
+#calculate_estimated_labels("euklid", 5, "3d_histo", "mean", 0.5, 3)
+#calculate_estimated_labels("euklid", 5, "3d_histo", "mean", 0.3, 3)
+#calculate_estimated_labels("euklid", 5, "3d_histo", "mean", 0.1, 3)
+#
+#calculate_estimated_labels("euklid", 6, "3d_histo", "mean", 0.9, 3)
+#calculate_estimated_labels("euklid", 6, "3d_histo", "mean", 0.7, 3)
+#calculate_estimated_labels("euklid", 6, "3d_histo", "mean", 0.5, 3)
+#calculate_estimated_labels("euklid", 6, "3d_histo", "mean", 0.3, 3)
+#calculate_estimated_labels("euklid", 6, "3d_histo", "mean", 0.1, 3)
+#
+#calculate_estimated_labels("euklid", 7, "3d_histo", "mean", 0.9, 3)
+#calculate_estimated_labels("euklid", 7, "3d_histo", "mean", 0.7, 3)
+#calculate_estimated_labels("euklid", 7, "3d_histo", "mean", 0.5, 3)
+#calculate_estimated_labels("euklid", 7, "3d_histo", "mean", 0.3, 3)
+#calculate_estimated_labels("euklid", 7, "3d_histo", "mean", 0.1, 3)
+#
+#calculate_estimated_labels("euklid", 8, "3d_histo", "mean", 0.9, 3)
+#calculate_estimated_labels("euklid", 8, "3d_histo", "mean", 0.7, 3)
+#calculate_estimated_labels("euklid", 8, "3d_histo", "mean", 0.5, 3)
+#calculate_estimated_labels("euklid", 8, "3d_histo", "mean", 0.3, 3)
+#calculate_estimated_labels("euklid", 8, "3d_histo", "mean", 0.1, 3)
+#
+calculate_estimated_labels("euklid", 4, "mean", "3d_histo", 0.9, 3)
+calculate_estimated_labels("euklid", 4, "mean", "3d_histo", 0.7, 3)
+calculate_estimated_labels("euklid", 4, "mean", "3d_histo", 0.5, 3)
+calculate_estimated_labels("euklid", 4, "mean", "3d_histo", 0.3, 3)
+calculate_estimated_labels("euklid", 4, "mean", "3d_histo", 0.1, 3)
 
-calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.9, 3)
-calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.7, 3)
-calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.5, 3)
-calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.3, 3)
-calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.1, 3)
+calculate_estimated_labels("euklid", 5, "mean", "3d_histo", 0.9, 3)
+calculate_estimated_labels("euklid", 5, "mean", "3d_histo", 0.7, 3)
+calculate_estimated_labels("euklid", 5, "mean", "3d_histo", 0.5, 3)
+calculate_estimated_labels("euklid", 5, "mean", "3d_histo", 0.3, 3)
+calculate_estimated_labels("euklid", 5, "mean", "3d_histo", 0.1, 3)
+
+calculate_estimated_labels("euklid", 6, "mean", "3d_histo", 0.9, 3)
+calculate_estimated_labels("euklid", 6, "mean", "3d_histo", 0.7, 3)
+calculate_estimated_labels("euklid", 6, "mean", "3d_histo", 0.5, 3)
+calculate_estimated_labels("euklid", 6, "mean", "3d_histo", 0.3, 3)
+calculate_estimated_labels("euklid", 6, "mean", "3d_histo", 0.1, 3)
+
+calculate_estimated_labels("euklid", 7, "mean", "3d_histo", 0.9, 3)
+calculate_estimated_labels("euklid", 7, "mean", "3d_histo", 0.7, 3)
+calculate_estimated_labels("euklid", 7, "mean", "3d_histo", 0.5, 3)
+calculate_estimated_labels("euklid", 7, "mean", "3d_histo", 0.3, 3)
+calculate_estimated_labels("euklid", 7, "mean", "3d_histo", 0.1, 3)
+
+calculate_estimated_labels("euklid", 8, "mean", "3d_histo", 0.9, 3)
+calculate_estimated_labels("euklid", 8, "mean", "3d_histo", 0.7, 3)
+calculate_estimated_labels("euklid", 8, "mean", "3d_histo", 0.5, 3)
+calculate_estimated_labels("euklid", 8, "mean", "3d_histo", 0.3, 3)
+calculate_estimated_labels("euklid", 8, "mean", "3d_histo", 0.1, 3)
+
+###############################################################################
+# Only with image_set 2
+#calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.9, 3)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.7, 3)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.5, 3)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.3, 3)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.1, 3)
+#
+#calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.9, 3)
+#calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.7, 3)
+#calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.5, 3)
+#calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.3, 3)
+#calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.1, 3)
 
 # Bilder ohne BG mit den normalen Fotos vergleichen
 
