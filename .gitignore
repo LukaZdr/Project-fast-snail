@@ -1,2 +1,3 @@
 # ignore files
 manual_approach/*.npz
+manual_approach/GIT-push.bat
