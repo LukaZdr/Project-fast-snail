@@ -1,0 +1,74 @@
+body {
+    font-family: sans-serif;
+    margin: 5px;
+}
+
+thead th {
+    text-align: left;
+    padding: 10 8 !important
+}
+
+td {
+    border-left: 1px solid #ccc
+}
+
+td:first-child {
+    border-left: none
+}
+
+table.dataTable.stripe tbody tr.odd,
+table.dataTable.display tbody tr.odd {
+    background-color: #fff !important
+}
+
+table.dataTable.stripe tbody tr.even,
+table.dataTable.display tbody tr.even {
+    background-color: #ddd !important
+}
+
+table.dataTable.display tbody tr.odd > .sorting_1,
+table.dataTable.order-column.stripe tbody tr.odd>.sorting_1 {
+    background-color: #daffd9 !important
+}
+
+table.dataTable.display tbody tr.even > .sorting_1,
+table.dataTable.order-column.stripe tbody tr.even>.sorting_1 {
+    background-color: #a6eda4 !important
+}
+
+table.dataTable.hover tbody tr:hover,
+table.dataTable.display tbody tr:hover,
+table.dataTable.display tbody tr:hover > .sorting_1,
+table.dataTable.order-column.hover tbody tr:hover>.sorting_1 {
+    background-color: #b8bfff !important
+}
+
+th select {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+a,
+a:active,
+a:hover,
+a:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+#t_filter {
+	position: absolute;
+	top: -40px;
+	right: 0;
+}
+
+#t_length,
+#t_paginate {
+	display: none;
+}
+
+h1,
+#t_info {
+	margin-bottom: 10px;
+}
