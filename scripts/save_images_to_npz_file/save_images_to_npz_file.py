@@ -15,9 +15,6 @@ co3 = list(io.ImageCollection("./3comp/*"))          # Label 4 #shape 4
 arrayOfImages = []
 labels = []
 
-for img in co3:
-  print(img.shape)
-
 while (len(eth) + len(vga) + len(ps2) + len(co3)) > 0:
   next_array = random.randrange(1, 5)
   if next_array == 1 and len(eth) != 0:
@@ -32,5 +29,5 @@ while (len(eth) + len(vga) + len(ps2) + len(co3)) > 0:
   elif next_array == 4 and len(co3) != 0:
     arrayOfImages.append(co3.pop(0))
     labels.append(4)
-   
+
 np.savez("images_and_labels", data = arrayOfImages, labels = labels)
