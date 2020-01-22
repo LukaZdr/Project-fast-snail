@@ -395,6 +395,7 @@ wait_length = str(len(va_shuffled_images))
 #calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 3)
 #calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 3)
 
+#TESTTEST
 
 # Bilder ohne BG mit den normalen Fotos vergleichen
 
