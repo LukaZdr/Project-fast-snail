@@ -178,7 +178,7 @@ def get_image_set(set):
 
 
 # Set imageset (1 or 2) #######################################################
-image_set = 1
+image_set = 2
 ###############################################################################
         
 
@@ -308,6 +308,9 @@ wait_length = str(len(va_shuffled_images))
 #calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.3, 3)
 #calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.1, 3)
 
+#calculate_estimated_labels("euklid", 6, "3d_histo", "std", 0.5, 3)
+#calculate_estimated_labels("euklid", 6, "std", "3d_histo", 0.5, 3)
+
 ###############################################################################
 # Only with image_set 1
 #calculate_estimated_labels("euklid", 4, "3d_histo", "mean", 0.9, 3)
@@ -340,35 +343,35 @@ wait_length = str(len(va_shuffled_images))
 #calculate_estimated_labels("euklid", 8, "3d_histo", "mean", 0.3, 3)
 #calculate_estimated_labels("euklid", 8, "3d_histo", "mean", 0.1, 3)
 #
-calculate_estimated_labels("euklid", 4, "mean", "3d_histo", 0.9, 3)
-calculate_estimated_labels("euklid", 4, "mean", "3d_histo", 0.7, 3)
-calculate_estimated_labels("euklid", 4, "mean", "3d_histo", 0.5, 3)
-calculate_estimated_labels("euklid", 4, "mean", "3d_histo", 0.3, 3)
-calculate_estimated_labels("euklid", 4, "mean", "3d_histo", 0.1, 3)
-
-calculate_estimated_labels("euklid", 5, "mean", "3d_histo", 0.9, 3)
-calculate_estimated_labels("euklid", 5, "mean", "3d_histo", 0.7, 3)
-calculate_estimated_labels("euklid", 5, "mean", "3d_histo", 0.5, 3)
-calculate_estimated_labels("euklid", 5, "mean", "3d_histo", 0.3, 3)
-calculate_estimated_labels("euklid", 5, "mean", "3d_histo", 0.1, 3)
-
-calculate_estimated_labels("euklid", 6, "mean", "3d_histo", 0.9, 3)
-calculate_estimated_labels("euklid", 6, "mean", "3d_histo", 0.7, 3)
-calculate_estimated_labels("euklid", 6, "mean", "3d_histo", 0.5, 3)
-calculate_estimated_labels("euklid", 6, "mean", "3d_histo", 0.3, 3)
-calculate_estimated_labels("euklid", 6, "mean", "3d_histo", 0.1, 3)
-
-calculate_estimated_labels("euklid", 7, "mean", "3d_histo", 0.9, 3)
-calculate_estimated_labels("euklid", 7, "mean", "3d_histo", 0.7, 3)
-calculate_estimated_labels("euklid", 7, "mean", "3d_histo", 0.5, 3)
-calculate_estimated_labels("euklid", 7, "mean", "3d_histo", 0.3, 3)
-calculate_estimated_labels("euklid", 7, "mean", "3d_histo", 0.1, 3)
-
-calculate_estimated_labels("euklid", 8, "mean", "3d_histo", 0.9, 3)
-calculate_estimated_labels("euklid", 8, "mean", "3d_histo", 0.7, 3)
-calculate_estimated_labels("euklid", 8, "mean", "3d_histo", 0.5, 3)
-calculate_estimated_labels("euklid", 8, "mean", "3d_histo", 0.3, 3)
-calculate_estimated_labels("euklid", 8, "mean", "3d_histo", 0.1, 3)
+#calculate_estimated_labels("euklid", 4, "mean", "3d_histo", 0.9, 3)
+#calculate_estimated_labels("euklid", 4, "mean", "3d_histo", 0.7, 3)
+#calculate_estimated_labels("euklid", 4, "mean", "3d_histo", 0.5, 3)
+#calculate_estimated_labels("euklid", 4, "mean", "3d_histo", 0.3, 3)
+#calculate_estimated_labels("euklid", 4, "mean", "3d_histo", 0.1, 3)
+#
+#calculate_estimated_labels("euklid", 5, "mean", "3d_histo", 0.9, 3)
+#calculate_estimated_labels("euklid", 5, "mean", "3d_histo", 0.7, 3)
+#calculate_estimated_labels("euklid", 5, "mean", "3d_histo", 0.5, 3)
+#calculate_estimated_labels("euklid", 5, "mean", "3d_histo", 0.3, 3)
+#calculate_estimated_labels("euklid", 5, "mean", "3d_histo", 0.1, 3)
+#
+#calculate_estimated_labels("euklid", 6, "mean", "3d_histo", 0.9, 3)
+#calculate_estimated_labels("euklid", 6, "mean", "3d_histo", 0.7, 3)
+#calculate_estimated_labels("euklid", 6, "mean", "3d_histo", 0.5, 3)
+#calculate_estimated_labels("euklid", 6, "mean", "3d_histo", 0.3, 3)
+#calculate_estimated_labels("euklid", 6, "mean", "3d_histo", 0.1, 3)
+#
+#calculate_estimated_labels("euklid", 7, "mean", "3d_histo", 0.9, 3)
+#calculate_estimated_labels("euklid", 7, "mean", "3d_histo", 0.7, 3)
+#calculate_estimated_labels("euklid", 7, "mean", "3d_histo", 0.5, 3)
+#calculate_estimated_labels("euklid", 7, "mean", "3d_histo", 0.3, 3)
+#calculate_estimated_labels("euklid", 7, "mean", "3d_histo", 0.1, 3)
+#
+#calculate_estimated_labels("euklid", 8, "mean", "3d_histo", 0.9, 3)
+#calculate_estimated_labels("euklid", 8, "mean", "3d_histo", 0.7, 3)
+#calculate_estimated_labels("euklid", 8, "mean", "3d_histo", 0.5, 3)
+#calculate_estimated_labels("euklid", 8, "mean", "3d_histo", 0.3, 3)
+#calculate_estimated_labels("euklid", 8, "mean", "3d_histo", 0.1, 3)
 
 ###############################################################################
 # Only with image_set 2
@@ -383,6 +386,7 @@ calculate_estimated_labels("euklid", 8, "mean", "3d_histo", 0.1, 3)
 #calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.5, 3)
 #calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.3, 3)
 #calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.1, 3)
+
 
 # Bilder ohne BG mit den normalen Fotos vergleichen
 

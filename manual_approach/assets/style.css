@@ -73,3 +73,13 @@ h1,
 #t_info {
 	margin-bottom: 10px;
 }
+
+table.dataTable thead .sorting_asc {
+	background-image: url("sort_asc.png") !important;
+	background-position: top right !important;
+}
+
+table.dataTable thead .sorting_desc {
+	background-image: url("sort_desc.png") !important;
+	background-position: top right !important;
+}

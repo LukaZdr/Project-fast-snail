@@ -210,4 +210,8 @@
 </td></tr><tr><td>euklid</td><td>8</td><td>mean</td><td>3d_histo</td><td>0.5</td><td>3</td><td>38.75</td><td>2.12</td><td>1
 </td></tr><tr><td>euklid</td><td>8</td><td>mean</td><td>3d_histo</td><td>0.3</td><td>3</td><td>38.75</td><td>2.14</td><td>1
 </td></tr><tr><td>euklid</td><td>8</td><td>mean</td><td>3d_histo</td><td>0.1</td><td>3</td><td>38.75</td><td>2.12</td><td>1
+</td></tr><tr><td>euklid</td><td>6</td><td>3d_histo</td><td>std</td><td>0.5</td><td>3</td><td>37.50</td><td>3.20</td><td>1
+</td></tr><tr><td>euklid</td><td>6</td><td>std</td><td>3d_histo</td><td>0.5</td><td>3</td><td>37.50</td><td>3.18</td><td>1
+</td></tr><tr><td>euklid</td><td>6</td><td>3d_histo</td><td>std</td><td>0.5</td><td>3</td><td>64.14</td><td>3.80</td><td>2
+</td></tr><tr><td>euklid</td><td>6</td><td>std</td><td>3d_histo</td><td>0.5</td><td>3</td><td>64.14</td><td>3.76</td><td>2
 </td></tr></tbody></table><script>$(document).ready(function(){$('#t').DataTable({fixedHeader:true,"lengthMenu":["9999"],initComplete:function(){var table=this;table.api().columns().every(function(){var column=this;var select=$('<br><select><option value=""></option></select>').appendTo($(column.header())).on('change',function(){var val=$(this).val();column.search(val?'^'+val+'$':'',true,false).draw();});column.data().unique().sort().each(function(value,index){select.append('<option value="'+value+'">'+value+'</option>')});$(select).click(function(e){e.stopPropagation();});});}});});</script></body></html>

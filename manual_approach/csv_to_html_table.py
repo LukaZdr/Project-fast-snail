@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 csv = open("Results.csv","r")
-html = open("table_for_viewing_result/index.html", "w")
+html = open("Results.html", "w")
 
 html.write("<html lang=\"de\"><head><meta charset=\"utf-8\"><title>CV - Manueller Ansatz</title><link rel=\"stylesheet\" href=\"assets/style.css\"><link rel=\"stylesheet\" href=\"assets/jquery.dataTables.min.css\"><script src=\"assets/jquery-3.3.1.js\"></script><script src=\"assets/jquery.dataTables.min.js\"></script></head>")
 html.write("<body><h1><a href='index.html'>Manual approach results</a></h1><table id='t' class='display'><thead><tr><th title='Field #1'>Distance measure</th><th title='Field #2'>Neighbour count</th><th title='Field #3'>Descriptor 1</th><th title='Field #4'>Descriptor 2</th><th title='Field #5'>Weight</th><th title='Field #6'>Bin count</th><th title='Field #7'>Guessing accuracy (%)</th><th title='Field #8'>Time needed (min)</th><th title='Field #9'>Image set</th></tr></thead><tbody>")
