@@ -56,15 +56,15 @@ for image_index in range(len(image_collection)):
   random_background_index = random.randrange(0, len(background_collection))
   background = background_collection[random_background_index]
   img_with_new_background = change_background(image, binarized_image, background)
-  plt.imshow(img_with_new_background, cmap='gray')
+  # plt.imshow(img_with_new_background, cmap='gray')
 
   # makeing a rirrored copy
   mirrored_img_with_new_background = img_with_new_background[:, ::-1]
 
   # saving the image
-  save_path = current_dir + '/img_' + str(image_index+1) + '.jpg'
+  save_path = current_dir + '/img_' + str(image_index+1) + '.png'
   imsave(save_path, img_with_new_background)
-  save_path = current_dir + '/img_r' + str(image_index+1) + '.jpg'
+  save_path = current_dir + '/img_r' + str(image_index+1) + '.png'
   imsave(save_path, mirrored_img_with_new_background)
 
 
