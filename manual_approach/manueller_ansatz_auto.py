@@ -181,7 +181,7 @@ def get_image_set(set):
         return "_3"
 
 
-# Set imageset (1 or 2) #######################################################
+# Set imageset (1, 2 or 3) ####################################################
 image_set = 3
 ###############################################################################
         
@@ -218,102 +218,102 @@ wait_length = str(len(va_shuffled_images))
 # weight:            gets multiplied with descriptor_2
 # bin_count:         bins used in histogram
 
-calculate_estimated_labels("euklid", 8, "1d_histo", "0", 0, 8)
-calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 8)
-calculate_estimated_labels("euklid", 8, "std", "0", 0, 0)
-calculate_estimated_labels("euklid", 8, "mean", "0", 0, 0)
-calculate_estimated_labels("euklid", 8, "sobel", "0", 0, 0)
-calculate_estimated_labels("euklid", 8, "hog,4,8", "0", 0, 0)
-
-calculate_estimated_labels("euklid", 4, "1d_histo", "0", 0, 8)
-calculate_estimated_labels("euklid", 4, "3d_histo", "0", 0, 8)
-calculate_estimated_labels("euklid", 4, "std", "0", 0, 0)
-calculate_estimated_labels("euklid", 4, "mean", "0", 0, 0)
-calculate_estimated_labels("euklid", 4, "sobel", "0", 0, 0)
-calculate_estimated_labels("euklid", 4, "hog,4,8", "0", 0, 0)
-
-calculate_estimated_labels("euklid", 3, "1d_histo", "0", 0, 8)
-calculate_estimated_labels("euklid", 3, "3d_histo", "0", 0, 8)
-calculate_estimated_labels("euklid", 3, "std", "0", 0, 0)
-calculate_estimated_labels("euklid", 3, "mean", "0", 0, 0)
-calculate_estimated_labels("euklid", 3, "sobel", "0", 0, 0)
-calculate_estimated_labels("euklid", 3, "hog,4,8", "0", 0, 0)
-
-calculate_estimated_labels("euklid", 2, "1d_histo", "0", 0, 8)
-calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 8)
-calculate_estimated_labels("euklid", 2, "std", "0", 0, 0)
-calculate_estimated_labels("euklid", 2, "mean", "0", 0, 0)
-calculate_estimated_labels("euklid", 2, "sobel", "0", 0, 0)
-calculate_estimated_labels("euklid", 2, "hog,4,8", "0", 0, 0)
-
-calculate_estimated_labels("euklid", 8, "1d_histo", "0", 0, 4)
-calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 4)
-calculate_estimated_labels("euklid", 4, "1d_histo", "0", 0, 4)
-calculate_estimated_labels("euklid", 4, "3d_histo", "0", 0, 4)
-calculate_estimated_labels("euklid", 3, "1d_histo", "0", 0, 4)
-calculate_estimated_labels("euklid", 3, "3d_histo", "0", 0, 4)
-calculate_estimated_labels("euklid", 2, "1d_histo", "0", 0, 4)
-calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 4)
-
-calculate_estimated_labels("euklid", 8, "1d_histo", "0", 0, 3)
-calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 3)
-calculate_estimated_labels("euklid", 4, "1d_histo", "0", 0, 3)
-calculate_estimated_labels("euklid", 4, "3d_histo", "0", 0, 3)
-calculate_estimated_labels("euklid", 3, "1d_histo", "0", 0, 3)
-calculate_estimated_labels("euklid", 3, "3d_histo", "0", 0, 3)
-calculate_estimated_labels("euklid", 2, "1d_histo", "0", 0, 3)
-calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 3)
-
-calculate_estimated_labels("euklid", 8, "hog,4,6", "0", 0, 0)
-calculate_estimated_labels("euklid", 4, "hog,4,6", "0", 0, 0)
-calculate_estimated_labels("euklid", 3, "hog,4,6", "0", 0, 0)
-calculate_estimated_labels("euklid", 2, "hog,4,6", "0", 0, 0)
-calculate_estimated_labels("euklid", 8, "hog,4,4", "0", 0, 0)
-calculate_estimated_labels("euklid", 4, "hog,4,4", "0", 0, 0)
-
-calculate_estimated_labels("euklid", 8, "1d_histo", "0", 0, 5)
-calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 5)
-calculate_estimated_labels("euklid", 4, "1d_histo", "0", 0, 5)
-calculate_estimated_labels("euklid", 4, "3d_histo", "0", 0, 5)
-calculate_estimated_labels("euklid", 3, "1d_histo", "0", 0, 5)
-calculate_estimated_labels("euklid", 3, "3d_histo", "0", 0, 5)
-calculate_estimated_labels("euklid", 2, "1d_histo", "0", 0, 5)
-calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 5)
-
-calculate_estimated_labels("euklid", 8, "1d_histo", "0", 0, 6)
-calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 6)
-calculate_estimated_labels("euklid", 4, "1d_histo", "0", 0, 6)
-calculate_estimated_labels("euklid", 4, "3d_histo", "0", 0, 6)
-calculate_estimated_labels("euklid", 3, "1d_histo", "0", 0, 6)
-calculate_estimated_labels("euklid", 3, "3d_histo", "0", 0, 6)
-calculate_estimated_labels("euklid", 2, "1d_histo", "0", 0, 6)
-calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 6)
-
-calculate_estimated_labels("euklid", 8, "1d_histo", "0", 0, 7)
-calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 7)
-calculate_estimated_labels("euklid", 4, "1d_histo", "0", 0, 7)
-calculate_estimated_labels("euklid", 4, "3d_histo", "0", 0, 7)
-calculate_estimated_labels("euklid", 3, "1d_histo", "0", 0, 7)
-calculate_estimated_labels("euklid", 3, "3d_histo", "0", 0, 7)
-calculate_estimated_labels("euklid", 2, "1d_histo", "0", 0, 7)
-calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 7)
-
-calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 2)
-
-calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.9, 3)
-calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.7, 3)
-calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.5, 3)
-calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.3, 3)
-calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.1, 3)
-
-calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.9, 3)
-calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.7, 3)
-calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.5, 3)
-calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.3, 3)
-calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.1, 3)
-
-calculate_estimated_labels("euklid", 6, "3d_histo", "std", 0.5, 3)
-calculate_estimated_labels("euklid", 6, "std", "3d_histo", 0.5, 3)
+#calculate_estimated_labels("euklid", 8, "1d_histo", "0", 0, 8)
+#calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 8)
+#calculate_estimated_labels("euklid", 8, "std", "0", 0, 0)
+#calculate_estimated_labels("euklid", 8, "mean", "0", 0, 0)
+#calculate_estimated_labels("euklid", 8, "sobel", "0", 0, 0)
+#calculate_estimated_labels("euklid", 8, "hog,4,8", "0", 0, 0)
+#
+#calculate_estimated_labels("euklid", 4, "1d_histo", "0", 0, 8)
+#calculate_estimated_labels("euklid", 4, "3d_histo", "0", 0, 8)
+#calculate_estimated_labels("euklid", 4, "std", "0", 0, 0)
+#calculate_estimated_labels("euklid", 4, "mean", "0", 0, 0)
+#calculate_estimated_labels("euklid", 4, "sobel", "0", 0, 0)
+#calculate_estimated_labels("euklid", 4, "hog,4,8", "0", 0, 0)
+#
+#calculate_estimated_labels("euklid", 3, "1d_histo", "0", 0, 8)
+#calculate_estimated_labels("euklid", 3, "3d_histo", "0", 0, 8)
+#calculate_estimated_labels("euklid", 3, "std", "0", 0, 0)
+#calculate_estimated_labels("euklid", 3, "mean", "0", 0, 0)
+#calculate_estimated_labels("euklid", 3, "sobel", "0", 0, 0)
+#calculate_estimated_labels("euklid", 3, "hog,4,8", "0", 0, 0)
+#
+#calculate_estimated_labels("euklid", 2, "1d_histo", "0", 0, 8)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 8)
+#calculate_estimated_labels("euklid", 2, "std", "0", 0, 0)
+#calculate_estimated_labels("euklid", 2, "mean", "0", 0, 0)
+#calculate_estimated_labels("euklid", 2, "sobel", "0", 0, 0)
+#calculate_estimated_labels("euklid", 2, "hog,4,8", "0", 0, 0)
+#
+#calculate_estimated_labels("euklid", 8, "1d_histo", "0", 0, 4)
+#calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 4)
+#calculate_estimated_labels("euklid", 4, "1d_histo", "0", 0, 4)
+#calculate_estimated_labels("euklid", 4, "3d_histo", "0", 0, 4)
+#calculate_estimated_labels("euklid", 3, "1d_histo", "0", 0, 4)
+#calculate_estimated_labels("euklid", 3, "3d_histo", "0", 0, 4)
+#calculate_estimated_labels("euklid", 2, "1d_histo", "0", 0, 4)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 4)
+#
+#calculate_estimated_labels("euklid", 8, "1d_histo", "0", 0, 3)
+#calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 3)
+#calculate_estimated_labels("euklid", 4, "1d_histo", "0", 0, 3)
+#calculate_estimated_labels("euklid", 4, "3d_histo", "0", 0, 3)
+#calculate_estimated_labels("euklid", 3, "1d_histo", "0", 0, 3)
+#calculate_estimated_labels("euklid", 3, "3d_histo", "0", 0, 3)
+#calculate_estimated_labels("euklid", 2, "1d_histo", "0", 0, 3)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 3)
+#
+#calculate_estimated_labels("euklid", 8, "hog,4,6", "0", 0, 0)
+#calculate_estimated_labels("euklid", 4, "hog,4,6", "0", 0, 0)
+#calculate_estimated_labels("euklid", 3, "hog,4,6", "0", 0, 0)
+#calculate_estimated_labels("euklid", 2, "hog,4,6", "0", 0, 0)
+#calculate_estimated_labels("euklid", 8, "hog,4,4", "0", 0, 0)
+#calculate_estimated_labels("euklid", 4, "hog,4,4", "0", 0, 0)
+#
+#calculate_estimated_labels("euklid", 8, "1d_histo", "0", 0, 5)
+#calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 5)
+#calculate_estimated_labels("euklid", 4, "1d_histo", "0", 0, 5)
+#calculate_estimated_labels("euklid", 4, "3d_histo", "0", 0, 5)
+#calculate_estimated_labels("euklid", 3, "1d_histo", "0", 0, 5)
+#calculate_estimated_labels("euklid", 3, "3d_histo", "0", 0, 5)
+#calculate_estimated_labels("euklid", 2, "1d_histo", "0", 0, 5)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 5)
+#
+#calculate_estimated_labels("euklid", 8, "1d_histo", "0", 0, 6)
+#calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 6)
+#calculate_estimated_labels("euklid", 4, "1d_histo", "0", 0, 6)
+#calculate_estimated_labels("euklid", 4, "3d_histo", "0", 0, 6)
+#calculate_estimated_labels("euklid", 3, "1d_histo", "0", 0, 6)
+#calculate_estimated_labels("euklid", 3, "3d_histo", "0", 0, 6)
+#calculate_estimated_labels("euklid", 2, "1d_histo", "0", 0, 6)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 6)
+#
+#calculate_estimated_labels("euklid", 8, "1d_histo", "0", 0, 7)
+#calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 7)
+#calculate_estimated_labels("euklid", 4, "1d_histo", "0", 0, 7)
+#calculate_estimated_labels("euklid", 4, "3d_histo", "0", 0, 7)
+#calculate_estimated_labels("euklid", 3, "1d_histo", "0", 0, 7)
+#calculate_estimated_labels("euklid", 3, "3d_histo", "0", 0, 7)
+#calculate_estimated_labels("euklid", 2, "1d_histo", "0", 0, 7)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 7)
+#
+#calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 2)
+#
+#calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.9, 3)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.7, 3)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.5, 3)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.3, 3)
+#calculate_estimated_labels("euklid", 2, "3d_histo", "mean", 0.1, 3)
+#
+#calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.9, 3)
+#calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.7, 3)
+#calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.5, 3)
+#calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.3, 3)
+#calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.1, 3)
+#
+#calculate_estimated_labels("euklid", 6, "3d_histo", "std", 0.5, 3)
+#calculate_estimated_labels("euklid", 6, "std", "3d_histo", 0.5, 3)
 
 ###############################################################################
 # Only with image_set 1
@@ -391,5 +391,14 @@ calculate_estimated_labels("euklid", 6, "std", "3d_histo", 0.5, 3)
 #calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.3, 3)
 #calculate_estimated_labels("euklid", 2, "mean", "3d_histo", 0.1, 3)
 
+###############################################################################
+# Only with image_set 3
+calculate_estimated_labels("euklid", 3, "3d_histo", "sobel", 0.3, 5)
+calculate_estimated_labels("euklid", 3, "3d_histo", "sobel", 0.5, 5)
+calculate_estimated_labels("euklid", 3, "3d_histo", "sobel", 0.7, 5)
+
+calculate_estimated_labels("euklid", 3, "sobel", "3d_histo", 0.3, 5)
+calculate_estimated_labels("euklid", 3, "sobel", "3d_histo", 0.5, 5)
+calculate_estimated_labels("euklid", 3, "sobel", "3d_histo", 0.7, 5)
 
 print("\nDone!")
