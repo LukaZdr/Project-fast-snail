@@ -393,12 +393,12 @@ wait_length = str(len(va_shuffled_images))
 
 ###############################################################################
 # Only with image_set 3
-calculate_estimated_labels("euklid", 3, "3d_histo", "sobel", 0.3, 5)
-calculate_estimated_labels("euklid", 3, "3d_histo", "sobel", 0.5, 5)
-calculate_estimated_labels("euklid", 3, "3d_histo", "sobel", 0.7, 5)
-
-calculate_estimated_labels("euklid", 3, "sobel", "3d_histo", 0.3, 5)
-calculate_estimated_labels("euklid", 3, "sobel", "3d_histo", 0.5, 5)
-calculate_estimated_labels("euklid", 3, "sobel", "3d_histo", 0.7, 5)
+#calculate_estimated_labels("euklid", 3, "3d_histo", "sobel", 0.3, 5)
+#calculate_estimated_labels("euklid", 3, "3d_histo", "sobel", 0.5, 5)
+#calculate_estimated_labels("euklid", 3, "3d_histo", "sobel", 0.7, 5)
+#
+#calculate_estimated_labels("euklid", 3, "sobel", "3d_histo", 0.3, 5)
+#calculate_estimated_labels("euklid", 3, "sobel", "3d_histo", 0.5, 5)
+#calculate_estimated_labels("euklid", 3, "sobel", "3d_histo", 0.7, 5)
 
 print("\nDone!")
