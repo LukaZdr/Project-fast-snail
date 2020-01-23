@@ -29,13 +29,5 @@ while (len(eth) + len(vga) + len(ps2) + len(co3)) > 0:
   elif next_array == 4 and len(co3) != 0:
     arrayOfImages.append(co3.pop(0))
     labels.append(4)
-<<<<<<< HEAD
-   
-<<<<<<< HEAD
-np.savez("vga_val", data = arrayOfImages, labels = labels)
-=======
-=======
 
->>>>>>> 0284466879afb8d1fe7e2450723c0c59e25c4e61
 np.savez("images_and_labels", data = arrayOfImages, labels = labels)
->>>>>>> b4c4b9ca8868feb6681a66ec1fcc3535cc66f128
