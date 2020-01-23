@@ -67,12 +67,13 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
             params = descriptor_1.split(",")
             par1 = int(params[1])
             par2 = int(params[2])
-            deskr_1_img_1, image1 = hog(img_1, orientations=par1, pixels_per_cell=(par2, par2), visualize=True)
-#            deskr_1_img_2 = hog(img_1, orientations=par1, pixels_per_cell=(par2, par2))
+            deskr_1_img_1 = hog(img_1, orientations=par1, pixels_per_cell=(par2, par2))
+            deskr_1_img_2 = hog(img_1, orientations=par1, pixels_per_cell=(par2, par2))
             # With image return:
-            deskr_1_img_2, image2 = hog(img_2, orientations=par1, pixels_per_cell=(par2, par2), visualize=True)
-            plt.imshow(image2)
-            plt.show()
+#            deskr_1_img_1, image1 = hog(img_1, orientations=par1, pixels_per_cell=(par2, par2), visualize=True)
+#            deskr_1_img_2, image2 = hog(img_2, orientations=par1, pixels_per_cell=(par2, par2), visualize=True)
+#            plt.imshow(image2)
+#            plt.show()
         elif descriptor_1 == "0":
             deskr_1_img_1 = 0
             deskr_1_img_2 = 0
@@ -222,7 +223,7 @@ wait_length = str(len(va_shuffled_images))
 #calculate_estimated_labels("euklid", 8, "std", "0", 0, 0)
 #calculate_estimated_labels("euklid", 8, "mean", "0", 0, 0)
 #calculate_estimated_labels("euklid", 8, "sobel", "0", 0, 0)
-#calculate_estimated_labels("euklid", 8, "hog,4,8", "0", 0, 0)
+calculate_estimated_labels("euklid", 8, "hog,4,8", "0", 0, 0)
 #
 #calculate_estimated_labels("euklid", 4, "1d_histo", "0", 0, 8)
 #calculate_estimated_labels("euklid", 4, "3d_histo", "0", 0, 8)
@@ -395,7 +396,7 @@ wait_length = str(len(va_shuffled_images))
 #calculate_estimated_labels("euklid", 2, "3d_histo", "0", 0, 3)
 #calculate_estimated_labels("euklid", 8, "3d_histo", "0", 0, 3)
 
-#TESTTEST
+
 
 # Bilder ohne BG mit den normalen Fotos vergleichen
 
