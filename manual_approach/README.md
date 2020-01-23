@@ -1,2 +1,1 @@
-"train_images.npz"/"train_images_2.npz" und "val_images.npz"/"val_images_2.npz" liegen hier eigentlich auch im Verzeichnis.
-Die werden allerdings per .gitignore ignoriert, da sie zu groß für git sind.
+"train_images.npz"/"train_images_2.npz"/"train_images_3.npz" and "val_images.npz"/"val_images_2.npz"/"val_images_3.npz" shall be in this folder (too big for git).
