@@ -8,7 +8,7 @@ $(document).ready(function() {
 			"width": "1%",
             "targets": 0
         }],
-        "order": [[ 1, 'asc' ]],
+        "order": [[ 7, 'desc' ]],
         initComplete: function() {
             var table = this;
             table.api().columns().every(function() {
@@ -32,8 +32,14 @@ $(document).ready(function() {
 	});
 	
 	$('#new_index').click(function() {
-		t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+		t.column(0, {search:'applied', order:'applied'}).nodes().each(function (cell, i) {
 			cell.innerHTML = i+1;
 		});
 	});
+	
+	let timeTotal = 0.0;
+	$('.tn').each(function(){
+		timeTotal += parseFloat(this.innerHTML);
+	});
+	console.log("Berechnungszeit gesamt in Tagen: " + timeTotal / 60 / 24); //=Tage
 });

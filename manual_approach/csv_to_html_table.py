@@ -29,7 +29,7 @@ for i, line in enumerate(csv):
         html.write("<td>%s</td>" % weight)
         html.write("<td>%s</td>" % bin_count)
         html.write("<td>%s</td>" % guessing_accuracy)
-        html.write("<td>%s</td>" % time_needed)
+        html.write("<td class='tn'>%s</td>" % time_needed)
         html.write("<td>%s</td>" % image_set)
         html.write("</tr>\n")
 
