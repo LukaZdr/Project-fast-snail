@@ -6,7 +6,8 @@ body {
 
 thead th {
     text-align: left;
-    padding: 10 8 !important
+    padding-top: 10px !important;
+	padding-bottom: 10px !important;
 }
 
 td {
@@ -44,8 +45,13 @@ table.dataTable.order-column.hover tbody tr:hover>.sorting_1 {
     background-color: #b8bfff !important
 }
 
+table.dataTable.display tbody tr > .sorting_1,
+table.dataTable.order-column.stripe tbody tr>.sorting_1 {
+    font-weight: bold;
+}
+
 th select {
-    width: 100%;
+    width: calc(100% + 15px);
     margin-top: 10px;
     font-size: 16px;
 }
@@ -89,9 +95,7 @@ table.dataTable thead .sorting_desc {
 }
 
 button#new_index {
-    float: left;
-    margin-top: 30px;
-    margin-left: 30px;
+    font-size: 10px;
 }
 
 #f select {
@@ -100,4 +104,9 @@ button#new_index {
 
 td.i {
 	font-style: italic;
+}
+
+th, td {
+    padding-right: 20px !important;
+    padding-left: 5px !important;
 }
