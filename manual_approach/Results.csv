@@ -306,3 +306,4 @@ euklid;3;sobel;3d_histo;0.5;5;35.00;3.44;3
 euklid;3;sobel;3d_histo;0.7;5;35.00;3.42;3
 euklid;8;hog,6,8;sobel;0.3;0;17.50;32.13;1
 euklid;8;hog,6,8;sobel;0.5;0;17.50;31.33;1
+euklid;8;hog,6,8;sobel;0.7;0;17.50;31.65;1

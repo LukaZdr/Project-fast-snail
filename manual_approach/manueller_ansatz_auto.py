@@ -99,7 +99,7 @@ def calculate_estimated_labels(p_distance_measure, p_neighbour_count, p_descript
             sobelV_2 = sobel_v(rgb2gray(img_2))
             deskr_2_img_2 = np.sqrt(sobelH_2**2 + sobelV_2**2)
         elif descriptor_2[:3] == "hog": 
-            params = descriptor_1.split(",")
+            params = descriptor_2.split(",")
             par1 = int(params[1])
             par2 = int(params[2])
             deskr_2_img_1 = hog(img_1, orientations=par1, pixels_per_cell=(par2, par2))
@@ -316,8 +316,8 @@ wait_length = str(len(va_shuffled_images))
 #calculate_estimated_labels("euklid", 6, "std", "3d_histo", 0.5, 3)
 
 #calculate_estimated_labels("euklid", 8, "hog,6,8", "sobel", 0.3, 0)
-calculate_estimated_labels("euklid", 8, "hog,6,8", "sobel", 0.5, 0)
-calculate_estimated_labels("euklid", 8, "hog,6,8", "sobel", 0.7, 0)
+#calculate_estimated_labels("euklid", 8, "hog,6,8", "sobel", 0.5, 0)
+#calculate_estimated_labels("euklid", 8, "hog,6,8", "sobel", 0.7, 0)
 
 calculate_estimated_labels("euklid", 8, "sobel", "hog,6,8", 0.3, 0)
 calculate_estimated_labels("euklid", 8, "sobel", "hog,6,8", 0.5, 0)
