@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function() {	
     t = $('#t').DataTable({
         fixedHeader: true,
         "lengthMenu": ["9999"],
