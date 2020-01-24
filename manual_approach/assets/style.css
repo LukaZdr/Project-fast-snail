@@ -94,6 +94,10 @@ table.dataTable thead .sorting_desc {
 	background-position: top right !important;
 }
 
+table.dataTable thead .sorting {
+	background: none;
+}
+
 button#new_index {
     font-size: 10px;
 }
