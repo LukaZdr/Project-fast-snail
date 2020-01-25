@@ -31,6 +31,7 @@ $(document).ready(function() {
 			table.api().column(0, {search:"applied", order:"applied"}).nodes().each(function(cell, i) {
 				cell.innerHTML = i + 1;
 			});
+			$("#b_index").addClass("clicked");
         }
     });
 	
@@ -39,6 +40,8 @@ $(document).ready(function() {
 		t.column(0, {search:"applied", order:"applied"}).nodes().each(function (cell, i) {
 			cell.innerHTML = i + 1;
 		});
+		$("#b_winner").removeClass("clicked");
+		$(this).addClass("clicked");
 	});
 	
 	// Button for showing the "winner" (other indexing)
@@ -53,6 +56,8 @@ $(document).ready(function() {
 			}
 			t.column(0, {search:"applied", order:"applied"}).nodes()[i].innerHTML = tempIndex;
 		});
+		$("#b_index").removeClass("clicked");
+		$(this).addClass("clicked");
 	});
 
 	// Show time needed

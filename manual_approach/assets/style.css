@@ -117,6 +117,11 @@ table.dataTable thead .sorting {
 	background: none;
 }
 
+#f {
+    background-image: unset !important;
+    cursor: unset !important;
+}
+
 #f select {
     display: none;
 }
@@ -125,7 +130,8 @@ td.i {
 	font-style: italic;
 }
 
-th, td {
+th,
+td {
     padding-right: 20px !important;
     padding-left: 5px !important;
 }
@@ -133,6 +139,11 @@ th, td {
 button {
     font-size: 10px;
     width: 100%;
+	cursor: pointer;
+}
+
+button.clicked {
+	background-color: #a6eda4;
 }
 
 button#b_index {
