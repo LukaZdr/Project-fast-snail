@@ -427,4 +427,6 @@ run_nr;distance_measure;neighbour_count;descriptor_1;descriptor_2;weight;bin_cou
 9;intersect;8;1d_histo;std;0;8;25.00;3.54;1
 9;euklid;8;1d_histo;std;0;8;27.50;3.83;1
 9;intersect;7;3d_histo;mean;0.3;3;21.25;2.23;1
-
+#
+# RUN 10 with Image Set 1
+#

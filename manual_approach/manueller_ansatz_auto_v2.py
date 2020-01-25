@@ -139,7 +139,7 @@ def guessing_accuracy(est_labels, val_labels): # in %
     return count / len(val_labels) * 100
 
 # Calculate estimated labels and write to csv file
-def run(image_set, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count):
+def run(run_nr, image_set, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count):
     # Load data
     if image_set == 1:   # Train images with own backgrounds + original validation images
         tr_images = tr1["data"]
@@ -177,7 +177,7 @@ def run(image_set, distance_measure, neighbour_count, descriptor_1, descriptor_2
     # Write settings and result to file
     with open("Results.csv", mode="a", newline="\n", encoding="utf-8") as file:
         file_writer = writer(file, delimiter=";", quotechar="'", quoting=QUOTE_MINIMAL)
-        file_writer.writerow([distance_measure, str(neighbour_count), descriptor_1, descriptor_2, str(weight), str(bin_count), "{:.2f}".format(guessing_acc), "{:.2f}".format(time_needed), str(image_set)])
+        file_writer.writerow([run_nr, distance_measure, str(neighbour_count), descriptor_1, descriptor_2, str(weight), str(bin_count), "{:.2f}".format(guessing_acc), "{:.2f}".format(time_needed), str(image_set)])
 
     print("Step done.")
 
@@ -197,7 +197,7 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 ###############################################################################
 # Run function with different settings 
 #
-# Parameter:         image_set, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count
+# Parameter:         run_nr, image_set, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count
 # image_set:         1, 2 or 3
 # distance_measure:  euklid, intersect (doesn't work with "0" as a descriptor)
 # neighbour_count:   number of compared suggestions for labels
@@ -479,5 +479,87 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 #run(1, "euklid", 8, "1d_histo", "std", 0, 8)
 #run(1, "intersect", 7, "3d_histo", "mean", 0.3, 3) #-->mit euklid bei 38.75%, mit intersect bei?
 
+
+
+
+
+#
+# RUN 10: wie RUN 1 nur mit intersect
+#
+run_nr = 10
+run(run_nr, 1, "intersect", 8, "1d_histo", "std", 0, 8)
+run(run_nr, 1, "intersect", 8, "3d_histo", "std", 0, 8)
+run(run_nr, 1, "intersect", 8, "std", "std", 0, 0)
+run(run_nr, 1, "intersect", 8, "mean", "std", 0, 0)
+run(run_nr, 1, "intersect", 8, "sobel", "std", 0, 0)
+run(run_nr, 1, "intersect", 8, "hog,4,8", "std", 0, 0)
+run(run_nr, 1, "intersect", 4, "1d_histo", "std", 0, 8)
+run(run_nr, 1, "intersect", 4, "3d_histo", "std", 0, 8)
+run(run_nr, 1, "intersect", 4, "std", "std", 0, 0)
+run(run_nr, 1, "intersect", 4, "mean", "std", 0, 0)
+run(run_nr, 1, "intersect", 4, "sobel", "std", 0, 0)
+run(run_nr, 1, "intersect", 4, "hog,4,8", "std", 0, 0)
+run(run_nr, 1, "intersect", 3, "1d_histo", "std", 0, 8)
+run(run_nr, 1, "intersect", 3, "3d_histo", "std", 0, 8)
+run(run_nr, 1, "intersect", 3, "std", "std", 0, 0)
+run(run_nr, 1, "intersect", 3, "mean", "std", 0, 0)
+run(run_nr, 1, "intersect", 3, "sobel", "std", 0, 0)
+run(run_nr, 1, "intersect", 3, "hog,4,8", "std", 0, 0)
+run(run_nr, 1, "intersect", 2, "1d_histo", "std", 0, 8)
+run(run_nr, 1, "intersect", 2, "3d_histo", "std", 0, 8)
+run(run_nr, 1, "intersect", 2, "std", "std", 0, 0)
+run(run_nr, 1, "intersect", 2, "mean", "std", 0, 0)
+run(run_nr, 1, "intersect", 2, "sobel", "std", 0, 0)
+run(run_nr, 1, "intersect", 2, "hog,4,8", "std", 0, 0)
+
+run(run_nr, 2, "intersect", 8, "1d_histo", "std", 0, 8)
+run(run_nr, 2, "intersect", 8, "3d_histo", "std", 0, 8)
+run(run_nr, 2, "intersect", 8, "std", "std", 0, 0)
+run(run_nr, 2, "intersect", 8, "mean", "std", 0, 0)
+run(run_nr, 2, "intersect", 8, "sobel", "std", 0, 0)
+run(run_nr, 2, "intersect", 8, "hog,4,8", "std", 0, 0)
+run(run_nr, 2, "intersect", 4, "1d_histo", "std", 0, 8)
+run(run_nr, 2, "intersect", 4, "3d_histo", "std", 0, 8)
+run(run_nr, 2, "intersect", 4, "std", "std", 0, 0)
+run(run_nr, 2, "intersect", 4, "mean", "std", 0, 0)
+run(run_nr, 2, "intersect", 4, "sobel", "std", 0, 0)
+run(run_nr, 2, "intersect", 4, "hog,4,8", "std", 0, 0)
+run(run_nr, 2, "intersect", 3, "1d_histo", "std", 0, 8)
+run(run_nr, 2, "intersect", 3, "3d_histo", "std", 0, 8)
+run(run_nr, 2, "intersect", 3, "std", "std", 0, 0)
+run(run_nr, 2, "intersect", 3, "mean", "std", 0, 0)
+run(run_nr, 2, "intersect", 3, "sobel", "std", 0, 0)
+run(run_nr, 2, "intersect", 3, "hog,4,8", "std", 0, 0)
+run(run_nr, 2, "intersect", 2, "1d_histo", "std", 0, 8)
+run(run_nr, 2, "intersect", 2, "3d_histo", "std", 0, 8)
+run(run_nr, 2, "intersect", 2, "std", "std", 0, 0)
+run(run_nr, 2, "intersect", 2, "mean", "std", 0, 0)
+run(run_nr, 2, "intersect", 2, "sobel", "std", 0, 0)
+run(run_nr, 2, "intersect", 2, "hog,4,8", "std", 0, 0)
+
+run(run_nr, 3, "intersect", 8, "1d_histo", "std", 0, 8)
+run(run_nr, 3, "intersect", 8, "3d_histo", "std", 0, 8)
+run(run_nr, 3, "intersect", 8, "std", "std", 0, 0)
+run(run_nr, 3, "intersect", 8, "mean", "std", 0, 0)
+run(run_nr, 3, "intersect", 8, "sobel", "std", 0, 0)
+run(run_nr, 3, "intersect", 8, "hog,4,8", "std", 0, 0)
+run(run_nr, 3, "intersect", 4, "1d_histo", "std", 0, 8)
+run(run_nr, 3, "intersect", 4, "3d_histo", "std", 0, 8)
+run(run_nr, 3, "intersect", 4, "std", "std", 0, 0)
+run(run_nr, 3, "intersect", 4, "mean", "std", 0, 0)
+run(run_nr, 3, "intersect", 4, "sobel", "std", 0, 0)
+run(run_nr, 3, "intersect", 4, "hog,4,8", "std", 0, 0)
+run(run_nr, 3, "intersect", 3, "1d_histo", "std", 0, 8)
+run(run_nr, 3, "intersect", 3, "3d_histo", "std", 0, 8)
+run(run_nr, 3, "intersect", 3, "std", "std", 0, 0)
+run(run_nr, 3, "intersect", 3, "mean", "std", 0, 0)
+run(run_nr, 3, "intersect", 3, "sobel", "std", 0, 0)
+run(run_nr, 3, "intersect", 3, "hog,4,8", "std", 0, 0)
+run(run_nr, 3, "intersect", 2, "1d_histo", "std", 0, 8)
+run(run_nr, 3, "intersect", 2, "3d_histo", "std", 0, 8)
+run(run_nr, 3, "intersect", 2, "std", "std", 0, 0)
+run(run_nr, 3, "intersect", 2, "mean", "std", 0, 0)
+run(run_nr, 3, "intersect", 2, "sobel", "std", 0, 0)
+run(run_nr, 3, "intersect", 2, "hog,4,8", "std", 0, 0)
 
 print("\nDone!")
