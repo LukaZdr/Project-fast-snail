@@ -88,8 +88,18 @@ h1 {
 	float: left;
 }
 
+#t {
+	margin-bottom: 40px;
+}
+
 #t_info {
-	margin-bottom: 10px;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	background: white;
+	padding: 10px 20px;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
 }
 
 table.dataTable thead .sorting_asc {

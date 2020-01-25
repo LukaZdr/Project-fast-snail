@@ -160,11 +160,6 @@ def run(image_set, distance_measure, neighbour_count, descriptor_1, descriptor_2
     # Random shuffle images
     tr_shuffled_images, tr_shuffled_labels = shuffle(tr_images, tr_labels)
     va_shuffled_images, va_shuffled_labels = shuffle(va_images, va_labels)
-
-    
-    # Init time
-#    time_start = 0
-#    time_stop = 0
     
     # Start time measurement
     time_start = default_timer()
@@ -210,6 +205,9 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 # weight:            gets multiplied with descriptor_2
 # bin_count:         bins used in histogram
 
+#
+# RUN 1: ERSTER TEST mit allen Image Sets jew. einmal
+#
 #run(1, "euklid", 8, "1d_histo", "std", 0, 8)
 #run("euklid", 8, "3d_histo", "0", 0, 8)
 #run("euklid", 8, "std", "0", 0, 0)
@@ -237,6 +235,9 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 #run("euklid", 2, "mean", "0", 0, 0)
 #run("euklid", 2, "sobel", "0", 0, 0)
 #run("euklid", 2, "hog,4,8", "0", 0, 0)
+
+#
+# RUN 2: DA HISTO SO GUT LIEF
 #
 #run("euklid", 8, "1d_histo", "0", 0, 4)
 #run("euklid", 8, "3d_histo", "0", 0, 4)
@@ -255,6 +256,9 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 #run("euklid", 3, "3d_histo", "0", 0, 3)
 #run("euklid", 2, "1d_histo", "0", 0, 3)
 #run("euklid", 2, "3d_histo", "0", 0, 3)
+
+#
+# RUN 3: HOG TESTEN
 #
 #run("euklid", 8, "hog,4,6", "0", 0, 0)
 #run("euklid", 4, "hog,4,6", "0", 0, 0)
@@ -262,6 +266,9 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 #run("euklid", 2, "hog,4,6", "0", 0, 0)
 #run("euklid", 8, "hog,4,4", "0", 0, 0)
 #run("euklid", 4, "hog,4,4", "0", 0, 0)
+
+#
+# RUN 4: MEHR NEIGHBOR COUNTS UND BINS (Histo)
 #
 #run("euklid", 8, "1d_histo", "0", 0, 5)
 #run("euklid", 8, "3d_histo", "0", 0, 5)
@@ -271,7 +278,7 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 #run("euklid", 3, "3d_histo", "0", 0, 5)
 #run("euklid", 2, "1d_histo", "0", 0, 5)
 #run("euklid", 2, "3d_histo", "0", 0, 5)
-#
+
 #run("euklid", 8, "1d_histo", "0", 0, 6)
 #run("euklid", 8, "3d_histo", "0", 0, 6)
 #run("euklid", 4, "1d_histo", "0", 0, 6)
@@ -291,6 +298,9 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 #run("euklid", 2, "3d_histo", "0", 0, 7)
 #
 #run("euklid", 8, "3d_histo", "0", 0, 2)
+
+#
+# RUN 5
 #
 #run("euklid", 2, "3d_histo", "mean", 0.9, 3)
 #run("euklid", 2, "3d_histo", "mean", 0.7, 3)
@@ -307,23 +317,9 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 #run("euklid", 6, "3d_histo", "std", 0.5, 3)
 #run("euklid", 6, "std", "3d_histo", 0.5, 3)
 
-
-
-
-#INTERSECT VERGLEICHE
-
-#run(1, "intersect", 8, "1d_histo", "std", 0, 8)
-#run(1, "euklid", 8, "1d_histo", "std", 0, 8)
-
-#run(1, "intersect", 7, "3d_histo", "mean", 0.3, 3) #-->mit euklid bei 38.75%, mit intersect bei?
-
-
-
-
-
-
-
-
+#
+# RUN 6
+#
 #run(1, "euklid", 8, "hog,6,8", "sobel", 0.3, 0)
 #run(1, "euklid", 8, "hog,6,8", "sobel", 0.5, 0)
 #run(1, "euklid", 8, "hog,6,8", "sobel", 0.7, 0)
@@ -367,39 +363,41 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 #
 #run(2, "euklid", 2, "hog,6,8", "sobel", 0.3, 0)
 #run(2, "euklid", 2, "hog,6,8", "sobel", 0.5, 0)
-run(2, "euklid", 2, "hog,6,8", "sobel", 0.7, 0)
+#run(2, "euklid", 2, "hog,6,8", "sobel", 0.7, 0)
+#
+#run(2, "euklid", 2, "sobel", "hog,6,8", 0.3, 0)
+#run(2, "euklid", 2, "sobel", "hog,6,8", 0.5, 0)
+#run(2, "euklid", 2, "sobel", "hog,6,8", 0.7, 0)
+#
+#
+#run(3, "euklid", 8, "hog,6,8", "sobel", 0.3, 0)
+#run(3, "euklid", 8, "hog,6,8", "sobel", 0.5, 0)
+#run(3, "euklid", 8, "hog,6,8", "sobel", 0.7, 0)
+#
+#run(3, "euklid", 8, "sobel", "hog,6,8", 0.3, 0)
+#run(3, "euklid", 8, "sobel", "hog,6,8", 0.5, 0)
+#run(3, "euklid", 8, "sobel", "hog,6,8", 0.7, 0)
+#
+#run(3, "euklid", 4, "hog,6,8", "sobel", 0.3, 0)
+#run(3, "euklid", 4, "hog,6,8", "sobel", 0.5, 0)
+#run(3, "euklid", 4, "hog,6,8", "sobel", 0.7, 0)
+#
+#run(3, "euklid", 4, "sobel", "hog,6,8", 0.3, 0)
+#run(3, "euklid", 4, "sobel", "hog,6,8", 0.5, 0)
+#run(3, "euklid", 4, "sobel", "hog,6,8", 0.7, 0)
+#
+#run(3, "euklid", 2, "hog,6,8", "sobel", 0.3, 0)
+#run(3, "euklid", 2, "hog,6,8", "sobel", 0.5, 0)
+#run(3, "euklid", 2, "hog,6,8", "sobel", 0.7, 0)
+#
+#run(3, "euklid", 2, "sobel", "hog,6,8", 0.3, 0)
+#run(3, "euklid", 2, "sobel", "hog,6,8", 0.5, 0)
+#run(3, "euklid", 2, "sobel", "hog,6,8", 0.7, 0)
 
-run(2, "euklid", 2, "sobel", "hog,6,8", 0.3, 0)
-run(2, "euklid", 2, "sobel", "hog,6,8", 0.5, 0)
-run(2, "euklid", 2, "sobel", "hog,6,8", 0.7, 0)
-
-
-run(3, "euklid", 8, "hog,6,8", "sobel", 0.3, 0)
-run(3, "euklid", 8, "hog,6,8", "sobel", 0.5, 0)
-run(3, "euklid", 8, "hog,6,8", "sobel", 0.7, 0)
-
-run(3, "euklid", 8, "sobel", "hog,6,8", 0.3, 0)
-run(3, "euklid", 8, "sobel", "hog,6,8", 0.5, 0)
-run(3, "euklid", 8, "sobel", "hog,6,8", 0.7, 0)
-
-run(3, "euklid", 4, "hog,6,8", "sobel", 0.3, 0)
-run(3, "euklid", 4, "hog,6,8", "sobel", 0.5, 0)
-run(3, "euklid", 4, "hog,6,8", "sobel", 0.7, 0)
-
-run(3, "euklid", 4, "sobel", "hog,6,8", 0.3, 0)
-run(3, "euklid", 4, "sobel", "hog,6,8", 0.5, 0)
-run(3, "euklid", 4, "sobel", "hog,6,8", 0.7, 0)
-
-run(3, "euklid", 2, "hog,6,8", "sobel", 0.3, 0)
-run(3, "euklid", 2, "hog,6,8", "sobel", 0.5, 0)
-run(3, "euklid", 2, "hog,6,8", "sobel", 0.7, 0)
-
-run(3, "euklid", 2, "sobel", "hog,6,8", 0.3, 0)
-run(3, "euklid", 2, "sobel", "hog,6,8", 0.5, 0)
-run(3, "euklid", 2, "sobel", "hog,6,8", 0.7, 0)
-
-###############################################################################
+#
+# RUN 7
 # Only with image_set 1
+#
 #run("euklid", 4, "3d_histo", "mean", 0.9, 3)
 #run("euklid", 4, "3d_histo", "mean", 0.7, 3)
 #run("euklid", 4, "3d_histo", "mean", 0.5, 3)
@@ -460,22 +458,10 @@ run(3, "euklid", 2, "sobel", "hog,6,8", 0.7, 0)
 #run("euklid", 8, "mean", "3d_histo", 0.3, 3)
 #run("euklid", 8, "mean", "3d_histo", 0.1, 3)
 
-###############################################################################
-# Only with image_set 2
-#run("euklid", 2, "3d_histo", "mean", 0.9, 3)
-#run("euklid", 2, "3d_histo", "mean", 0.7, 3)
-#run("euklid", 2, "3d_histo", "mean", 0.5, 3)
-#run("euklid", 2, "3d_histo", "mean", 0.3, 3)
-#run("euklid", 2, "3d_histo", "mean", 0.1, 3)
 #
-#run("euklid", 2, "mean", "3d_histo", 0.9, 3)
-#run("euklid", 2, "mean", "3d_histo", 0.7, 3)
-#run("euklid", 2, "mean", "3d_histo", 0.5, 3)
-#run("euklid", 2, "mean", "3d_histo", 0.3, 3)
-#run("euklid", 2, "mean", "3d_histo", 0.1, 3)
-
-###############################################################################
+# RUN 8
 # Only with image_set 3
+#
 #run("euklid", 3, "3d_histo", "sobel", 0.3, 5)
 #run("euklid", 3, "3d_histo", "sobel", 0.5, 5)
 #run("euklid", 3, "3d_histo", "sobel", 0.7, 5)
@@ -483,5 +469,15 @@ run(3, "euklid", 2, "sobel", "hog,6,8", 0.7, 0)
 #run("euklid", 3, "sobel", "3d_histo", 0.3, 5)
 #run("euklid", 3, "sobel", "3d_histo", 0.5, 5)
 #run("euklid", 3, "sobel", "3d_histo", 0.7, 5)
+
+#
+# RUN 9
+# INTERSECT VERGLEICHE
+# Only with image Set 1
+#
+#run(1, "intersect", 8, "1d_histo", "std", 0, 8)
+#run(1, "euklid", 8, "1d_histo", "std", 0, 8)
+#run(1, "intersect", 7, "3d_histo", "mean", 0.3, 3) #-->mit euklid bei 38.75%, mit intersect bei?
+
 
 print("\nDone!")
