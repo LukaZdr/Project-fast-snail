@@ -1,13 +1,16 @@
 $(document).ready(function() {	
     t = $('#t').DataTable({
         fixedHeader: true,
-        "lengthMenu": ["9999"],
+        "lengthMenu": ["999"],
 		"columnDefs": [{
             "searchable": false,
             "orderable": false,
 			"width": "1%",
             "targets": 0
         }],
+		"drawCallback": function(settings) {
+			writeTime();
+		},
         // "order": [[ 7, 'desc' ]],
         initComplete: function() {
             var table = this;
@@ -18,7 +21,7 @@ $(document).ready(function() {
                     column.search(val ? '^' + val + '$' : '', true, false).draw();
                 });
                 column.data().unique().sort().each(function(value, index) {
-                    select.append('<option value="' + value + '">' + value + '</option>')
+                    select.append('<option value="' + value + '">' + value + '</option>');
                 });
                 $(select).click(function(e) {
                     e.stopPropagation();
@@ -50,9 +53,14 @@ $(document).ready(function() {
 		});
 	});
 	
-	let timeTotal = 0.0;
-	$('.tn').each(function(){
-		timeTotal += parseFloat(this.innerHTML);
-	});
-	console.log("Berechnungszeit gesamt in Tagen: " + timeTotal / 60 / 24);
+	function writeTime() {
+		let timeTotal = 0.0;
+		$('.tn').each(function(){
+			timeTotal += parseFloat(this.innerHTML);
+		});
+		let hours = timeTotal / 60;
+		let days = hours / 24;
+		let text = $('#t_info').text() + " | Needed time: " + hours.toFixed(2) + "h (" + days.toFixed(2) + "d)";
+		$('#t_info').text(text);
+	}
 });

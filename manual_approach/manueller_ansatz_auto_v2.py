@@ -479,10 +479,6 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 #run(1, "euklid", 8, "1d_histo", "std", 0, 8)
 #run(1, "intersect", 7, "3d_histo", "mean", 0.3, 3) #-->mit euklid bei 38.75%, mit intersect bei?
 
-
-
-
-
 #
 # RUN 10: wie RUN 1 nur mit intersect
 #
