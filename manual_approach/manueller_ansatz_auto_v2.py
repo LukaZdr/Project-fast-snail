@@ -115,8 +115,9 @@ def calculate_combined_weighted_distance(img_1, img_2, distance_measure, neighbo
 
     return distance_1 + weight * distance_2
 
-def rgb_img_n_nearest_neighbour(va_imgs, tr_imgs, tr_labels, wait_length, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count): # Calculates esimated labels through nearest neighbour method
+def rgb_img_n_nearest_neighbour(va_imgs, tr_imgs, tr_labels, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count): # Calculates esimated labels through nearest neighbour method
     print("\nCalculates: " + distance_measure + " / " + str(neighbour_count) + " / " + descriptor_1 + " / " + descriptor_2 + " / " + str(weight) + " / " + str(bin_count))
+    wait_length = str(len(va_imgs))
     est_labels_list = []
     for i, va_img in enumerate(va_imgs):
         distances = []
@@ -160,8 +161,6 @@ def run(image_set, distance_measure, neighbour_count, descriptor_1, descriptor_2
     tr_shuffled_images, tr_shuffled_labels = shuffle(tr_images, tr_labels)
     va_shuffled_images, va_shuffled_labels = shuffle(va_images, va_labels)
 
-    # For displaying status
-    wait_length = str(len(va_shuffled_images))
     
     # Init time
 #    time_start = 0
@@ -171,7 +170,7 @@ def run(image_set, distance_measure, neighbour_count, descriptor_1, descriptor_2
     time_start = default_timer()
     
     # Calculate esimated labels
-    estimated_labels = rgb_img_n_nearest_neighbour(va_shuffled_images, tr_shuffled_images, tr_shuffled_labels, wait_length, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count)
+    estimated_labels = rgb_img_n_nearest_neighbour(va_shuffled_images, tr_shuffled_images, tr_shuffled_labels, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count)
     
     # Stop time measurement
     time_stop = default_timer()
