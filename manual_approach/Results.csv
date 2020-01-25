@@ -342,3 +342,5 @@ euklid;2;sobel;hog,6,8;0.5;0;24.83;36.57;2
 intersect;8;1d_histo;std;0;8;25.00;3.54;1
 euklid;8;1d_histo;std;0;8;27.50;3.83;1
 intersect;7;3d_histo;mean;0.3;3;21.25;2.23;1
+euklid;2;hog,6,8;sobel;0.7;0;24.83;38.07;2
+euklid;2;sobel;hog,6,8;0.3;0;24.83;39.17;2

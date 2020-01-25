@@ -8,7 +8,7 @@ $(document).ready(function() {
 			"width": "1%",
             "targets": 0
         }],
-        "order": [[ 7, 'desc' ]],
+        // "order": [[ 7, 'desc' ]],
         initComplete: function() {
             var table = this;
             table.api().columns().every(function() {
@@ -32,8 +32,15 @@ $(document).ready(function() {
 	});
 	
 	$('#new_index').click(function() {
-		t.column(0, {search:'applied', order:'applied'}).nodes().each(function (cell, i) {
-			cell.innerHTML = i+1;
+		var activeColumn = t.order();
+		let tempContent = "";
+		let tempIndex = 0;
+		t.column(activeColumn[0][0], {search:'applied', order:'applied'}).nodes().each(function (cell, i) {
+			if(cell.innerHTML !== tempContent) {
+				tempIndex = i+1;
+				tempContent = cell.innerHTML;
+			}
+			t.column(0, {search:'applied', order:'applied'}).nodes()[i].innerHTML = tempIndex;
 		});
 	});
 	
@@ -41,5 +48,5 @@ $(document).ready(function() {
 	$('.tn').each(function(){
 		timeTotal += parseFloat(this.innerHTML);
 	});
-	console.log("Berechnungszeit gesamt in Tagen: " + timeTotal / 60 / 24); //=Tage
+	console.log("Berechnungszeit gesamt in Tagen: " + timeTotal / 60 / 24);
 });
