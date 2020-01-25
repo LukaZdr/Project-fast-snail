@@ -1,4 +1,5 @@
-$(document).ready(function() {	
+$(document).ready(function() {
+	// Init table
     t = $('#t').DataTable({
         fixedHeader: true,
         "lengthMenu": ["999"],
@@ -11,7 +12,6 @@ $(document).ready(function() {
 		"drawCallback": function(settings) {
 			writeTime();
 		},
-        // "order": [[ 7, 'desc' ]],
         initComplete: function() {
             var table = this;
             table.api().columns().every(function() {
@@ -54,7 +54,8 @@ $(document).ready(function() {
 			t.column(0, {search:'applied', order:'applied'}).nodes()[i].innerHTML = tempIndex;
 		});
 	});
-	
+
+	// Show time needed
 	function writeTime() {
 		let timeTotal = 0.0;
 		$('.tn').each(function(){
