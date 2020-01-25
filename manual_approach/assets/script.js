@@ -27,26 +27,28 @@ $(document).ready(function() {
                     e.stopPropagation();
                 });
             });
+			// Set index
+			table.api().column(0).nodes().each(function (cell, i) {
+				cell.innerHTML = i + 1;
+			});
         }
     });
 	
-	t.column(0).nodes().each(function (cell, i) {
-		cell.innerHTML = i+1;
-	});
-		
+	// Button for indexing
 	$('#b_index').click(function() {
 		t.column(0).nodes().each(function (cell, i) {
-			cell.innerHTML = i+1;
+			cell.innerHTML = i + 1;
 		});
 	});
 	
+	// Button for showing the "winner" (other indexing)
 	$('#b_winner').click(function() {
 		var activeColumn = t.order();
 		let tempContent = "";
 		let tempIndex = 0;
 		t.column(activeColumn[0][0], {search:'applied', order:'applied'}).nodes().each(function (cell, i) {
 			if(cell.innerHTML !== tempContent) {
-				tempIndex = i+1;
+				tempIndex = i + 1;
 				tempContent = cell.innerHTML;
 			}
 			t.column(0, {search:'applied', order:'applied'}).nodes()[i].innerHTML = tempIndex;
