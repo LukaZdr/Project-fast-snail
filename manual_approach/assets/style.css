@@ -90,6 +90,7 @@ h1 {
 
 #t {
 	margin-bottom: 40px;
+	width: 100% !important;
 }
 
 #t_info {

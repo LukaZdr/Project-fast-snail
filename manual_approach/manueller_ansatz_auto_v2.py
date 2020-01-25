@@ -6,41 +6,50 @@ from skimage.color import rgb2gray
 from sklearn.utils import shuffle
 from timeit import default_timer
 from csv import writer, QUOTE_MINIMAL
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 # Define needed functions
-def rgb_img_to_1d_histo(img, bin_count): # gray
+# Histrogram 1D (gray)
+def rgb_img_to_1d_histo(img, bin_count):
 	img = img.ravel() # ravel => returns flattend 1d-Array
 	return np.histogram(img, bins=bin_count, range=(0, 256))
 
-def rgb_img_to_3d_histo(img, bin_count): # color
+# Histrogram 3D (color)
+def rgb_img_to_3d_histo(img, bin_count):
 	img = img.reshape(img.shape[0] * img.shape[1], 3)
 	return np.histogramdd(img, bins=[bin_count, bin_count, bin_count], range=((0, 256), (0, 256), (0, 256)))
 
-def rgb_img_mean(img): # der Farbmittelwert eines Bildes
+# Mean value of image
+def rgb_img_mean(img): 
 	return np.mean(img, axis = (0, 1, 2))
 
-def indices_of_n_smallest_values(neighbors, num_list): # gibt die indizes der n kleinsten elemente des arrays zurück
+# Returns indices of n smallest elements of array
+def indices_of_n_smallest_values(neighbors, num_list):
 	return np.array(num_list).argsort()[:neighbors]
 
-def indices_of_n_biggest_values(n, num_list): # gibt die indizes der n größten elemente des arrays zurück
+# Returns indices of n largest elements of array
+def indices_of_n_biggest_values(n, num_list):
 	return np.array(num_list).argsort()[-n:][::-1]
 
-def elements_for_index_list(index_list, elements_list): # gibt fuer eine liste an indizes und eine an elementen die elemente der indizes zurueck
+# Returns elements of indices of a list of indices and a list of elements
+def elements_for_index_list(index_list, elements_list):
 	return list(map(lambda x: elements_list[x], index_list))
 
-def most_common_occurrence(element_list): # Returns the most frequently occurring element
-	return max(element_list,key=element_list.count)
+# Returns the most frequently occurring element
+def most_common_occurrence(element_list):
+	return max(element_list, key=element_list.count)
 
+# Euklid distance measure
 def euklid(x, y):
 	return np.sqrt(np.sum((x - y)**2))
 
+# Intersection distance measure
 def intersection(x, y):
-    minimum = np.minimum(x, y)
-    intersection = np.true_divide(np.sum(minimum), np.sum(y))
+    intersection = np.true_divide(np.sum(np.minimum(x, y)), np.sum(y))
     return intersection
 
-def calculate_combined_weighted_distance(img_1, img_2, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count): # Takes distance of up to 2 descriptors and sums up
+# Takes distance of up to 2 descriptors and sums up
+def calculate_combined_weighted_distance(img_1, img_2, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count):
 	# Set Descriptor 1
     if descriptor_1 == "1d_histo":
         deskr_1_img_1 = rgb_img_to_1d_histo(img_1, bin_count)[0]
@@ -75,7 +84,7 @@ def calculate_combined_weighted_distance(img_1, img_2, distance_measure, neighbo
     elif descriptor_1 == "0":
         deskr_1_img_1 = 0
         deskr_1_img_2 = 0
-
+        
 	# Set Descriptor 2
     if descriptor_2 == "1d_histo":
         deskr_2_img_1 = rgb_img_to_1d_histo(img_1, bin_count)[0]
@@ -105,6 +114,7 @@ def calculate_combined_weighted_distance(img_1, img_2, distance_measure, neighbo
     elif descriptor_2 == "0":
         deskr_2_img_1 = 0
         deskr_2_img_2 = 0
+        
     # Calculate distance
     if distance_measure == "euklid":
         distance_1 = euklid(deskr_1_img_1, deskr_1_img_2)
@@ -112,11 +122,12 @@ def calculate_combined_weighted_distance(img_1, img_2, distance_measure, neighbo
     elif distance_measure == "intersect":
         distance_1 = intersection(deskr_1_img_1, deskr_1_img_2)
         distance_2 = intersection(deskr_2_img_1, deskr_2_img_2)
-
+        
     return distance_1 + weight * distance_2
 
-def rgb_img_n_nearest_neighbour(run_nr, image_set, va_imgs, tr_imgs, tr_labels, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count): # Calculates esimated labels through nearest neighbour method
-    print("\nRUN " + run_nr + ": " + image_set + " / " + distance_measure + " / " + str(neighbour_count) + " / " + descriptor_1 + " / " + descriptor_2 + " / " + str(weight) + " / " + str(bin_count))
+# Calculates esimated labels through nearest neighbour method
+def rgb_img_n_nearest_neighbour(run_nr, image_set, va_imgs, tr_imgs, tr_labels, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count):
+    print("\nRUN " + str(run_nr) + ": ImgSet " + str(image_set) + " / " + distance_measure + " / " + str(neighbour_count) + " / " + descriptor_1 + " / " + descriptor_2 + " / " + str(weight) + " / " + str(bin_count))
     wait_length = str(len(va_imgs))
     est_labels_list = []
     for i, va_img in enumerate(va_imgs):
@@ -131,14 +142,15 @@ def rgb_img_n_nearest_neighbour(run_nr, image_set, va_imgs, tr_imgs, tr_labels, 
         print(str(i + 1) + "/" + wait_length)
     return est_labels_list
 
-def guessing_accuracy(est_labels, val_labels): # in %
+# Guessing accuracy in %
+def guessing_accuracy(est_labels, val_labels):
     count = 0
     for index in range(len(est_labels)):
         if est_labels[index] == val_labels[index]:
             count += 1
     return count / len(val_labels) * 100
 
-# Calculate estimated labels and write to csv file
+# Calculate estimated labels and write to csv file (with # for comment-lines)
 def run(run_nr, image_set, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count):
     # Load data
     if image_set == 1:   # Train images with own backgrounds + original validation images
@@ -167,9 +179,9 @@ def run(run_nr, image_set, distance_measure, neighbour_count, descriptor_1, desc
     # Calculate esimated labels
     estimated_labels = rgb_img_n_nearest_neighbour(run_nr, image_set, va_shuffled_images, tr_shuffled_images, tr_shuffled_labels, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count)
     
-    # Stop time measurement
+    # Stop time measurement (in min)
     time_stop = default_timer()
-    time_needed = (time_stop - time_start) / 60 # in min.
+    time_needed = (time_stop - time_start) / 60
     
     # Calculate guessing accuracy
     guessing_acc = guessing_accuracy(estimated_labels, va_shuffled_labels)
@@ -182,7 +194,7 @@ def run(run_nr, image_set, distance_measure, neighbour_count, descriptor_1, desc
     print("Step done.")
 
 # Load images
-tr1 = np.load("./train_images.npz", allow_pickle=True)
+tr1 = np.load("./train_images.npz", allow_pickle=True) # allow_pickle = "eingelegt" -> needed when loading object arrays (but not secure against erroneous or maliciously constructed data)
 tr2 = np.load("./train_images_2.npz", allow_pickle=True)
 tr3 = np.load("./train_images_3.npz", allow_pickle=True)
 va1 = np.load("./val_images.npz", allow_pickle=True)
@@ -192,10 +204,10 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 # Write header of CSV file (just necessary the first time)
 #with open("Results.csv", mode="a", newline="\n", encoding="utf-8") as file:
 #    file_writer = writer(file, delimiter=";", quotechar="'", quoting=QUOTE_MINIMAL)
-#    file_writer.writerow(["distance_measure", "neighbour_count", "descriptor_1", "descriptor_2", "weight", "bin_count", "guessing_accuracy (%)", "time_needed (min)", "image_set"])
+#    file_writer.writerow(["run_nr", "distance_measure", "neighbour_count", "descriptor_1", "descriptor_2", "weight", "bin_count", "guessing_accuracy (%)", "time_needed (min)", "image_set"])
 
 ###############################################################################
-# Run function with different settings 
+# run(Parameter)-function with different settings:
 #
 # Parameter:         run_nr, image_set, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count
 # image_set:         1, 2 or 3
@@ -204,6 +216,7 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 # descriptor_x:      1d_histo, 3d_histo, std, mean, sobel, hog, 0
 # weight:            gets multiplied with descriptor_2
 # bin_count:         bins used in histogram
+###############################################################################
 
 #
 # RUN 1: ERSTER TEST mit allen Image Sets jew. einmal
@@ -481,50 +494,50 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 
 #
 # RUN 10: wie RUN 1 nur mit intersect
-#
 run_nr = 10
-run(run_nr, 1, "intersect", 8, "1d_histo", "std", 0, 8)
-run(run_nr, 1, "intersect", 8, "3d_histo", "std", 0, 8)
-run(run_nr, 1, "intersect", 8, "std", "std", 0, 0)
-run(run_nr, 1, "intersect", 8, "mean", "std", 0, 0)
-run(run_nr, 1, "intersect", 8, "sobel", "std", 0, 0)
-run(run_nr, 1, "intersect", 8, "hog,4,8", "std", 0, 0)
-run(run_nr, 1, "intersect", 4, "1d_histo", "std", 0, 8)
-run(run_nr, 1, "intersect", 4, "3d_histo", "std", 0, 8)
-run(run_nr, 1, "intersect", 4, "std", "std", 0, 0)
-run(run_nr, 1, "intersect", 4, "mean", "std", 0, 0)
-run(run_nr, 1, "intersect", 4, "sobel", "std", 0, 0)
-run(run_nr, 1, "intersect", 4, "hog,4,8", "std", 0, 0)
-run(run_nr, 1, "intersect", 3, "1d_histo", "std", 0, 8)
-run(run_nr, 1, "intersect", 3, "3d_histo", "std", 0, 8)
-run(run_nr, 1, "intersect", 3, "std", "std", 0, 0)
-run(run_nr, 1, "intersect", 3, "mean", "std", 0, 0)
-run(run_nr, 1, "intersect", 3, "sobel", "std", 0, 0)
-run(run_nr, 1, "intersect", 3, "hog,4,8", "std", 0, 0)
-run(run_nr, 1, "intersect", 2, "1d_histo", "std", 0, 8)
-run(run_nr, 1, "intersect", 2, "3d_histo", "std", 0, 8)
-run(run_nr, 1, "intersect", 2, "std", "std", 0, 0)
-run(run_nr, 1, "intersect", 2, "mean", "std", 0, 0)
-run(run_nr, 1, "intersect", 2, "sobel", "std", 0, 0)
-run(run_nr, 1, "intersect", 2, "hog,4,8", "std", 0, 0)
+#
+#run(run_nr, 1, "intersect", 8, "1d_histo", "std", 0, 8)
+#run(run_nr, 1, "intersect", 8, "3d_histo", "std", 0, 8)
+#run(run_nr, 1, "intersect", 8, "std", "std", 0, 0)
+#run(run_nr, 1, "intersect", 8, "mean", "std", 0, 0)
+#run(run_nr, 1, "intersect", 8, "sobel", "std", 0, 0)
+#run(run_nr, 1, "intersect", 8, "hog,4,8", "std", 0, 0)
+#run(run_nr, 1, "intersect", 4, "1d_histo", "std", 0, 8)
+#run(run_nr, 1, "intersect", 4, "3d_histo", "std", 0, 8)
+#run(run_nr, 1, "intersect", 4, "std", "std", 0, 0)
+#run(run_nr, 1, "intersect", 4, "mean", "std", 0, 0)
+#run(run_nr, 1, "intersect", 4, "sobel", "std", 0, 0)
+#run(run_nr, 1, "intersect", 4, "hog,4,8", "std", 0, 0)
+#run(run_nr, 1, "intersect", 3, "1d_histo", "std", 0, 8)
+#run(run_nr, 1, "intersect", 3, "3d_histo", "std", 0, 8)
+#run(run_nr, 1, "intersect", 3, "std", "std", 0, 0)
+#run(run_nr, 1, "intersect", 3, "mean", "std", 0, 0)
+#run(run_nr, 1, "intersect", 3, "sobel", "std", 0, 0)
+#run(run_nr, 1, "intersect", 3, "hog,4,8", "std", 0, 0)
+#run(run_nr, 1, "intersect", 2, "1d_histo", "std", 0, 8)
+#run(run_nr, 1, "intersect", 2, "3d_histo", "std", 0, 8)
+#run(run_nr, 1, "intersect", 2, "std", "std", 0, 0)
+#run(run_nr, 1, "intersect", 2, "mean", "std", 0, 0)
+#run(run_nr, 1, "intersect", 2, "sobel", "std", 0, 0)
+#run(run_nr, 1, "intersect", 2, "hog,4,8", "std", 0, 0)
 
-run(run_nr, 2, "intersect", 8, "1d_histo", "std", 0, 8)
-run(run_nr, 2, "intersect", 8, "3d_histo", "std", 0, 8)
-run(run_nr, 2, "intersect", 8, "std", "std", 0, 0)
-run(run_nr, 2, "intersect", 8, "mean", "std", 0, 0)
-run(run_nr, 2, "intersect", 8, "sobel", "std", 0, 0)
-run(run_nr, 2, "intersect", 8, "hog,4,8", "std", 0, 0)
-run(run_nr, 2, "intersect", 4, "1d_histo", "std", 0, 8)
-run(run_nr, 2, "intersect", 4, "3d_histo", "std", 0, 8)
-run(run_nr, 2, "intersect", 4, "std", "std", 0, 0)
-run(run_nr, 2, "intersect", 4, "mean", "std", 0, 0)
-run(run_nr, 2, "intersect", 4, "sobel", "std", 0, 0)
-run(run_nr, 2, "intersect", 4, "hog,4,8", "std", 0, 0)
-run(run_nr, 2, "intersect", 3, "1d_histo", "std", 0, 8)
-run(run_nr, 2, "intersect", 3, "3d_histo", "std", 0, 8)
-run(run_nr, 2, "intersect", 3, "std", "std", 0, 0)
-run(run_nr, 2, "intersect", 3, "mean", "std", 0, 0)
-run(run_nr, 2, "intersect", 3, "sobel", "std", 0, 0)
+#run(run_nr, 2, "intersect", 8, "1d_histo", "std", 0, 8)
+#run(run_nr, 2, "intersect", 8, "3d_histo", "std", 0, 8)
+#run(run_nr, 2, "intersect", 8, "std", "std", 0, 0)
+#run(run_nr, 2, "intersect", 8, "mean", "std", 0, 0)
+#run(run_nr, 2, "intersect", 8, "sobel", "std", 0, 0)
+#run(run_nr, 2, "intersect", 8, "hog,4,8", "std", 0, 0)
+#run(run_nr, 2, "intersect", 4, "1d_histo", "std", 0, 8)
+#run(run_nr, 2, "intersect", 4, "3d_histo", "std", 0, 8)
+#run(run_nr, 2, "intersect", 4, "std", "std", 0, 0)
+#run(run_nr, 2, "intersect", 4, "mean", "std", 0, 0)
+#run(run_nr, 2, "intersect", 4, "sobel", "std", 0, 0)
+#run(run_nr, 2, "intersect", 4, "hog,4,8", "std", 0, 0)
+#run(run_nr, 2, "intersect", 3, "1d_histo", "std", 0, 8)
+#run(run_nr, 2, "intersect", 3, "3d_histo", "std", 0, 8)
+#run(run_nr, 2, "intersect", 3, "std", "std", 0, 0)
+#run(run_nr, 2, "intersect", 3, "mean", "std", 0, 0)
+#run(run_nr, 2, "intersect", 3, "sobel", "std", 0, 0)
 run(run_nr, 2, "intersect", 3, "hog,4,8", "std", 0, 0)
 run(run_nr, 2, "intersect", 2, "1d_histo", "std", 0, 8)
 run(run_nr, 2, "intersect", 2, "3d_histo", "std", 0, 8)
