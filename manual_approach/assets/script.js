@@ -28,7 +28,7 @@ $(document).ready(function() {
                 });
             });
 			// Set index
-			table.api().column(0).nodes().each(function (cell, i) {
+			table.api().column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i) {
 				cell.innerHTML = i + 1;
 			});
         }
@@ -36,7 +36,7 @@ $(document).ready(function() {
 	
 	// Button for indexing
 	$('#b_index').click(function() {
-		t.column(0).nodes().each(function (cell, i) {
+		t.column(0, {search:'applied', order:'applied'}).nodes().each(function (cell, i) {
 			cell.innerHTML = i + 1;
 		});
 	});
@@ -46,7 +46,7 @@ $(document).ready(function() {
 		var activeColumn = t.order();
 		let tempContent = "";
 		let tempIndex = 0;
-		t.column(activeColumn[0][0], {search:'applied', order:'applied'}).nodes().each(function (cell, i) {
+		t.column(activeColumn[0][0], {search:'applied', order:'applied'}).nodes().each(function(cell, i) {
 			if(cell.innerHTML !== tempContent) {
 				tempIndex = i + 1;
 				tempContent = cell.innerHTML;
