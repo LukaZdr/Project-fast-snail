@@ -30,8 +30,14 @@ $(document).ready(function() {
 	t.column(0).nodes().each(function (cell, i) {
 		cell.innerHTML = i+1;
 	});
+		
+	$('#b_index').click(function() {
+		t.column(0).nodes().each(function (cell, i) {
+			cell.innerHTML = i+1;
+		});
+	});
 	
-	$('#new_index').click(function() {
+	$('#b_winner').click(function() {
 		var activeColumn = t.order();
 		let tempContent = "";
 		let tempIndex = 0;

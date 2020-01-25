@@ -106,10 +106,6 @@ table.dataTable thead .sorting {
 	background: none;
 }
 
-button#new_index {
-    font-size: 10px;
-}
-
 #f select {
     display: none;
 }
@@ -121,4 +117,13 @@ td.i {
 th, td {
     padding-right: 20px !important;
     padding-left: 5px !important;
+}
+
+button {
+    font-size: 10px;
+    width: 100%;
+}
+
+button#b_index {
+	margin-bottom: 5px;
 }
