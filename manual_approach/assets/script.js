@@ -74,11 +74,23 @@ $(document).ready(function() {
 	}
 	
 	function colorMap() {
-		let allGAs = $('.ga');
+		let allGAs = $('.ga');		
+		//Get min/max
+		let max = 0.0;
+		let min = 99.9;
 		allGAs.each(function() {
-			let cssString = "hsl(" + (this.innerHTML + 100) + ", 70%, 60%)";
-			$(this).css("background-color", cssString);
+			if(this.innerHTML > max) {
+				max = this.innerHTML;
+			}
+			else if(this.innerHTML < min) {
+				min = this.innerHTML;
+			}
+		});
+		allGAs.each(function() {
+			let val = (this.innerHTML - min) / (max - min) * 100;  //Y = (X-A)/(B-A) * (D-C) + C
+			$(this).css("background-color", "hsl(" + val + ", 70%, 60%)");
 		});
 	}
+	
 	
 });
