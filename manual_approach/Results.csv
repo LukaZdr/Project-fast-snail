@@ -511,3 +511,11 @@ run_nr;distance_measure;neighbour_count;descriptor_1;descriptor_2;weight;bin_cou
 8;euklid;3;sobel;3d_histo;0.5;5;32.50;7.61;1
 8;euklid;3;sobel;3d_histo;0.7;5;32.50;7.65;1
 8;euklid;3;3d_histo;hog,4,8;0.5;5;32.50;30.76;1
+8;euklid;3;hog,4,8;3d_histo;0.5;5;32.50;30.32;1
+8;euklid;7;3d_histo;sobel;0.3;5;26.25;6.61;1
+8;euklid;7;3d_histo;sobel;0.5;5;26.25;6.62;1
+8;euklid;7;3d_histo;sobel;0.7;5;26.25;6.66;1
+8;euklid;7;sobel;3d_histo;0.3;5;26.25;8.08;1
+8;euklid;7;sobel;3d_histo;0.5;5;26.25;8.15;1
+8;euklid;7;sobel;3d_histo;0.7;5;26.25;8.73;1
+8;euklid;7;3d_histo;hog,4,8;0.5;5;26.25;34.63;1
