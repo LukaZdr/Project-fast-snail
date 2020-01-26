@@ -30,16 +30,16 @@ table.dataTable.display tbody tr.even {
 
 table.dataTable.display tbody tr.odd > .sorting_1,
 table.dataTable.order-column.stripe tbody tr.odd>.sorting_1 {
-    background-color: #daffd9 !important
+    background-color: #ebeeeb
 }
 
 table.dataTable.display tbody tr.even > .sorting_1,
 table.dataTable.order-column.stripe tbody tr.even>.sorting_1 {
-    background-color: #a6eda4 !important
+    background-color: #cacaca
 }
 
-table.dataTable.hover tbody tr:hover,
-table.dataTable.display tbody tr:hover,
+table.dataTable.hover tbody tr:hover td,
+table.dataTable.display tbody tr:hover td,
 table.dataTable.display tbody tr:hover > .sorting_1,
 table.dataTable.order-column.hover tbody tr:hover>.sorting_1 {
     background-color: #b8bfff !important
@@ -57,6 +57,11 @@ table.dataTable.display tbody tr > .sorting_1,
 table.dataTable.order-column.stripe tbody tr>.sorting_1 {
     font-weight: bold;
 }
+
+/* .sorting_1 { */
+    /* border-left: 3px solid black; */
+	/* border-right: 3px solid black; */
+/* } */
 
 th select {
     width: calc(100% + 15px);
@@ -91,6 +96,10 @@ h1 {
 #t {
 	margin-bottom: 40px;
 	width: 100% !important;
+}
+
+#t td {
+	text-align: right;
 }
 
 #t_info {

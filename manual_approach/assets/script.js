@@ -11,6 +11,7 @@ $(document).ready(function() {
         }],
 		"drawCallback": function(settings) {
 			writeTime();
+			colorMap();
 		},
         initComplete: function() {
             var table = this;
@@ -71,4 +72,15 @@ $(document).ready(function() {
 		let text = $("#t_info").text() + " | Time needed: " + hours.toFixed(2) + "h (" + days.toFixed(2) + "d)";
 		$("#t_info").text(text);
 	}
+	
+	function colorMap() {
+		let allGAs = $('.ga');
+		allGAs.each(function() {
+			let cssString = "hsl(" + (this.innerHTML + 100) + ", 70%, 60%)";
+			$(this).css("background-color", cssString);
+		});
+		
+		console.log("MAX: " + max + " | MIN: " + min);
+	}
+	
 });

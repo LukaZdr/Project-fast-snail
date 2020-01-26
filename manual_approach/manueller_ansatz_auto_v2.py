@@ -90,8 +90,8 @@ def calculate_combined_weighted_distance(img_1, img_2, distance_measure, neighbo
         deskr_2_img_1 = rgb_img_to_1d_histo(img_1, bin_count)[0]
         deskr_2_img_2 = rgb_img_to_1d_histo(img_2, bin_count)[0]
     elif descriptor_2 == "3d_histo":
-        deskr_2_img_1 = rgb_img_to_3d_histo(img_1)[0]
-        deskr_2_img_2 = rgb_img_to_3d_histo(img_2)[0]
+        deskr_2_img_1 = rgb_img_to_3d_histo(img_1, bin_count)[0]
+        deskr_2_img_2 = rgb_img_to_3d_histo(img_2, bin_count)[0]
     elif descriptor_2 == "std":
         deskr_2_img_1 = np.std(img_1)
         deskr_2_img_2 = np.std(img_2)
@@ -472,16 +472,47 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 #run("euklid", 8, "mean", "3d_histo", 0.1, 3)
 
 #
-# RUN 8
-# Only with image_set 3
+# RUN 8 (goes through all 3 image sets)
+# 3d_histo mal mit mehr kombinieren
+run_nr = 8
 #
-#run("euklid", 3, "3d_histo", "sobel", 0.3, 5)
-#run("euklid", 3, "3d_histo", "sobel", 0.5, 5)
-#run("euklid", 3, "3d_histo", "sobel", 0.7, 5)
-#
-#run("euklid", 3, "sobel", "3d_histo", 0.3, 5)
-#run("euklid", 3, "sobel", "3d_histo", 0.5, 5)
-#run("euklid", 3, "sobel", "3d_histo", 0.7, 5)
+for i in range(3):
+    if i+1 != 1:
+        run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.3, 5)
+        run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.5, 5)
+        run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.7, 5)
+    run(run_nr, i+1, "euklid", 2, "sobel", "3d_histo", 0.3, 5)
+    run(run_nr, i+1, "euklid", 2, "sobel", "3d_histo", 0.5, 5)
+    run(run_nr, i+1, "euklid", 2, "sobel", "3d_histo", 0.7, 5)  
+    run(run_nr, i+1, "euklid", 2, "3d_histo", "hog,4,8", 0.5, 5)
+    run(run_nr, i+1, "euklid", 2, "hog,4,8", "3d_histo", 0.5, 5)
+    
+    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.3, 5)
+    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.5, 5)
+    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.7, 5)
+    run(run_nr, i+1, "euklid", 3, "sobel", "3d_histo", 0.3, 5)
+    run(run_nr, i+1, "euklid", 3, "sobel", "3d_histo", 0.5, 5)
+    run(run_nr, i+1, "euklid", 3, "sobel", "3d_histo", 0.7, 5)  
+    run(run_nr, i+1, "euklid", 3, "3d_histo", "hog,4,8", 0.5, 5)
+    run(run_nr, i+1, "euklid", 3, "hog,4,8", "3d_histo", 0.5, 5)
+    
+    run(run_nr, i+1, "euklid", 7, "3d_histo", "sobel", 0.3, 5)
+    run(run_nr, i+1, "euklid", 7, "3d_histo", "sobel", 0.5, 5)
+    run(run_nr, i+1, "euklid", 7, "3d_histo", "sobel", 0.7, 5)
+    run(run_nr, i+1, "euklid", 7, "sobel", "3d_histo", 0.3, 5)
+    run(run_nr, i+1, "euklid", 7, "sobel", "3d_histo", 0.5, 5)
+    run(run_nr, i+1, "euklid", 7, "sobel", "3d_histo", 0.7, 5)  
+    run(run_nr, i+1, "euklid", 7, "3d_histo", "hog,4,8", 0.5, 5)
+    run(run_nr, i+1, "euklid", 7, "hog,4,8", "3d_histo", 0.5, 5)
+    
+    run(run_nr, i+1, "euklid", 8, "3d_histo", "sobel", 0.3, 5)
+    run(run_nr, i+1, "euklid", 8, "3d_histo", "sobel", 0.5, 5)
+    run(run_nr, i+1, "euklid", 8, "3d_histo", "sobel", 0.7, 5)
+    run(run_nr, i+1, "euklid", 8, "sobel", "3d_histo", 0.3, 5)
+    run(run_nr, i+1, "euklid", 8, "sobel", "3d_histo", 0.5, 5)
+    run(run_nr, i+1, "euklid", 8, "sobel", "3d_histo", 0.7, 5)  
+    run(run_nr, i+1, "euklid", 8, "3d_histo", "hog,4,8", 0.5, 5)
+    run(run_nr, i+1, "euklid", 8, "hog,4,8", "3d_histo", 0.5, 5)
 
 #
 # RUN 9
@@ -494,7 +525,7 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 
 #
 # RUN 10: wie RUN 1 nur mit intersect
-run_nr = 10
+#run_nr = 10
 #
 #run(run_nr, 1, "intersect", 8, "1d_histo", "std", 0, 8)
 #run(run_nr, 1, "intersect", 8, "3d_histo", "std", 0, 8)
