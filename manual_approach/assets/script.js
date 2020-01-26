@@ -79,8 +79,6 @@ $(document).ready(function() {
 			let cssString = "hsl(" + (this.innerHTML + 100) + ", 70%, 60%)";
 			$(this).css("background-color", cssString);
 		});
-		
-		console.log("MAX: " + max + " | MIN: " + min);
 	}
 	
 });
