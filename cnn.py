@@ -5,9 +5,9 @@
 import numpy as np
 np.random.seed(123) # um die Gewichte immer gleich zufaellig zu initialisieren
 import tensorflow as tf
-tf.set_random_seed(123) # um die Gewichte immer gleich zufaellig zu initialisieren
+tf.compat.v1.set_random_seed(123) # um die Gewichte immer gleich zufaellig zu initialisieren
 from keras.models import Sequential
-from keras.layers import Dense
+from keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
 from keras.utils import np_utils
 from keras.optimizers import SGD
 
@@ -36,8 +36,6 @@ def labels_to_y_train(labels):
 		new_labels.append(new_label)
 	return np_utils.to_categorical(new_labels, 4)
 
-
-# Aufgabe 1
 def get_rgb_mws_stds(imgs): # kanalweiser Mittelwert sowie Standardabweichung
 	x_train = []
 	for index in range(len(imgs)):
@@ -53,7 +51,6 @@ def get_rgb_mws_stds(imgs): # kanalweiser Mittelwert sowie Standardabweichung
 	return np.array(x_train)
 
 # Laden der Daten
-
 tr_data = np.load('./train_images.npz')
 tr_imgs = tr_data['data']
 tr_labels = tr_data['labels']
@@ -71,17 +68,24 @@ x_train = get_rgb_mws_stds(tr_imgs)
 vl_rgb_mws_stds = get_rgb_mws_stds(vl_imgs)
 
 model = Sequential()
-model.add(Dense(20, activation='relu', name='fc1',input_shape=(6,)))
-model.add(Dense(20, activation='relu', name='fc2'))
-model.add(Dense(20, activation='relu', name='fc3'))
+model.add(Conv2D(32, (3, 3), activation="relu", name="conv1", padding="same", input_shape=(255,255,3)))
+model.add(Conv2D(32, (3, 3), activation="relu", name="conv2", padding="same"))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Conv2D(64, (3, 3), activation="relu", name="conv3", padding="same", input_shape=(255,255,3)))
+model.add(Conv2D(64, (3, 3), activation="relu", name="conv4", padding="same"))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+
+
+model.add(Flatten())
+model.add(Dense(256, activation='relu', name='dens1'))
 model.add(Dense(4, activation='softmax'))
 
 model.compile(loss='categorical_crossentropy',
           		optimizer=SGD(lr=0.000005, momentum=0.9),
 							metrics=['accuracy'])
 
-model.fit(x_train, y_train, batch_size=1, epochs=500, verbose=1)
+model.fit(tr_imgs, y_train, batch_size=1, epochs=1, verbose=1)
 
-score = model.evaluate(vl_rgb_mws_stds, y_test, verbose=1)
+score = model.evaluate(vl_imgs, y_test, verbose=1)
 
 print(score)
