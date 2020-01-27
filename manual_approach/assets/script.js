@@ -15,11 +15,11 @@ $(document).ready(function() {
 		},
         initComplete: function() {
             let table = this;
+			// Set up filter for column 0-9
             table.api().columns([0,1,2,3,4,5,6,7,8,9]).every(function() {
                 let column = this;
                 let select = $("<br><select><option value=''></option></select>").appendTo($(column.header())).on("change", function() {
                     let val = $(this).val();
-					
                     column.search(val ? "^" + val + "$" : "", true, false).draw();
                 });
                 column.data().unique().sort().each(function(value, index) {
@@ -29,13 +29,12 @@ $(document).ready(function() {
                     e.stopPropagation();
                 });
             });
-			
+			// Set up search for elements that are val1 or val2 or between
 			table.api().columns([10]).every(function() {
                 let column = this;
-                let select = $("<br><div id='rns'><input type='text' id='r1'></input><div>to</div><input type='text' id='r2'></input></div>").appendTo($(column.header())).on("change", function() {
-                    let val1 = $('#r1').val();
-					let val2 = $('#r2').val();	
-					// Only show elements that are val1 or val2 or between
+                let select = $("<br><select id='s1'><option value=''></option></select><select id='s2'><option value=''></option></select>").appendTo($(column.header())).on("change", function() {
+                    let val1 = $('#s1').val();
+					let val2 = $('#s2').val();
 					let regexString = "";
                     for (let i = val1; i <= val2; i++) {
 						if(i == val2) {
@@ -48,12 +47,13 @@ $(document).ready(function() {
 					console.log("regexString: " + regexString);
 					column.search(regexString, true, false ).draw();
                 });
+				column.data().unique().sort().each(function(value, index) {
+                    select.append("<option value='" + value + "'>" + value + "</option>");
+                });
                 $(select).click(function(e) {
                     e.stopPropagation();
                 });
             });
-			
-			//run nach 1+2 und 1-3 (bis) filtern
 			
 			// Set index
 			table.api().column(0, {search:"applied", order:"applied"}).nodes().each(function(cell, i) {

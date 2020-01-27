@@ -158,14 +158,13 @@ button#b_index {
 	margin-bottom: 5px;
 }
 
-#rns {
-	margin-right: -20px;
+.rn {
+	padding-right: 5px !important;
 }
 
-#rns input {
-	width: 38%;
+.rn select {
+	width: 50px;
 	float: left;
-	margin-top: 9px;
 }
 
 #rns > div {
