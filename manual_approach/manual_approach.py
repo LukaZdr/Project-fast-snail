@@ -310,7 +310,7 @@ run(run_nr, 1, "euklid", 8, "1d_histo", "0", 0, 8)
 #run("euklid", 8, "3d_histo", "0", 0, 2)
 
 #
-# RUN 5
+# RUN 5 - Start mit mischung der besten ergebnisse
 #
 #run("euklid", 2, "3d_histo", "mean", 0.9, 3)
 #run("euklid", 2, "3d_histo", "mean", 0.7, 3)

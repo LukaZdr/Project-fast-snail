@@ -15,10 +15,11 @@ $(document).ready(function() {
 		},
         initComplete: function() {
             let table = this;
-            table.api().columns().every(function() {
+            table.api().columns([0,1,2,4,5,6,7,8,9]).every(function() {
                 let column = this;
                 let select = $("<br><select><option value=''></option></select>").appendTo($(column.header())).on("change", function() {
                     let val = $(this).val();
+					
                     column.search(val ? "^" + val + "$" : "", true, false).draw();
                 });
                 column.data().unique().sort().each(function(value, index) {
@@ -28,6 +29,32 @@ $(document).ready(function() {
                     e.stopPropagation();
                 });
             });
+			
+			table.api().columns([10]).every(function() {
+                let column = this;
+                let select = $("<br><input type='text' id='r1'></input><div class='r12'>to</div><input type='text' id='r2'></input>").appendTo($(column.header())).on("change", function() {
+                    let val1 = $('#r1').val();
+					let val2 = $('#r2').val();	
+					// Only show elements that are val1 or val2 or between
+					let regexString = "";
+                    for (let i = val1; i <= val2; i++) {
+						if(i == val2) {
+							regexString += "^" + i + "$";
+						}
+						else {
+							regexString += "^" + i + "$|";
+						}
+					}
+					console.log("regexString: " + regexString);
+					column.search(regexString, true, false ).draw();
+                });
+                $(select).click(function(e) {
+                    e.stopPropagation();
+                });
+            });
+			
+			//run nach 1+2 und 1-3 (bis) filtern
+			
 			// Set index
 			table.api().column(0, {search:"applied", order:"applied"}).nodes().each(function(cell, i) {
 				cell.innerHTML = i + 1;
