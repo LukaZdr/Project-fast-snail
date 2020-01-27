@@ -7,9 +7,7 @@ html.write("<html lang=\"de\">\n<head>\n<meta charset=\"utf-8\">\n<title>CV - Ma
 html.write("<body><div id='st'></div>\n\n<h1><a href='Results.html'>CV - Manual approach results</a></h1>\n\n<table id='t' class='display'>\n<thead>\n<tr>\n<th id='f' title='Reset index'><button id='b_index'>Index</button><br><button id='b_winner'>\"Winner\"</button></th><th title='Field #1'>Distance measure</th><th title='Field #2'>Neighbour count</th><th title='Field #3'>Descriptor 1</th><th title='Field #4'>Descriptor 2</th><th title='Field #5'>Weight</th><th title='Field #6'>Bin count</th><th title='Field #7'>Guessing accuracy (%)</th><th title='Field #8'>Time needed (min)</th><th title='Field #9'>Image set</th><th title='Run Nr.'>Run#</th>\n</tr>\n</thead>\n<tbody>\n")
            
 for i, line in enumerate(csv):
-    if line.startswith('#') or line.isspace() or i == 0: # comment-line in csv file also starts with #
-        print() # It's not possible to use "not line.startswith('#') or not line.isspace() or i != 0" instead of doing it with an else-block. Why?
-    else:
+    if not(line.startswith('#') or line.isspace() or i == 0): # comment-line in csv file also starts with #
         row = line.split(";")
         
         run_nr = row[0]
