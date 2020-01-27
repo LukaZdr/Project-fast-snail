@@ -469,53 +469,78 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 #run("euklid", 8, "mean", "3d_histo", 0.7, 3)
 #run("euklid", 8, "mean", "3d_histo", 0.5, 3)
 #run("euklid", 8, "mean", "3d_histo", 0.3, 3)
-#run("euklid", 8, "mean", "3d_histo", 0.1, 3)
+#run("euklid", 8, "mean", "3d_histo", 0.1, 3)   
+    
+#
+# RUN 9 (goes through all 3 image sets)
+# 3d_histo mal mit mehr kombinieren
+#run_nr = 9
+#
+#for i in range(3):
+#    run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.3, 5)
+#    run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.5, 5)
+#    run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.7, 5)
+#    run(run_nr, i+1, "euklid", 2, "sobel", "3d_histo", 0.3, 5)
+#    run(run_nr, i+1, "euklid", 2, "sobel", "3d_histo", 0.5, 5)
+#    run(run_nr, i+1, "euklid", 2, "sobel", "3d_histo", 0.7, 5)  
+#    run(run_nr, i+1, "euklid", 2, "3d_histo", "hog,4,8", 0.5, 5)
+#    run(run_nr, i+1, "euklid", 2, "hog,4,8", "3d_histo", 0.5, 5)
+#    
+#    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.3, 5)
+#    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.5, 5)
+#    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.7, 5)
+#    run(run_nr, i+1, "euklid", 3, "sobel", "3d_histo", 0.3, 5)
+#    run(run_nr, i+1, "euklid", 3, "sobel", "3d_histo", 0.5, 5)
+#    run(run_nr, i+1, "euklid", 3, "sobel", "3d_histo", 0.7, 5)  
+#    run(run_nr, i+1, "euklid", 3, "3d_histo", "hog,4,8", 0.5, 5)
+#    run(run_nr, i+1, "euklid", 3, "hog,4,8", "3d_histo", 0.5, 5)
+#    
+#    run(run_nr, i+1, "euklid", 7, "3d_histo", "sobel", 0.3, 5)
+#    run(run_nr, i+1, "euklid", 7, "3d_histo", "sobel", 0.5, 5)
+#    run(run_nr, i+1, "euklid", 7, "3d_histo", "sobel", 0.7, 5)
+#    run(run_nr, i+1, "euklid", 7, "sobel", "3d_histo", 0.3, 5)
+#    run(run_nr, i+1, "euklid", 7, "sobel", "3d_histo", 0.5, 5)
+#    run(run_nr, i+1, "euklid", 7, "sobel", "3d_histo", 0.7, 5)  
+#    run(run_nr, i+1, "euklid", 7, "3d_histo", "hog,4,8", 0.5, 5)
+#    run(run_nr, i+1, "euklid", 7, "hog,4,8", "3d_histo", 0.5, 5)
+#    
+#    run(run_nr, i+1, "euklid", 8, "3d_histo", "sobel", 0.3, 5)
+#    run(run_nr, i+1, "euklid", 8, "3d_histo", "sobel", 0.5, 5)
+#    run(run_nr, i+1, "euklid", 8, "3d_histo", "sobel", 0.7, 5)
+#    run(run_nr, i+1, "euklid", 8, "sobel", "3d_histo", 0.3, 5)
+#    run(run_nr, i+1, "euklid", 8, "sobel", "3d_histo", 0.5, 5)
+#    run(run_nr, i+1, "euklid", 8, "sobel", "3d_histo", 0.7, 5)  
+#    run(run_nr, i+1, "euklid", 8, "3d_histo", "hog,4,8", 0.5, 5)
+#    run(run_nr, i+1, "euklid", 8, "hog,4,8", "3d_histo", 0.5, 5)
+
 
 #
-# RUN 8 (goes through all 3 image sets)
-# 3d_histo mal mit mehr kombinieren
-run_nr = 8
+# RUN 9 (goes through all 3 image sets)
+# 3d_histo mit anderem bin count und erfolgreichsten neigbour count
+run_nr = 9
 #
 for i in range(3):
-    if i+1 != 1:
-        run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.3, 5)
-        run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.5, 5)
-        run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.7, 5)
-    run(run_nr, i+1, "euklid", 2, "sobel", "3d_histo", 0.3, 5)
-    run(run_nr, i+1, "euklid", 2, "sobel", "3d_histo", 0.5, 5)
-    run(run_nr, i+1, "euklid", 2, "sobel", "3d_histo", 0.7, 5)  
-    run(run_nr, i+1, "euklid", 2, "3d_histo", "hog,4,8", 0.5, 5)
-    run(run_nr, i+1, "euklid", 2, "hog,4,8", "3d_histo", 0.5, 5)
+    run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.3, 3)
+    run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.5, 3)
+    run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.7, 3)
+    run(run_nr, i+1, "euklid", 2, "sobel", "3d_histo", 0.3, 3)
+    run(run_nr, i+1, "euklid", 2, "sobel", "3d_histo", 0.5, 3)
+    run(run_nr, i+1, "euklid", 2, "sobel", "3d_histo", 0.7, 3)  
+    run(run_nr, i+1, "euklid", 2, "3d_histo", "hog,4,8", 0.5, 3)
+    run(run_nr, i+1, "euklid", 2, "hog,4,8", "3d_histo", 0.5, 3)
     
-    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.3, 5)
-    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.5, 5)
-    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.7, 5)
-    run(run_nr, i+1, "euklid", 3, "sobel", "3d_histo", 0.3, 5)
-    run(run_nr, i+1, "euklid", 3, "sobel", "3d_histo", 0.5, 5)
-    run(run_nr, i+1, "euklid", 3, "sobel", "3d_histo", 0.7, 5)  
-    run(run_nr, i+1, "euklid", 3, "3d_histo", "hog,4,8", 0.5, 5)
-    run(run_nr, i+1, "euklid", 3, "hog,4,8", "3d_histo", 0.5, 5)
+    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.3, 3)
+    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.5, 3)
+    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.7, 3)
+    run(run_nr, i+1, "euklid", 3, "sobel", "3d_histo", 0.3, 3)
+    run(run_nr, i+1, "euklid", 3, "sobel", "3d_histo", 0.5, 3)
+    run(run_nr, i+1, "euklid", 3, "sobel", "3d_histo", 0.7, 3)  
+    run(run_nr, i+1, "euklid", 3, "3d_histo", "hog,4,8", 0.5, 3)
+    run(run_nr, i+1, "euklid", 3, "hog,4,8", "3d_histo", 0.5, 3) 
     
-    run(run_nr, i+1, "euklid", 7, "3d_histo", "sobel", 0.3, 5)
-    run(run_nr, i+1, "euklid", 7, "3d_histo", "sobel", 0.5, 5)
-    run(run_nr, i+1, "euklid", 7, "3d_histo", "sobel", 0.7, 5)
-    run(run_nr, i+1, "euklid", 7, "sobel", "3d_histo", 0.3, 5)
-    run(run_nr, i+1, "euklid", 7, "sobel", "3d_histo", 0.5, 5)
-    run(run_nr, i+1, "euklid", 7, "sobel", "3d_histo", 0.7, 5)  
-    run(run_nr, i+1, "euklid", 7, "3d_histo", "hog,4,8", 0.5, 5)
-    run(run_nr, i+1, "euklid", 7, "hog,4,8", "3d_histo", 0.5, 5)
-    
-    run(run_nr, i+1, "euklid", 8, "3d_histo", "sobel", 0.3, 5)
-    run(run_nr, i+1, "euklid", 8, "3d_histo", "sobel", 0.5, 5)
-    run(run_nr, i+1, "euklid", 8, "3d_histo", "sobel", 0.7, 5)
-    run(run_nr, i+1, "euklid", 8, "sobel", "3d_histo", 0.3, 5)
-    run(run_nr, i+1, "euklid", 8, "sobel", "3d_histo", 0.5, 5)
-    run(run_nr, i+1, "euklid", 8, "sobel", "3d_histo", 0.7, 5)  
-    run(run_nr, i+1, "euklid", 8, "3d_histo", "hog,4,8", 0.5, 5)
-    run(run_nr, i+1, "euklid", 8, "hog,4,8", "3d_histo", 0.5, 5)
 
 #
-# RUN 9
+# RUN 10
 # INTERSECT VERGLEICHE
 # Only with image Set 1
 #
@@ -524,7 +549,7 @@ for i in range(3):
 #run(1, "intersect", 7, "3d_histo", "mean", 0.3, 3) #-->mit euklid bei 38.75%, mit intersect bei?
 
 #
-# RUN 10: wie RUN 1 nur mit intersect
+# RUN 11: wie RUN 1 nur mit intersect
 #run_nr = 10
 #
 #run(run_nr, 1, "intersect", 8, "1d_histo", "std", 0, 8)

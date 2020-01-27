@@ -58,10 +58,9 @@ table.dataTable.order-column.stripe tbody tr>.sorting_1 {
     font-weight: bold;
 }
 
-/* .sorting_1 { */
-    /* border-left: 3px solid black; */
-	/* border-right: 3px solid black; */
-/* } */
+.ga {
+	border-bottom: 1px solid #ccc;
+}
 
 th select {
     width: calc(100% + 15px);

@@ -14,11 +14,11 @@ $(document).ready(function() {
 			colorMap();
 		},
         initComplete: function() {
-            var table = this;
+            let table = this;
             table.api().columns().every(function() {
-                var column = this;
-                var select = $("<br><select><option value=''></option></select>").appendTo($(column.header())).on("change", function() {
-                    var val = $(this).val();
+                let column = this;
+                let select = $("<br><select><option value=''></option></select>").appendTo($(column.header())).on("change", function() {
+                    let val = $(this).val();
                     column.search(val ? "^" + val + "$" : "", true, false).draw();
                 });
                 column.data().unique().sort().each(function(value, index) {
@@ -47,7 +47,7 @@ $(document).ready(function() {
 	
 	// Button for showing the "winner" (other indexing)
 	$("#b_winner").click(function() {
-		var activeColumn = t.order();
+		let activeColumn = t.order();
 		let tempContent = "";
 		let tempIndex = 0;
 		t.column(activeColumn[0][0], {search:"applied", order:"applied"}).nodes().each(function(cell, i) {
@@ -74,20 +74,11 @@ $(document).ready(function() {
 	}
 	
 	function colorMap() {
-		let allGAs = $('.ga');		
-		//Get min/max
-		let max = 100.0; //0.0;
-		let min = 25.00; //99.9;
-		// allGAs.each(function() {
-			// if(this.innerHTML > max) {
-				// max = this.innerHTML;
-			// }
-			// else if(this.innerHTML < min) {
-				// min = this.innerHTML;
-			// }
-		// });
+		let allGAs = $('.ga');
+		let statusGreen = 80.0;
+		let statusRed = 25.00;
 		allGAs.each(function() {
-			let val = (this.innerHTML - min) / (max - min) * 100;  //Y = (X-A)/(B-A) * (D-C) + C     -vllt mit min = 0, max = 100? d und c= 100 
+			let val = (this.innerHTML - statusRed) / (statusGreen - statusRed) * 100; //Y=(X-A)/(B-A)*(D-C)+C
 			$(this).css("background-color", "hsl(" + val + ", 70%, 60%)");
 		});
 	}
