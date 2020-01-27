@@ -5,17 +5,16 @@
 import numpy as np
 np.random.seed(123) # um die Gewichte immer gleich zufaellig zu initialisieren
 import tensorflow as tf
-tf.set_random_seed(123) # um die Gewichte immer gleich zufaellig zu initialisieren
+tf.compat.v1.set_random_seed(123) # um die Gewichte immer gleich zufaellig zu initialisieren
 from keras.models import Sequential
-from keras.layers import Dense
+from keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
 from keras.utils import np_utils
 from keras.optimizers import SGD
 
-# Laden der Daten
 
 # Features Berechnen
 # moegliche features die angemessen sind(wikipedia)
-# @COLOR: 
+# @COLOR:
   # Dominant Color Descriptor (DCD)
   # Scalable Color Descriptor (SCD)
   # Color Structure Descriptor (CSD)
@@ -27,10 +26,6 @@ from keras.optimizers import SGD
   # 3-D `Shape Descriptor (3-D SD)
   # Histogram of oriented gradients (HOG)
 
-
-# def euklDist(x,y):
-#   return np.sqrt(np.sum((x-y)**2))
-
 def labels_to_y_train(labels):
 	new_labels = []
 	for label in labels:
@@ -41,8 +36,6 @@ def labels_to_y_train(labels):
 		new_labels.append(new_label)
 	return np_utils.to_categorical(new_labels, 4)
 
-
-# Aufgabe 1
 def get_rgb_mws_stds(imgs): # kanalweiser Mittelwert sowie Standardabweichung
 	x_train = []
 	for index in range(len(imgs)):
@@ -57,7 +50,7 @@ def get_rgb_mws_stds(imgs): # kanalweiser Mittelwert sowie Standardabweichung
 		x_train.append(img_vals)
 	return np.array(x_train)
 
-# Aufgabe 3
+# Laden der Daten
 tr_data = np.load('./train_images.npz')
 tr_imgs = tr_data['data']
 tr_labels = tr_data['labels']
@@ -74,40 +67,25 @@ x_train = get_rgb_mws_stds(tr_imgs)
 #Vlidierungsdaten berechnen:
 vl_rgb_mws_stds = get_rgb_mws_stds(vl_imgs)
 
-# est_label = []
-
-# for i in range(len(vl_imgs)):
-#     dist = []
-#     for i2 in range(len(tr_imgs)):
-#         dist.append(euklDist(vl_imgs_mean[i],tr_imgs_mean[i2]))
-#     est_label.append(trLabels[dist.index(np.min(dist))])
-# count = 0
-# for ind in range(len(est_label)):
-#     if est_label[ind] == vlLabels[ind]: count += 1
-
-# print("Treffer:")
-# print(count)
-# print(count/len(vl_imgs)*100, "%")
-
-# Aufgabe 4
 model = Sequential()
-model.add(Dense(20, activation='relu', name='fc1',input_shape=(6,)))
-model.add(Dense(20, activation='relu', name='fc2'))
-model.add(Dense(20, activation='relu', name='fc3'))
+model.add(Conv2D(32, (3, 3), activation="relu", name="conv1", padding="same", input_shape=(255,255,3)))
+model.add(Conv2D(32, (3, 3), activation="relu", name="conv2", padding="same"))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Conv2D(64, (3, 3), activation="relu", name="conv3", padding="same", input_shape=(255,255,3)))
+model.add(Conv2D(64, (3, 3), activation="relu", name="conv4", padding="same"))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+
+
+model.add(Flatten())
+model.add(Dense(256, activation='relu', name='dens1'))
 model.add(Dense(4, activation='softmax'))
 
-# Aufgabe 5
 model.compile(loss='categorical_crossentropy',
           		optimizer=SGD(lr=0.000005, momentum=0.9),
 							metrics=['accuracy'])
 
-# Aufgabe 6
-model.fit(x_train, y_train, batch_size=1, epochs=500, verbose=1)
+model.fit(tr_imgs, y_train, batch_size=1, epochs=1, verbose=1)
 
-# Aufgabe 7
-# Epoch 500/500
-# 60/60 [==============================] - 0s 1ms/step - loss: 0.8234 - accuracy: 0.5333
+score = model.evaluate(vl_imgs, y_test, verbose=1)
 
-"""die Genauigkeit des Systems, mit 2 Denselayern mit jeweils 8 Neuronen, hat sich nur
-minimal verbessert. Deht man aber ab der Zahl der Denselayer oder Neuronen pro Layer hoch
-so verbessert sich die genauigkeit enorm."""
+print(score)
