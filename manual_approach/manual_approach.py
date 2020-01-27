@@ -133,7 +133,7 @@ def guessing_accuracy(est_labels, val_labels):
             count += 1
     return count / len(val_labels) * 100
 
-# Calculate estimated labels and write to csv file (with # for comment-lines)
+# Run: calculate estimated labels and write to csv file (with # for comment-lines)
 def run(run_nr, image_set, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count):
     # Load data
     if image_set == 1:   # Train images with own backgrounds + original validation images
@@ -218,7 +218,7 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 #
 # RUN 1: ERSTER TEST mit allen Image Sets jew. einmal
 #
-#run(run_nr, 1, "euklid", 8, "1d_histo", "0", 0, 8)
+run(run_nr, 1, "euklid", 8, "1d_histo", "0", 0, 8)
 #run("euklid", 8, "3d_histo", "0", 0, 8)
 #run("euklid", 8, "std", "0", 0, 0)
 #run("euklid", 8, "mean", "0", 0, 0)
