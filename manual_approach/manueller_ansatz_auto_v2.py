@@ -520,23 +520,16 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 run_nr = 9
 #
 for i in range(3):
-    run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.3, 3)
-    run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.5, 3)
+    if i+1 != 1:
+        run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.3, 3)
+        run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.5, 3)  
     run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.7, 3)
-    run(run_nr, i+1, "euklid", 2, "sobel", "3d_histo", 0.3, 3)
-    run(run_nr, i+1, "euklid", 2, "sobel", "3d_histo", 0.5, 3)
-    run(run_nr, i+1, "euklid", 2, "sobel", "3d_histo", 0.7, 3)  
     run(run_nr, i+1, "euklid", 2, "3d_histo", "hog,4,8", 0.5, 3)
-    run(run_nr, i+1, "euklid", 2, "hog,4,8", "3d_histo", 0.5, 3)
     
     run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.3, 3)
     run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.5, 3)
     run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.7, 3)
-    run(run_nr, i+1, "euklid", 3, "sobel", "3d_histo", 0.3, 3)
-    run(run_nr, i+1, "euklid", 3, "sobel", "3d_histo", 0.5, 3)
-    run(run_nr, i+1, "euklid", 3, "sobel", "3d_histo", 0.7, 3)  
     run(run_nr, i+1, "euklid", 3, "3d_histo", "hog,4,8", 0.5, 3)
-    run(run_nr, i+1, "euklid", 3, "hog,4,8", "3d_histo", 0.5, 3) 
     
 
 #

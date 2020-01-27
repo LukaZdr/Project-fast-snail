@@ -73,6 +73,7 @@ $(document).ready(function() {
 		$("#t_info").text(text);
 	}
 	
+	// Colorize guessing accuracy column with green to red
 	function colorMap() {
 		let allGAs = $('.ga');
 		let statusGreen = 80.0;
@@ -82,6 +83,4 @@ $(document).ready(function() {
 			$(this).css("background-color", "hsl(" + val + ", 70%, 60%)");
 		});
 	}
-	
-	
 });
