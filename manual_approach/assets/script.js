@@ -15,7 +15,7 @@ $(document).ready(function() {
 		},
         initComplete: function() {
             let table = this;
-            table.api().columns([0,1,2,4,5,6,7,8,9]).every(function() {
+            table.api().columns([0,1,2,3,4,5,6,7,8,9]).every(function() {
                 let column = this;
                 let select = $("<br><select><option value=''></option></select>").appendTo($(column.header())).on("change", function() {
                     let val = $(this).val();
@@ -32,7 +32,7 @@ $(document).ready(function() {
 			
 			table.api().columns([10]).every(function() {
                 let column = this;
-                let select = $("<br><input type='text' id='r1'></input><div class='r12'>to</div><input type='text' id='r2'></input>").appendTo($(column.header())).on("change", function() {
+                let select = $("<br><div id='rns'><input type='text' id='r1'></input><div>to</div><input type='text' id='r2'></input></div>").appendTo($(column.header())).on("change", function() {
                     let val1 = $('#r1').val();
 					let val2 = $('#r2').val();	
 					// Only show elements that are val1 or val2 or between

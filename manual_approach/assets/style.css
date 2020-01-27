@@ -158,13 +158,17 @@ button#b_index {
 	margin-bottom: 5px;
 }
 
-th.rn input {
-	width: 33%;
+#rns {
+	margin-right: -20px;
+}
+
+#rns input {
+	width: 38%;
 	float: left;
 	margin-top: 9px;
 }
 
-th.rn .r12 {
+#rns > div {
 	float: left;
 	font-size: 10px;
 	margin-left: 2px;
