@@ -512,13 +512,40 @@ run_nr;distance_measure;neighbour_count;descriptor_1;descriptor_2;weight;bin_cou
 8;euklid;8;3d_histo;hog,4,8;0.5;5;26.25;15.44;3
 8;euklid;8;hog,4,8;3d_histo;0.5;5;26.25;15.39;3
 #
+# RUN 9
+#
+9;euklid;2;3d_histo;sobel;0.3;3;32.50;5.11;1
+9;euklid;2;3d_histo;sobel;0.5;3;32.50;5.13;1
+9;euklid;2;3d_histo;sobel;0.7;3;32.50;5.60;1
+9;euklid;2;3d_histo;hog,4,8;0.5;3;32.50;26.54;1
+9;euklid;3;3d_histo;sobel;0.3;3;32.50;5.60;1
+9;euklid;3;3d_histo;sobel;0.5;3;32.50;5.79;1
+9;euklid;3;3d_histo;sobel;0.7;3;32.50;5.70;1
+9;euklid;3;3d_histo;hog,4,8;0.5;3;32.50;26.47;1
+9;euklid;2;3d_histo;sobel;0.3;3;80.00;6.41;2
+9;euklid;2;3d_histo;sobel;0.5;3;80.00;6.43;2
+9;euklid;2;3d_histo;sobel;0.7;3;80.00;6.43;2
+9;euklid;2;3d_histo;hog,4,8;0.5;3;80.00;34.37;2
+9;euklid;3;3d_histo;sobel;0.3;3;62.07;6.65;2
+9;euklid;3;3d_histo;sobel;0.5;3;62.07;7.87;2
+9;euklid;3;3d_histo;sobel;0.7;3;62.07;8.84;2
+9;euklid;3;3d_histo;hog,4,8;0.5;3;62.07;41.45;2
+9;euklid;2;3d_histo;sobel;0.3;3;28.75;4.26;3
+9;euklid;2;3d_histo;sobel;0.5;3;28.75;4.05;3
+9;euklid;2;3d_histo;sobel;0.7;3;28.75;4.02;3
+9;euklid;2;3d_histo;hog,4,8;0.5;3;28.75;16.41;3
+9;euklid;3;3d_histo;sobel;0.3;3;30.00;3.32;3
+9;euklid;3;3d_histo;sobel;0.5;3;30.00;3.29;3
+9;euklid;3;3d_histo;sobel;0.7;3;30.00;3.30;3
+9;euklid;3;3d_histo;hog,4,8;0.5;3;30.00;16.24;3
+#
 # RUN 10 only with Image Set 1
 #
 10;intersect;8;1d_histo;std;0;8;25.00;3.54;1
 10;euklid;8;1d_histo;std;0;8;27.50;3.83;1
 10;intersect;7;3d_histo;mean;0.3;3;21.25;2.23;1
 #
-# RUN 11 with Image Set 1
+# RUN 11
 #
 11;intersect;8;1d_histo;std;0;8;25.00;3.60;1
 11;intersect;8;3d_histo;std;0;8;22.50;3.33;1
@@ -592,17 +619,3 @@ run_nr;distance_measure;neighbour_count;descriptor_1;descriptor_2;weight;bin_cou
 11;intersect;2;mean;std;0;0;25.00;0.62;3
 11;intersect;2;sobel;std;0;0;23.75;2.49;3
 11;intersect;2;hog,4,8;std;0;0;25.00;15.86;3
-#
-# RUN 9
-#
-9;euklid;2;3d_histo;sobel;0.3;3;32.50;5.11;1
-9;euklid;2;3d_histo;sobel;0.5;3;32.50;5.13;1
-9;euklid;2;3d_histo;sobel;0.7;3;32.50;5.60;1
-9;euklid;2;3d_histo;hog,4,8;0.5;3;32.50;26.54;1
-9;euklid;3;3d_histo;sobel;0.3;3;32.50;5.60;1
-9;euklid;3;3d_histo;sobel;0.5;3;32.50;5.79;1
-9;euklid;3;3d_histo;sobel;0.7;3;32.50;5.70;1
-9;euklid;3;3d_histo;hog,4,8;0.5;3;32.50;26.47;1
-9;euklid;2;3d_histo;sobel;0.3;3;80.00;6.41;2
-9;euklid;2;3d_histo;sobel;0.5;3;80.00;6.43;2
-9;euklid;2;3d_histo;sobel;0.7;3;80.00;6.43;2

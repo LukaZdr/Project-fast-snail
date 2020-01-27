@@ -8,7 +8,7 @@ from timeit import default_timer
 from csv import writer, QUOTE_MINIMAL
 #import matplotlib.pyplot as plt
 
-# Define needed functions
+### Define needed functions
 # Histrogram 1D (gray)
 def rgb_img_to_1d_histo(img, bin_count):
 	img = img.ravel() # ravel => returns flattend 1d-Array
@@ -48,7 +48,7 @@ def intersection(x, y):
     intersection = np.true_divide(np.sum(np.minimum(x, y)), np.sum(y))
     return intersection
 
-# Takes distance of up to 2 descriptors and sums up
+# Takes distance of up to 2 descriptors and returns sum (inkl. weight)
 def calculate_combined_weighted_distance(img_1, img_2, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count):
 	# Set Descriptor 1
     if descriptor_1 == "1d_histo":
@@ -125,23 +125,6 @@ def calculate_combined_weighted_distance(img_1, img_2, distance_measure, neighbo
         
     return distance_1 + weight * distance_2
 
-# Calculates esimated labels through nearest neighbour method
-def rgb_img_n_nearest_neighbour(run_nr, image_set, va_imgs, tr_imgs, tr_labels, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count):
-    print("\nRUN " + str(run_nr) + ": ImgSet " + str(image_set) + " / " + distance_measure + " / " + str(neighbour_count) + " / " + descriptor_1 + " / " + descriptor_2 + " / " + str(weight) + " / " + str(bin_count))
-    wait_length = str(len(va_imgs))
-    est_labels_list = []
-    for i, va_img in enumerate(va_imgs):
-        distances = []
-        for tr_img in tr_imgs:                            
-            distance = calculate_combined_weighted_distance(va_img, tr_img, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count)
-            distances.append(distance)
-        index_list = indices_of_n_smallest_values(neighbour_count, distances)
-        n_closest_labels = elements_for_index_list(index_list, tr_labels)
-        est_label = most_common_occurrence(n_closest_labels)
-        est_labels_list.append(est_label)
-        print(str(i + 1) + "/" + wait_length)
-    return est_labels_list
-
 # Guessing accuracy in %
 def guessing_accuracy(est_labels, val_labels):
     count = 0
@@ -169,22 +152,36 @@ def run(run_nr, image_set, distance_measure, neighbour_count, descriptor_1, desc
         va_images = va3["data"]
         va_labels = va3["labels"]
     
-    # Random shuffle images
+    # Random shuffle data
     tr_shuffled_images, tr_shuffled_labels = shuffle(tr_images, tr_labels)
     va_shuffled_images, va_shuffled_labels = shuffle(va_images, va_labels)
     
-    # Start time measurement
+    # Calculate estimated labels with nearest neigbour method 
+    print("\nRUN " + str(run_nr) + ": ImgSet " + str(image_set) + " / " + distance_measure + " / " + str(neighbour_count) + " / " + descriptor_1 + " / " + descriptor_2 + " / " + str(weight) + " / " + str(bin_count))
+    est_labels_list = []
+    wait_length = str(len(va_shuffled_images))
+    
+    ### Start time measurement
     time_start = default_timer()
     
-    # Calculate esimated labels
-    estimated_labels = rgb_img_n_nearest_neighbour(run_nr, image_set, va_shuffled_images, tr_shuffled_images, tr_shuffled_labels, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count)
-    
-    # Stop time measurement (in min)
-    time_stop = default_timer()
-    time_needed = (time_stop - time_start) / 60
+    for i, va_img in enumerate(va_shuffled_images):
+        distances = []
+        for tr_img in tr_shuffled_images:                            
+            distance = calculate_combined_weighted_distance(va_img, tr_img, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count)
+            distances.append(distance)
+        index_list = indices_of_n_smallest_values(neighbour_count, distances)
+        n_closest_labels = elements_for_index_list(index_list, tr_shuffled_labels)
+        est_label = most_common_occurrence(n_closest_labels)
+        est_labels_list.append(est_label)
+        print(str(i + 1) + "/" + wait_length)
+    estimated_labels = est_labels_list
     
     # Calculate guessing accuracy
     guessing_acc = guessing_accuracy(estimated_labels, va_shuffled_labels)
+       
+    ### Stop time measurement
+    time_stop = default_timer()
+    time_needed = (time_stop - time_start) / 60 # minutes
     
     # Write settings and result to file
     with open("Results.csv", mode="a", newline="\n", encoding="utf-8") as file:
@@ -207,7 +204,7 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 #    file_writer.writerow(["run_nr", "distance_measure", "neighbour_count", "descriptor_1", "descriptor_2", "weight", "bin_count", "guessing_accuracy (%)", "time_needed (min)", "image_set"])
 
 ###############################################################################
-# run(Parameter)-function with different settings:
+# run()-function settings:
 #
 # Parameter:         run_nr, image_set, distance_measure, neighbour_count, descriptor_1, descriptor_2, weight, bin_count
 # image_set:         1, 2 or 3
@@ -221,7 +218,7 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 #
 # RUN 1: ERSTER TEST mit allen Image Sets jew. einmal
 #
-#run(1, "euklid", 8, "1d_histo", "std", 0, 8)
+#run(run_nr, 1, "euklid", 8, "1d_histo", "0", 0, 8)
 #run("euklid", 8, "3d_histo", "0", 0, 8)
 #run("euklid", 8, "std", "0", 0, 0)
 #run("euklid", 8, "mean", "0", 0, 0)
@@ -517,19 +514,18 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 #
 # RUN 9 (goes through all 3 image sets)
 # 3d_histo mit anderem bin count und erfolgreichsten neigbour count
-run_nr = 9
+#run_nr = 9
 #
-for i in range(3):
-    if i+1 != 1:
-        run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.3, 3)
-        run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.5, 3)  
-    run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.7, 3)
-    run(run_nr, i+1, "euklid", 2, "3d_histo", "hog,4,8", 0.5, 3)
-    
-    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.3, 3)
-    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.5, 3)
-    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.7, 3)
-    run(run_nr, i+1, "euklid", 3, "3d_histo", "hog,4,8", 0.5, 3)
+#for i in range(3):
+#    run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.3, 3)
+#    run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.5, 3)  
+#    run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.7, 3)
+#    run(run_nr, i+1, "euklid", 2, "3d_histo", "hog,4,8", 0.5, 3)
+#    
+#    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.3, 3)
+#    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.5, 3)
+#    run(run_nr, i+1, "euklid", 3, "3d_histo", "sobel", 0.7, 3)
+#    run(run_nr, i+1, "euklid", 3, "3d_histo", "hog,4,8", 0.5, 3)
     
 
 #
