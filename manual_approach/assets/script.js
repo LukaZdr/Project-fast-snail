@@ -10,9 +10,10 @@ $(document).ready(function() {
             targets: 0
 			},
 			{
-			type: "natural", 
-			targets: 10
+			type: 'natural', 
+			targets: '_all'
 		}],
+		order: [[0, 'asc']],
 		drawCallback: function(settings) {
 			writeTime();
 			colorMap();
@@ -54,7 +55,7 @@ $(document).ready(function() {
 							regexString += "^" + i + "$|";
 						}
 					}
-					console.log("regexString: " + regexString);
+					// console.log("regexString: " + regexString);
 					column.search(regexString, true, false ).draw();
                 });
 				column.data().unique().sort().each(function(value, index) {
