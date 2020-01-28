@@ -218,6 +218,7 @@ va3 = np.load("./val_images_3.npz", allow_pickle=True)
 #
 # RUN 1: ERSTER TEST mit allen Image Sets jew. einmal
 #
+run_nr = 12
 run(run_nr, 1, "euklid", 8, "1d_histo", "0", 0, 8)
 #run("euklid", 8, "3d_histo", "0", 0, 8)
 #run("euklid", 8, "std", "0", 0, 0)
