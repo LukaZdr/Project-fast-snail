@@ -71,6 +71,8 @@ $(document).ready(function() {
 				cell.innerHTML = i + 1;
 			});
 			$("#b_index").addClass("clicked");
+			// Set run select
+			$('#s1').val(1);
         }
     });
 	
