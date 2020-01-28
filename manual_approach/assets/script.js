@@ -2,14 +2,18 @@ $(document).ready(function() {
 	// Init table
     t = $("#t").DataTable({
         fixedHeader: true,
-        "lengthMenu": ["999"],
-		"columnDefs": [{
-            "searchable": false,
-            "orderable": false,
-			"width": "50px",
-            "targets": 0
-        }],
-		"drawCallback": function(settings) {
+        lengthMenu: ["999"],
+		columnDefs: [{
+            searchable: false,
+            orderable: false,
+			width: "50px",
+            targets: 0
+			},
+			{
+			type: "natural", 
+			targets: 10
+		}],
+		drawCallback: function(settings) {
 			writeTime();
 			colorMap();
 		},
@@ -26,6 +30,12 @@ $(document).ready(function() {
                     select.append("<option value='" + value + "'>" + value + "</option>");
                 });
                 $(select).click(function(e) {
+                    e.stopPropagation();
+                });
+				$('#b_winner').click(function(e) {
+                    e.stopPropagation();
+                });
+				$('#b_index').click(function(e) {
                     e.stopPropagation();
                 });
             });
