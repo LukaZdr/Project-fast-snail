@@ -329,7 +329,7 @@ run(run_nr, 1, "euklid", 8, "1d_histo", "0", 0, 8)
 #run("euklid", 6, "std", "3d_histo", 0.5, 3)
 
 #
-# RUN 6
+# RUN 6 - HOG und SOBEL mischen
 #
 #run(1, "euklid", 8, "hog,6,8", "sobel", 0.3, 0)
 #run(1, "euklid", 8, "hog,6,8", "sobel", 0.5, 0)
@@ -406,7 +406,7 @@ run(run_nr, 1, "euklid", 8, "1d_histo", "0", 0, 8)
 #run(3, "euklid", 2, "sobel", "hog,6,8", 0.7, 0)
 
 #
-# RUN 7
+# RUN 7 - Beste Ergebnisse bei Image Set 1
 # Only with image_set 1
 #
 #run("euklid", 4, "3d_histo", "mean", 0.9, 3)
@@ -470,9 +470,9 @@ run(run_nr, 1, "euklid", 8, "1d_histo", "0", 0, 8)
 #run("euklid", 8, "mean", "3d_histo", 0.1, 3)   
     
 #
-# RUN 9 (goes through all 3 image sets)
+# RUN 8 (goes through all 3 image sets)
 # 3d_histo mal mit mehr kombinieren
-#run_nr = 9
+#run_nr = 8
 #
 #for i in range(3):
 #    run(run_nr, i+1, "euklid", 2, "3d_histo", "sobel", 0.3, 5)
@@ -531,7 +531,7 @@ run(run_nr, 1, "euklid", 8, "1d_histo", "0", 0, 8)
 
 #
 # RUN 10
-# INTERSECT VERGLEICHE
+# INTERSECT VERGLEICHE -- (..., 7, "3d_histo", "mean", 0.3, 3) --> mit euklid bei 38.75%, mit intersect bei?
 # Only with image Set 1
 #
 #run(1, "intersect", 8, "1d_histo", "std", 0, 8)
@@ -540,7 +540,7 @@ run(run_nr, 1, "euklid", 8, "1d_histo", "0", 0, 8)
 
 #
 # RUN 11: wie RUN 1 nur mit intersect
-#run_nr = 10
+#run_nr = 11
 #
 #run(run_nr, 1, "intersect", 8, "1d_histo", "std", 0, 8)
 #run(run_nr, 1, "intersect", 8, "3d_histo", "std", 0, 8)
