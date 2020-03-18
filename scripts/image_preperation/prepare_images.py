@@ -51,7 +51,7 @@ os.mkdir(current_dir) # creating dir
 for image_index in range(len(image_collection)):
   # binarizing the image via otsu
   image = image_collection[image_index]
-  size_img = img_as_ubyte(resize(image, (255,255)))
+  size_img = img_as_ubyte(resize(image, (224,224)))
 
   gray_image = rgb2gray(size_img)
 
@@ -60,7 +60,7 @@ for image_index in range(len(image_collection)):
   # replacing the backrounf with random images
   random_background_index = random.randrange(0, len(background_collection))
   background = background_collection[random_background_index]
-  size_back = img_as_ubyte(resize(background, (255,255)))
+  size_back = img_as_ubyte(resize(background, (224,224)))
 
   # plt.imshow(size_img_bin, cmap='gray')
   # plt.show()
