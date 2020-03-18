@@ -9,10 +9,12 @@ import numpy as np
 from skimage import filters
 import os
 import random
+from skimage.transform import resize
+from skimage import img_as_ubyte
 
 def binarize_image(img):
-  #otsu_threshold = filters.threshold_otsu(img)
-  mask = img < 255
+  otsu_threshold = filters.threshold_otsu(img)
+  mask = img < 235
   return mask.astype(np.int)
 
 def rgb2gray(rgb):
@@ -22,7 +24,7 @@ def change_background(img, binarized_img, new_background):
   new_img = np.zeros(img.shape, dtype=int)
   for y in range(len(img)):
     for x in range(len(img[0])):
-      pixel_state = binarized_image[y][x]
+      pixel_state = binarized_img[y][x]
       if pixel_state == 0:
         bounded_y = y%len(img)
         bounded_x = x%len(img[0])
@@ -33,7 +35,7 @@ def change_background(img, binarized_img, new_background):
 
 # loding the images from data_collection
 image_collection = ImageCollection('images_to_change/*')
-background_collection = ImageCollection('random_backgrounds/*')
+background_collection = ImageCollection('random_backgrounds_office/*')
 
 # making a dir to save images
 dir_name = 'converted_images'
@@ -49,23 +51,25 @@ os.mkdir(current_dir) # creating dir
 for image_index in range(len(image_collection)):
   # binarizing the image via otsu
   image = image_collection[image_index]
-  gray_image = rgb2gray(image)
+  size_img = img_as_ubyte(resize(image, (255,255)))
+
+  gray_image = rgb2gray(size_img)
+
   binarized_image = binarize_image(gray_image)
 
   # replacing the backrounf with random images
   random_background_index = random.randrange(0, len(background_collection))
   background = background_collection[random_background_index]
-  img_with_new_background = change_background(image, binarized_image, background)
+  size_back = img_as_ubyte(resize(background, (255,255)))
+
+  # plt.imshow(size_img_bin, cmap='gray')
+  # plt.show()
+
+  img_with_new_background = change_background(size_img, binarized_image, size_back)
   # plt.imshow(img_with_new_background, cmap='gray')
 
-  # makeing a rirrored copy
-  mirrored_img_with_new_background = img_with_new_background[:, ::-1]
-
   # saving the image
-  save_path = current_dir + '/img_' + str(image_index+1) + '.png'
+  save_path = current_dir + '/img_' + str(image_index+1) + '.jpg'
   imsave(save_path, img_with_new_background)
-  save_path = current_dir + '/img_r' + str(image_index+1) + '.png'
-  imsave(save_path, mirrored_img_with_new_background)
 
 
-# plt.show()
