@@ -17,12 +17,12 @@ allow_pickle = True
 from tempfile import TemporaryFile
 outfile = TemporaryFile()
 
-image_collection = ImageCollection('bilder/*.jpg')
+image_collection = ImageCollection('bilder/*')
 
 croped_images = []
 
 for img in image_collection:
-    croped_images.append(resize(img, (255,255)))
+    croped_images.append(resize(img, (224,224)))
     
 img_count = 1
 for cropted_img in croped_images:
